@@ -1,0 +1,23 @@
+\chapter{Chromatin immunoprecepitation}
+\section{Experiment design}
+Chromatin immunoprecepitation followed by sequencing (ChIP-seq) is a method developed for the genome wide identification of transcription factor (TF) binding sites and epigenetic marks.
+The protocol has many steps invilving sample preparation and analysis.
+DNA-binding protein is crosslinked to DNA \emph{in vivo} with formaldehyde.
+After that the chromatin fragmentation using sonication makes DNA fragments in the 200-600bp range.
+
+Quality of the antibody used in the ChiP-seq assay influence the value of ChIP-seq data.
+Antibody specifity will give a high level of enrichment compared to the background. 
+It makes available to detect binding events.
+A typical experiment requires 10-100 ng of DNA.
+
+
+\section{Sequencing}
+Purified DNAs fragments from ChIP-seq samples are sequenced as reads of length 36-100bp and can be uniquely aligned to the genome reference.
+Different next-generation platforms can be utilized.
+The technology provides siquencing of both single-end and paired-end reads.
+A single run of the Illumina/Solexa sequencing technology generetas 50-200 million reads\cite{park2009chip}.
+Single-end reads are usrd for common ChIP-seq analysis, while paired-end are evolved to improve the library complexity.
+That helps to focuse at repetitive regions \cite{chen2012systematic}.
+
+\section{Mapping}
+Sequenced short reads are represented as a text file and can be aligned with mapping software based on Burrows-Wheeler transform algorithm \cite{li2009fast} \cite{siren2014indexing}
