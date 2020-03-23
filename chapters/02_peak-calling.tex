@@ -1,0 +1,50 @@
+\chapter{Identification of enriched regions using peak calling}
+
+The central role in ChIP-seq analysis plays a process named peak calling, where ChIP versus control reads enrichment is identified.
+Several tools that scan along the genome to identify the region with the enrichment have been designed.
+These programs are based on different statistical algorithms.
+% Regions of high sequence read density are reffered to as peaks.
+% The output of software implementing peak-finding methodology is a list of signals.
+% These signals comprise the genomic locations of sites inferred to be occupied by the protein.
+
+In early approaches, the genome was partitioned into non-overlapping  windows of a given size~\cite{Zang-2009} or scan the genome with a sliding window~\cite{Xu-2010}.
+Then each window was scored by the quantity of the read density. 
+Then scores were assesses by a set of criteria such as enrichment over the control and minimum tag density.
+These software tools adopted Poisson model, which puts on the assumption that the background reads are uniformly distributed along the genome.
+
+
+Subsequent algorithms take advantage of the important property of the data such as directionality of reads.
+Dna fragments are sequenced directly from 5' to 3' end.
+Therefire, the unique mapping of those short reads to the reference form forward and reverse reads cluster opposite sides of the transcription factor binding site.
+Sequencing tends to extend read from one end of the DNA fragment toward its middle.
+And makes it in strand-specific manner for each end. 
+This pattern can be used for the detection of ChIP signal intensity peak.
+The locations of mapped tags form two distributions.
+These distributions form a consistent distance between the peaks of these distributins.
+The distance between sense and antisense profiles may vary from experiment to experiment.
+% shift estimation here ?
+% fragment size estimation ?
+The forvard and reverse profiles are shifted toward the center or each mapped position is extended with a fragment of estimeted size to produce the combined density profile.
+Given a profile, peaks can be scored.
+
+% 1) Fold ratio of the signal for ChIP sample relative to that of the control sample around the peak.
+
+%Poisson model
+
+%Binomial distribution or others
+
+% another approach, the peaks are scored before a combined profile is generated
+% by considering how well the tag distribution on two strands resamble each other
+
+% another local correction - adjust for sequence alignability.
+% Depending on how the non-uniquely mapped reads are processed
+% regions containing repetitive elements will have a different expected tag count.
+
+
+
+and output signals with assosiated P-value.
+These P-values show ranking peaks in order of confidence.
+And also P-values are useful for estimating false dicovery rate (FDR) at different significance thresholds.
+
+
+\section{False positive signals}

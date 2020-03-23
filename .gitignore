@@ -27,6 +27,5 @@ mpxerr.tex
 !ms.eps
 *.synctex.gz
 *synctex*
-*.xmpdata
 *.fdb_latexmk
 *.xmpi
