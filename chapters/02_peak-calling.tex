@@ -1,17 +1,23 @@
 \chapter{Identification of enriched regions using peak calling}
 
+ChIP-seq analysis has three major steps: processing, finding candidate regions, and scoring and significance testing.
+
+
+
+\section{Peak calling}
 The central role in ChIP-seq analysis plays a process named peak calling, where ChIP versus control reads enrichment is identified.
 Several tools that scan along the genome to identify the region with the enrichment have been designed.
-These programs are based on different statistical algorithms.
-% Regions of high sequence read density are reffered to as peaks.
-% The output of software implementing peak-finding methodology is a list of signals.
-% These signals comprise the genomic locations of sites inferred to be occupied by the protein.
+These programs are based on different statistical algorithms, and choosing a suitable peak caller for a given ChIP-seq experiment is crucial.
+Regions of the genome of high sequence read density give us a coverage which are reffered to as peaks.
+The output of peak calling software is a list of signals.
+These signals display the locations of sites where the protein may occoure.
 
 In early approaches, the genome was partitioned into non-overlapping  windows of a given size~\cite{Zang-2009} or scan the genome with a sliding window~\cite{Xu-2010}.
 Then each window was scored by the quantity of the read density. 
 Then scores were assesses by a set of criteria such as enrichment over the control and minimum tag density.
 These software tools adopted Poisson model, which puts on the assumption that the background reads are uniformly distributed along the genome.
-
+However, the greater variation in the tag distribution along the genome is experimentally observed.
+And in contrast of widely used Poisson model the negative binomial model was adopted to allow the backgroung rate of occurence of the reads give more flexible gamma distribution~\cite{ji2008integrated}.
 
 Subsequent algorithms take advantage of the important property of the data such as directionality of reads.
 Dna fragments are sequenced directly from 5' to 3' end.
@@ -27,6 +33,14 @@ The distance between sense and antisense profiles may vary from experiment to ex
 The forvard and reverse profiles are shifted toward the center or each mapped position is extended with a fragment of estimeted size to produce the combined density profile.
 Given a profile, peaks can be scored.
 
+Widely used peak caller MACS is suitable for sharp peaks.
+It utilize a sliding window. 
+Overall avarege number of reads in a window calibrate paramiters of a Poisson distribution used to get a significance of the enrichment of the window.
+If there are overlapping candidate windows, they are merged together.
+Significance of ttat region is also determind based on Poisson distribution.
+But now it is parametrized by the backgroound count average in a varying neighbourhood of the region in the ChIP sample or its control if available.
+
+
 % 1) Fold ratio of the signal for ChIP sample relative to that of the control sample around the peak.
 
 %Poisson model
@@ -40,11 +54,29 @@ Given a profile, peaks can be scored.
 % Depending on how the non-uniquely mapped reads are processed
 % regions containing repetitive elements will have a different expected tag count.
 
+\section{FDR}
 
-
-and output signals with assosiated P-value.
+Peak-finding tools output signals with assosiated P-value.
 These P-values show ranking peaks in order of confidence.
 And also P-values are useful for estimating false dicovery rate (FDR) at different significance thresholds.
+% Poisson-based threshold is significantly lower than the obtained from empirical background measurement.
+% Comparison with the input based FDR calculations reveals that the Poisson-based model underestimates FDR
+% 
+The large-scale problems such as ChIP-seq analysis permit false discovery rate computation based on the Benjamini-Hochberg method.
 
+% The q-value of a peak is a minimum FDR at which the peak is deemed significan
+% and is analogous to the P-value in a single hypothesis test setting.
+% The accuracy of the statistical significance computed in peak calling algorithms depends on how how realistic the underlying null distribution is.
+% For ChIP-seq, an FDR derived from a null distribution based on randomization 
+% of ChIP reads can be off by an order of magnitude because tags in the same or neighbouring position 
+% are not completely independent even without true bbinding, as can be seen in the control profile.
+
+
+\section{Sharp and broad}
+
+% A major difficulty in identifying enriched regions is that there are three types of peaks.
+% Sharp preaks are generally found for protein-DNA binding or histone modification at regulatory element.
+% Broad regions are orten assosiated with histone modifications that mark domains (transcribed or repressed regions)
 
 \section{False positive signals}
+\section{Where peak calling can be usefull, where it should be avoided}
