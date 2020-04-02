@@ -1,37 +1,100 @@
 \chapter{Identification of enriched regions using peak calling}
 
 ChIP-seq analysis has three major steps: processing, finding candidate regions, and scoring and significance testing.
+Peak calling is a technique used to identify refions in a genome that have been enriched with aligned reads.
+Due to large amount of sequence tag it is difficult to analyze ChIP-seq data.
+Furthermore, it is a challenge due to intrinsic complexities of the signals, and various biases introduced.
 
 
 
-\section{Peak calling}
+
+\section{Building a signal profile}
+
 The central role in ChIP-seq analysis plays a process named peak calling, where ChIP versus control reads enrichment is identified.
+Given a recent development in the field there are offered a diverse peak calling methods.
 Several tools that scan along the genome to identify the region with the enrichment have been designed.
-These programs are based on different statistical algorithms, and choosing a suitable peak caller for a given ChIP-seq experiment is crucial.
+These programs are based on different statistical algorithms.
 Regions of the genome of high sequence read density give us a coverage which are reffered to as peaks.
-The output of peak calling software is a list of signals.
+Peak calling softwares build a signal profiles along each chromosome.
 These signals display the locations of sites where the protein may occoure.
 
-In early approaches, the genome was partitioned into non-overlapping  windows of a given size~\cite{Zang-2009} or scan the genome with a sliding window~\cite{Xu-2010}.
-Then each window was scored by the quantity of the read density. 
-Then scores were assesses by a set of criteria such as enrichment over the control and minimum tag density.
+choosing a suitable peak caller for a given ChIP-seq experiment is crutial.
+In early approaches, the genome was scanning using window-based counting method~\cite{Zang-2009}~\cite{Xu-2010}.
+Each overlapping or non-overlapping window was scored by the quantity of the read density. 
+Then scores were assessed by a set of criteria such as enrichment over the control and minimum tag density.
 These software tools adopted Poisson model, which puts on the assumption that the background reads are uniformly distributed along the genome.
 However, the greater variation in the tag distribution along the genome is experimentally observed.
 And in contrast of widely used Poisson model the negative binomial model was adopted to allow the backgroung rate of occurence of the reads give more flexible gamma distribution~\cite{ji2008integrated}.
 
 Subsequent algorithms take advantage of the important property of the data such as directionality of reads.
 Dna fragments are sequenced directly from 5' to 3' end.
-Therefire, the unique mapping of those short reads to the reference form forward and reverse reads cluster opposite sides of the transcription factor binding site.
+Therefore, the unique mapping of those short reads to the reference form forward and reverse reads cluster opposite sides of the transcription factor binding site.
 Sequencing tends to extend read from one end of the DNA fragment toward its middle.
 And makes it in strand-specific manner for each end. 
-This pattern can be used for the detection of ChIP signal intensity peak.
-The locations of mapped tags form two distributions.
+This pattern can be used for the detection of ChIP signal intensity locations of mapped tags form two distributions.
 These distributions form a consistent distance between the peaks of these distributins.
 The distance between sense and antisense profiles may vary from experiment to experiment.
 % shift estimation here ?
 % fragment size estimation ?
 The forvard and reverse profiles are shifted toward the center or each mapped position is extended with a fragment of estimeted size to produce the combined density profile.
 Given a profile, peaks can be scored.
+
+\section{FDR}
+
+When analyzing results from genomewide studies, thousands of hypothesis tests are conucted simulteniously.
+In order to identify as many significant comparisons as possible while maintaining a low false positive rate, the False Discovery Rate (FDR) and its analog the q-value are utilized.
+
+If performing multiple comparisons, the probability of false positives are increased.
+The more test are present, the higher the chance of a null feature being called significant.
+
+The false positive rate (FPR) is the expected number of false positives out of all hypothesis tests conducted.
+The FPR is calculated as the ratio between the number of negative events wrongly categorized as positive and the total number of actual negative events.
+This method is too liberal, since the great number of false positives are unwanted.
+
+Controlling for the false positive rate (FDR) is a way to identify as many significant features as possible while incurring a relatively low proportion of false positives~\cite{benjamini1995controlling}.
+FDR is a rate that called significant are trully null.
+
+An FDR of 5\% means that 5\% of all features called significant are trully null.
+Just a threshold was set for the P-value to control the FPR, it is possible to set a threshold for the q-value, which is the FDR analog of the P-value.
+
+\section{Identifying if enriched regions}
+
+% After a signal profile was built, the next step is to identify enriched regions.
+Window-based counting methods set a threshold to call enriched regions.
+%If the tag count exceed the threshold value, the regions has defined as enriched.
+%Usually, for these enriched regions false dicovery rate (FDR) or individual P-value was calculated by the peak-finding tools.
+
+Once the candidate peaks have been identified, the different methods rank candidates by their significance of a hypothesis test that compares the counts in the corresponding genome regions of the ChIP ands input.
+
+In order to ba able to identify as many significant comparisons as possible while maintaining a low false positive rate, the FDR and its analoq th q-value are utilized.
+When counting hypothesis tests, a P-value is calculated .
+This value is the probability of obtaining a test statistic that is more extreme than the observed one, assuming the null hypothesis is true.
+
+%The significance is based on the rejection of the null hypothesis that the proportion of DNA from a given genomic region in the ChIP sample is less than equal to that in the input sample.
+%This is tested by either Poisson or Binomial test on the number of reads that map to the genomic location in the ChIP and input samples. 
+
+Poisson test is more powerful at detecting enriched regions.\cite{}
+
+
+% Something before
+%If the difference is large but the variance is also large, then tye difference may not be significant.
+%On the other hand, a small difference coupled with a vary small variance could be significant.
+
+% Some method instead of P-value computation, estimate an empirical FDR, which is defined as the ration of the number of control peaks to the number of chromatin immunoprecepitation (ChIP) peaks.
+
+The FDR approach is optimized by using characteristics of the P-value distribution to produce a q-value.
+
+
+In one-sample analysis, where there is only one ChIP sample is available, the background distribution is usually derived from Poisson or negative binomial distribution.
+These hypotesis-testing approaches leave with a difficult problem for thee adkustment of multiplycity.
+Vast number of tests are performed and the test statistics are usually not independent.
+Therefore, it is difficult to choose an appropriate cutoff to discriminate true enriched regions from background noise.
+
+An important feature of ChIP-seq data is the spatial dependency.
+Markov models and Markov random field modela are popular models for dsata with spatial dependency.
+However, due to the computationsl challenge of processing the vast amount of data, a few Markov model-based of Bayessian methods have been used for ChIP-seq analysis.
+
+
 
 Widely used peak caller MACS is suitable for sharp peaks.
 It utilize a sliding window. 
@@ -43,9 +106,6 @@ But now it is parametrized by the backgroound count average in a varying neighbo
 
 % 1) Fold ratio of the signal for ChIP sample relative to that of the control sample around the peak.
 
-%Poisson model
-
-%Binomial distribution or others
 
 % another approach, the peaks are scored before a combined profile is generated
 % by considering how well the tag distribution on two strands resamble each other
@@ -54,7 +114,6 @@ But now it is parametrized by the backgroound count average in a varying neighbo
 % Depending on how the non-uniquely mapped reads are processed
 % regions containing repetitive elements will have a different expected tag count.
 
-\section{FDR}
 
 Peak-finding tools output signals with assosiated P-value.
 These P-values show ranking peaks in order of confidence.
@@ -72,11 +131,13 @@ The large-scale problems such as ChIP-seq analysis permit false discovery rate c
 % are not completely independent even without true bbinding, as can be seen in the control profile.
 
 
-\section{Sharp and broad}
-
+Once the candidate peaks have been identified, the different methods rank candidates by their significance of a hypothesis test
 % A major difficulty in identifying enriched regions is that there are three types of peaks.
 % Sharp preaks are generally found for protein-DNA binding or histone modification at regulatory element.
 % Broad regions are orten assosiated with histone modifications that mark domains (transcribed or repressed regions)
 
-\section{False positive signals}
-\section{Where peak calling can be usefull, where it should be avoided}
+\section{Normalization}
+Combinung the whole-genome profiles of two different transcription factors in order to study their interactions may be important.
+Different antibodies have different affinities, and experimental conditions are intrinsically variable.
+Independent ChIP-seq experiment can produce quite different distributions of reads.
+And chosing the common P-value cutoff for two experiments may unfairly bias the peak-calling algorithm toward one experiment.

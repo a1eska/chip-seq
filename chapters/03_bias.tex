@@ -1,8 +1,90 @@
 \chapter{bias, artefacts}
 
-\section{artefacts}
+% To ensure reliability of the data, at least duplicate biological replicate experiments should be done.
+% Sonication of crosslinked chromatin may be preffered method.
+% Mocrococcal nuclease degrade linker DNA where TF tend to bind.
+% The conditions of sonication should be optimized for each cell type.
+% Because they depend on cell type, type of sonicator and  sonicator settings.
 
-For statistical methods used to infer enrichment sites it is desires to identify true DNA-protein interaction. rather than artifact.
+\section{assay artefacts}
+Strong enrichment signals suggestive of proteins binding to genomic loci where genes were higly transcribed were found.
+Moreover, the enrichment for proteins binding to higly-transcribed genes was was observed even in controls like moch ChIP-seq data.
+Which poins to an overall bias that could contaminate any ChIP-seq data with false positives~\cite{park2013widespread}
+A secondary bias of nucleosomal periodicity was also commonly observed across ChIP-seq dataset.
+And contributed additional false positives in which proteins falsly appeared to interact with nucleosomes.
 
-Non-specific antibody binding can give rise to artifacts as well as library constructuion.
-Measuring multiple samples can partially reduce biases.
+Two features among strong false positive signals.
+First, the signals were present within gene bodies.
+Second, Stronges signal derived from genes thet are known to be higly expressed.
+
+% It is possible that certain TF trully bind to ORFas a means of regulating gene expression.
+A common use of ChIP-seq is to examine binding of a given factor under different growth conditions or backgrounds.
+Since only a single variable is changed (growth condition), it might be assumed that comparing binding under different conditions offers a reliable means of identifying biologically relevant targets, with most background artefacts being ormalized out.
+
+One bias arised during genome sonication.
+Open chromatin regions are easely shared than other regions.
+Thus these open regions yield more protein-DNA complexes.
+IP step immunoprecepitate more complexes from the open chromatin regions.
+And as a result gives more sequenced reads.
+
+To correct this bias, the fragmented genome are divided into two portions.
+One portion goes through the IP step.
+And then sequenced.
+Other portion is sequenced directly.
+This portion serve the input control.
+
+This input control can be used to normalize the shearing bias of sonication~\cite{kharchenko2008design}.
+% Type of normalization controls might be appropriate for normalizing false positives?
+
+In the analysis of ChIP-seq data two types of normalization or correction controls are commonly used.
+
+The input sample has the advanage that all the regions of the genome are well represented.
+The sample concentration is ample and stable for constructing sequencing libraries.
+The same sample can potentially serve as the control for several related experiments.
+
+The input a baseline signal for reads across the genome, factoring in sequence mappability and copy number differences relative to the reference genome.
+For these reasons, input has been suggested as a more effective control.
+
+However, genes transcribed at high rates is not adequately represented in the input.
+
+A mock ChIP is designed to correct data with large quantity of spurious sites in ChIP-seq, which are coused by uneven genomic sonication and nonspecific interactions between chromatin and antibody.
+Whereas DNA input controls corrects only for uneven sonication.
+
+Mock better reflects the background enrichment from highly transcribed genes.
+Mock ChIP-seq data exhibit a stronger expression bias than the corresponding input sample.
+Therefore correction by mock ChIP (normalization) would be more effectively reduce the false-positives than normalization by input~\cite{park2013widespread}.
+Mock ia s better control for minimizing the appearence of occupancy signal over transcribed regions.
+
+Measuring the binding of a TF under two different conditions and identifying the differentially bound target offers the most reliable way to identify targets of biological significence.
+The assumption that most sources of background signal are canseled out between two samples is risky.
+Expression biase derives directly from actively transcribed genes.
+Transcription will differ between two conditions.
+Even in these cases ChIP data from each condition has to be properly corrected by the corresponding mock ChIP data to minimize false positives.
+
+\section{crosslink bias}
+
+Source and mechanism of the background expression bias arise from direct or indirect non-specific interactons of the immunoprecepitated protein with DNA in  open chromatin at highly transcribed regions, trapped by the crosslinked process.
+It is unclear why the phenomenon exists in mock ChIP datasets.
+It is possible that even low level non-spesific interactions between the antibody and cross-reacting cellular proteins contrebute to this phenomenon.
+Or Open chromatin shows oreferential recovery through the immunoprecepitation process.
+Highly expressed genes are characterized by open chromatin conformation, nucleosome perturbation and DNA more exposed to interactions.\cite{}
+Although the antibody in IP binds specifically to its target TFs.
+It can also bind non-specifically to other proteins.
+Under some cross-linkin conditions, this regions might cause the hyper ChIPability\cite{}
+
+One possible solution is to develope alternative approaches that avoid the cross-linking step.
+The lack of cross-linking necessarily means that only proteins very tightly assosiated with the chromatin can be immunoprecepitated.
+Non-specific cross-linking in human cell line is not an issue if formaldehyde treatment is limited to 10 min or less~\cite{}.
+Shortering the fixation time reduces the background level due to non-specific protein binding to trap preferentially native DNA-proteins interactions~\cite{baranello2016chip}.
+Under some conditions cross-linked artefacts might be relevant.
+Good biochemical practice and proper controls can detect and minimize this bias.
+
+To control for nonspecific antibody bias, a mock ChIP can be utilized.
+
+However, mock ChIP yields much less DNA material than DNA input.
+And mock is more susceptible to technical noise~\cite{kidder2011chip, landt2012chip}.
+
+%%%
+\section{GC}
+GC-content biase is present in ChIP-seq technology.
+GC-bias correction model(?)
