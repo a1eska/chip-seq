@@ -85,6 +85,46 @@ However, mock ChIP yields much less DNA material than DNA input.
 And mock is more susceptible to technical noise~\cite{kidder2011chip, landt2012chip}.
 
 %%%
-\section{GC}
-GC-content biase is present in ChIP-seq technology.
-GC-bias correction model(?)
+\section{GC content bias in ChIP-seq is challenging}
+
+Fragmentation is the first step of DNA sequencing process.
+Using enzymatic digestion, chemical shearing or different mechanical method, purified DNA is broken up into short fragments.
+The sequenced reads must overlap to achieve the required level of resolution for a ChIP experiment the genome regions should be sequenced multiple times.
+Whereby the experiment requires many copies of a whole genome.
+Nowadays ChIP purified DNA is obtained from many cells.
+Multiple genome copies provide a sufficient number of overlapping reads after cleavage and sequencing.
+In addition, sigle-cell sequencing requires PCR-amplification before the fragmentation step~\cite{clark2016single}.
+
+The early assumption was that genomic DNA break randomly.
+However, the experiment~\cite{poptsova2014non} with different methods of DNA fragmentation showed that the rates of double-stranded breaks are sequence-dependent.
+Which can lead the source of the GC-bias have been observed in several NGS experiments~\cite{benjamini2012summarizing}~\cite{dohm2008substantial}. 
+
+The coverage for ChIP-seq varies across experiments due to GC-content bias.
+And that variability leads obtain false-positive signals.
+However, true binding sites of the protein of interest are expected to occour in high GC regions.
+Those regions have biological relevance such as promotore regions.
+Modelling of the GC-content at the fragment level~\cite{benjamini2012summarizing} is the optimal approach, but is not directly applicable to ChIP-seq analysis.
+
+The mixed-model method for the GC-content bias correction was presented~\cite{teng2017accounting}.
+Incorporation of the approach into current peak callers shows substantial improvements in signal finding.
+However, the method is not suitable for broad peak identification as histone modifications.
+
+Also new methods of cleavege of the purified DNA cleavage for library construction are developing~\cite{}, which provide better uniform coverage for GC reagions.
+
+
+% It is troubling that the number of reads mapped to a genome region depends on the sequence itself.
+
+% Windows with a GC content of 40\% contain almost twice as many reads as windows with lower content~\cite{dohm2008substantial}.
+% This variability does not reflect the signal of interest, but might confuced it.
+% Since GC abundance is heterogeneous across the genome and often correlated with functionality, the GC effect can be hard to tell apart from the true signal.
+% The effect is not consistent between repeated experiments, or even libraries within the same experiment.
+% GC counts could be associated with the stability of the DNA, and thus modify the probability of a fragmentation point occurring in the genome.
+% Binding sites are expected to occur in or near high GC-content regions such as gene promoters.
+% % IDR algorithms to select peaks
+% GC-content bias lead peak callers to report a substantial number of false positives.
+
+% Most peak callers operate on bin level information.
+% Algorithms define bins, calculate coverage measurements.
+% % something about new approach using a mixed model, which permits independent adjustments of the signal and back- ground signals and thus circumvents the confounding challenge and can be incorporated into most current peak callers
+
+
