@@ -89,7 +89,7 @@ And mock is more susceptible to technical noise~\cite{kidder2011chip, landt2012c
 % =====================================================
 \section{GC content bias in ChIP-seq is challenging}
 
-Fragmentation is the first step of DNA sequencing process.
+Fragmentation is the first step of DNA sequencing process.\todo{text}
 Using enzymatic digestion, chemical shearing or different mechanical method, purified DNA is broken up into short fragments.
 The sequenced reads must overlap to achieve the required level of resolution for a ChIP experiment the genome regions should be sequenced multiple times.
 Whereby the experiment requires many copies of a whole genome.
@@ -130,3 +130,9 @@ Also new methods of cleavege of the purified DNA cleavage for library constructi
 % % something about new approach using a mixed model, which permits independent adjustments of the signal and back- ground signals and thus circumvents the confounding challenge and can be incorporated into most current peak callers
 
 
+\section{Blacklist region/Difficulties in the ussambly/overrepresented regions}
+
+Signals based on high-throughout sequencing output rely on an accurate genomic annotation and mapping.
+In some regions, such as regions with a large number of structural variants and repetitive regions, the assembly of the genome can be difficult and may may be collapsed or under-represented relative to the actual underlying genomic sequence.
+Problems with the assembly have effects on the mapping and calling and lead to inaccurate interpretation of the downstream analysis.
+Duplication rate for single-end ChIP-seq data is overestimated and leads to ChIP-seq signal being lost within those regions~\cite{chen2012systematic}.
