@@ -34,6 +34,7 @@ And makes it in strand-specific manner for each end.
 This pattern can be used for the detection of ChIP signal intensity locations of mapped tags form two distributions.
 These distributions form a consistent distance between the peaks of these distributins.
 The distance between sense and antisense profiles may vary from experiment to experiment.
+\todo{vysvetli, proc se to mezi experimenty liší}
 % shift estimation here ?
 % fragment size estimation ?
 The forvard and reverse profiles are shifted toward the center or each mapped position is extended with a fragment of estimeted size to produce the combined density profile.
@@ -43,6 +44,7 @@ Given a profile, peaks can be scored.
 
 When analyzing results from genomewide studies, thousands of hypothesis tests are conucted simulteniously.
 In order to identify as many significant comparisons as possible while maintaining a low false positive rate, the False Discovery Rate (FDR) and its analog the q-value are utilized.
+\todo{já myslel, že q-value = FDR-adjusted p-value? Tvůj  text chápu tak, že q-value je něco podobného jako metoda FDR. Koneckonců to sama píšeš na konci tohoto odstavce}
 
 If performing multiple comparisons, the probability of false positives are increased.
 The more test are present, the higher the chance of a null feature being called significant.
@@ -67,6 +69,7 @@ Window-based counting methods set a threshold to call enriched regions.
 Once the candidate peaks have been identified, the different methods rank candidates by their significance of a hypothesis test that compares the counts in the corresponding genome regions of the ChIP ands input.
 
 In order to ba able to identify as many significant comparisons as possible while maintaining a low false positive rate, the FDR and its analoq th q-value are utilized.
+\todo{úplně stejná věta se vyskytuje v předchozí sekci o FDR}
 When counting hypothesis tests, a P-value is calculated .
 This value is the probability of obtaining a test statistic that is more extreme than the observed one, assuming the null hypothesis is true.
 
@@ -138,6 +141,7 @@ Once the candidate peaks have been identified, the different methods rank candid
 
 \section{Normalization}
 Combinung the whole-genome profiles of two different transcription factors in order to study their interactions may be important.
+\todo{to se vůbec nemusí týkat jen TFs. Často kombinujeme profily z velmi různých ChIPů: TF + RNA Pol + histone marks, atd.}
 Different antibodies have different affinities, and experimental conditions are intrinsically variable.
 Independent ChIP-seq experiment can produce quite different distributions of reads.
 And chosing the common P-value cutoff for two experiments may unfairly bias the peak-calling algorithm toward one experiment.

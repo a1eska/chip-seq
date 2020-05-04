@@ -48,17 +48,22 @@ For these reasons, input has been suggested as a more effective control.
 However, genes transcribed at high rates is not adequately represented in the input.
 
 A mock ChIP is designed to correct data with large quantity of spurious sites in ChIP-seq, which are coused by uneven genomic sonication and nonspecific interactions between chromatin and antibody.
+\todo{nezapomeň na nespecifické interakce mezi chromatinem a magnetickými/polysacharidovými kuličkami, které se používají pro purifikaci komplexů chromatin-protilátka}
 Whereas DNA input controls corrects only for uneven sonication.
+\todo{řekl bych, že input dokáže korigovat i PCR amplification bias (GC bias?)}
 
 Mock better reflects the background enrichment from highly transcribed genes.
 Mock ChIP-seq data exhibit a stronger expression bias than the corresponding input sample.
 Therefore correction by mock ChIP (normalization) would be more effectively reduce the false-positives than normalization by input~\cite{park2013widespread}.
 Mock ia s better control for minimizing the appearence of occupancy signal over transcribed regions.
+\todo{mock IP má ale tendenci precipitovat jen velmi malé množství chromatinu (DNA), které je do určité míry náhodné a tedy nereproducibilní. Při PCR pak dochází k overamplifikaci.}
 
 Measuring the binding of a TF under two different conditions and identifying the differentially bound target offers the most reliable way to identify targets of biological significence.
+\todo{s tímhle nesouhlasím, je to příliš obecně definované. Pokud například opůsobím buňky nějakým inhibitorem, který do 10 min způsobí disociaci TF z chromatinu, tak se to na transkripci moc neprojeví a artefakty mi zůstanou prakticky stejné.}
 The assumption that most sources of background signal are canseled out between two samples is risky.
 Expression biase derives directly from actively transcribed genes.
 Transcription will differ between two conditions.
+\todo{není jisté, zda se bude transkripce mezi podmínkami lišit. Záleží, jaké to jsou podmínky. A určitě bude existovat nějaká skupina vysoce exprimovaných housekeeping genů, které budou silně transkribované za obou podmínek: např. proteiny translačního aparátu, cytoskelet atd.}
 Even in these cases ChIP data from each condition has to be properly corrected by the corresponding mock ChIP data to minimize false positives.
 
 \section{crosslink bias}
@@ -71,11 +76,13 @@ Highly expressed genes are characterized by open chromatin conformation, nucleos
 Although the antibody in IP binds specifically to its target TFs.
 It can also bind non-specifically to other proteins.
 Under some cross-linkin conditions, this regions might cause the hyper ChIPability\cite{}
+\todo{jak už jsem psal výše, hlavím zdrojem nespecifických interakcí je adsorpce na povrch kuliček. Protilátka může a nemusí také přispívat}
 
 One possible solution is to develope alternative approaches that avoid the cross-linking step.
 The lack of cross-linking necessarily means that only proteins very tightly assosiated with the chromatin can be immunoprecepitated.
 Non-specific cross-linking in human cell line is not an issue if formaldehyde treatment is limited to 10 min or less~\cite{}.
 Shortering the fixation time reduces the background level due to non-specific protein binding to trap preferentially native DNA-proteins interactions~\cite{baranello2016chip}.
+\todo{"native" bych zde nepoužíval, spíš specific nebo genuine. Nativní se používá jako protiklad k fixovaný (např. native vs formaldehyde-fixed ChIP)}
 Under some conditions cross-linked artefacts might be relevant.
 Good biochemical practice and proper controls can detect and minimize this bias.
 
@@ -96,14 +103,17 @@ Whereby the experiment requires many copies of a whole genome.
 Nowadays ChIP purified DNA is obtained from many cells.
 Multiple genome copies provide a sufficient number of overlapping reads after cleavage and sequencing.
 In addition, sigle-cell sequencing requires PCR-amplification before the fragmentation step~\cite{clark2016single}.
+\todo{důležitá poznámka k celému odstavci: DNA/chromatin se u ChIPu fragmentuje pouze před imunoprecipitací. Poté, co vyizoluješ čistou DNA, se už žádná další fragmentace neprovádí. Rovnou se připraví knihovna a sekvenuje se!}
 
 The early assumption was that genomic DNA break randomly.
 However, the experiment~\cite{poptsova2014non} with different methods of DNA fragmentation showed that the rates of double-stranded breaks are sequence-dependent.
 Which can lead the source of the GC-bias have been observed in several NGS experiments~\cite{benjamini2012summarizing}~\cite{dohm2008substantial}. 
 
 The coverage for ChIP-seq varies across experiments due to GC-content bias.
+\todo{GC bias vzniká také v průběhu PCR, kdy se GC-rich fragmeny amplifikují hůře než GC-poor. Je to dáno jejich méně efektivní denaturací - mají vyšší vazebnou energii}
 And that variability leads obtain false-positive signals.
 However, true binding sites of the protein of interest are expected to occour in high GC regions.
+\todo{"are expected" -> spíš "may be expected". Oblasti vazby vůbec nemusí být GC-bohaté, záleží na cílovém proteinu}
 Those regions have biological relevance such as promotore regions.
 Modelling of the GC-content at the fragment level~\cite{benjamini2012summarizing} is the optimal approach, but is not directly applicable to ChIP-seq analysis.
 
