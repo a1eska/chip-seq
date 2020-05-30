@@ -122,44 +122,41 @@ And mock is more susceptible to technical noise~\cite{kidder2011chip, landt2012c
 % GC bias
 % ============
 \section{GC content bias in ChIP-seq is challenging}
-
 Effective analysis requires sufficient coverage by sequence reads. 
 The sequenced reads must overlap to achieve the required level of resolution for a ChIP experiment.
 Whereby the experiment requires many copies of a whole genome.
 Nowadays ChIP purified DNA is obtained from many cells.
 Multiple genome copies provide a sufficient number of overlapping reads after cleavage and sequencing.
 In addition, sigle-cell sequencing requires PCR-amplification before the fragmentation step~\cite{clark2016single}.
+
 % \todo{důležitá poznámka k celému odstavci: DNA/chromatin se u ChIPu fragmentuje pouze před imunoprecipitací. Poté, co vyizoluješ čistou DNA, se už žádná další fragmentace neprovádí. Rovnou se připraví knihovna a sekvenuje se!}
 
 The coverage for ChIP-seq varies across experiments due to GC-content bias, and that variability may introduce false-positive signals during downstream analysis.
 Loci with high GC base composition are often under-represented, and such bias has been observed in several NGS experiments~\cite{benjamini2012summarizing}\cite{dohm2008substantial}\cite{teng2017accounting}.
-This bias tends to be appeared during the PCR amplification~\cite{ross2013characterizing}.
+This bias tends to have appeared during the PCR amplification~\cite{ross2013characterizing}.
 It is known that GC-rich DNA targets are less amenable to amplification due to base base-stacking interations~\cite{yakovchuk2006base}.
 % \todo{GC bias vzniká také v průběhu PCR, kdy se GC-rich fragmeny amplifikují hůře než GC-poor. Je to dáno jejich méně efektivní denaturací - mají vyšší vazebnou energii}
 
-
 Both PCR amplification during library construction and PCR for cluster amplification on the Illumina platform play role. 
-First case has many potantial solutions to avoid the bias during library construction step.
-It requires to prepare larger amount of the input DNA to avoid PCR inself, or PCR step with extensive optimization such as annealing time and temperatures and primer specifity~\cite{aird2011analyzing}.
-Possible problem of Illumina cell flow bridge amplification may occours due to secondary structures.
+The first case has many potential solutions to avoid the bias during library construction step.
+It requires preparing a larger amount of the input DNA to avoid PCR itself, or PCR step with extensive optimization such as annealing time and temperatures and primer specifity~\cite{aird2011analyzing}.
+The possible problem of Illumina cell flow bridge amplification may occur due to secondary structures.
 GC-rich sequences form hairpins, which are stable and stack unmelted at usual PCR denaturation temperatures~\cite{stein2010nucleosome}.
 
+Fragmentation is the first step in DNA sequencing process.
+This step ensures the solubility of the crosslinked DNA-protein complexes are soluble and accessible to antibody.
+Using enzymatic digestion, chemical shearing, or different mechanical method, DNA with crosslinked proteins is broken up into short fragments.
+After immunoprecipitation one or both ends of the fragment sequenced.
 
-
-Fragmentation is the first step of DNA sequencing process.
-This step ensures soluability of the crosslinked DNA-protein complexes are soluble and accesible to antibody.
-Using enzymatic digestion, chemical shearing or different mechanical method, DNA with crosslinked proteins is broken up into short fragments.
-After immunoprecepitation one or both ends of the fragment sequenced.
 
 The early assumption was that genomic DNA break randomly.
 However, the experiment~\cite{poptsova2014non} with different methods of DNA fragmentation showed that the rates of double-stranded breaks are sequence-dependent.
 This dependency may also cause the GC-bias. 
 
-
-However, true binding sites of the protein of interest may be expected to occour in high GC regions.
+However, true binding sites of the protein of interest may be expected to occur in high GC regions.
 % \todo{"are expected" -> spíš "may be expected"}\todo{. Oblasti vazby vůbec nemusí být GC-bohaté, záleží na cílovém proteinu}
-Those regions have biological relevance such as promotore regions.
-Modelling of the GC-content at the fragment level~\cite{benjamini2012summarizing} is the optimal approach, but is not directly applicable to ChIP-seq analysis.
+Those regions have biological relevance such as promotor regions.
+Modeling of the GC-content at the fragment level~\cite{benjamini2012summarizing} is the optimal approach, but is not directly applicable to ChIP-seq analysis.
 The method for correction of this kind of bias was presented~\cite{teng2017accounting}.
 Incorporation of the approach into current peak callers shows substantial improvements in signal finding.
 However, the method is not suitable for broad peak identification as histone modifications.
