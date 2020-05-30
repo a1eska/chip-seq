@@ -70,16 +70,18 @@ Even in these cases ChIP data from each condition has to be properly corrected b
 % ===========
 \section{crosslink bias}
 
-ChIP-seq technology has been uset to identify the localization of post-translationally modified histones, histone variants, TF and other chromatin-associated proteins.
+ChIP-seq technology has been used to identify the localization of post-translationally modified histones, histone variants, TF, and other chromatin-associated proteins.
 Native ChIP is commonly used for the analysis of histones.
+
 % \todo{"native" bych zde nepoužíval, spíš specific nebo genuine. Nativní se používá jako protiklad k fixovaný (např. native vs formaldehyde-fixed ChIP)}
-Transcription factors do not have high affinity to the DNA, and crosslinking step is required.
 
-Typical protocol involving crosslinking with formaldehyde, which has been used to trap protein-DNA interactions inside the cells before immunoprecepitation with minimal crosslinkong time.
-This small electrophilic molecule is able to reversibly cross-link with actually all celular proteins except non-NDA-binding proteins~\cite{solomon1985formaldehyde}. 
+Transcription factors do not have a high affinity to the DNA, and the crosslinking step is required.
+
+Typical protocol involving crosslinking with formaldehyde, which has been used to trap protein-DNA interactions inside the cells before immunoprecipitation with minimal crosslinking time.
+This small electrophilic molecule can reversibly cross-link with actually all cellular proteins except non-NDA-binding proteins~\cite{solomon1985formaldehyde}. 
 
 
-Some transcription factors bind non-specificly to a multitude of disparate sites~\cite{struhl2007interpreting}.
+Some transcription factors bind non-specifically to a multitude of disparate sites~\cite{struhl2007interpreting}.
 Other factors have specific binding sites.
 It is also known, that site-specific TFs can bind non-specificly~\cite{hammar2012lac}\cite{mirny2009protein}.
 
@@ -87,37 +89,32 @@ It is also known, that site-specific TFs can bind non-specificly~\cite{hammar201
 
 
 
+Source and mechanism of the background expression bias arise from direct or indirect non-specific interactions in open chromatin at highly transcribed regions.
 
 
 
 
-
-Source and mechanism of the background expression bias arise from direct or indirect non-specific interactons in open chromatin at hihly transcribed regions.
-
-
-
-
-It is possible that even low level non-spesific interactions between the antibody and cross-reacting cellular proteins contrebute to this phenomenon.
-Or Open chromatin shows oreferential recovery through the immunoprecepitation process.
+Even low-level non-specific interactions between the antibody and cross-reacting cellular proteins may contribute to this phenomenon.
+Or Open chromatin shows preferential recovery through the immunoprecipitation process.
 Highly expressed genes are characterized by open chromatin conformation, nucleosome perturbation and DNA more exposed to interactions.\cite{}
 Although the antibody in IP binds specifically to its target TFs.
 It can also bind non-specifically to other proteins.
 Under some cross-linkin conditions, this regions might cause the hyper ChIPability\cite{}
+
 %\todo{jak už jsem psal výše, hlavím zdrojem nespecifických interakcí je adsorpce na povrch kuliček. Protilátka může a nemusí také přispívat}
 
-One possible solution is to develope alternative approaches that avoid the cross-linking step.
-The lack of cross-linking necessarily means that only proteins very tightly assosiated with the chromatin can be immunoprecepitated.
-Non-specific cross-linking in human cell line is not an issue if formaldehyde treatment is limited to 10 min or less~\cite{}.
-Shortering the fixation time reduces the background level due to non-specific protein binding to trap preferentially native DNA-proteins interactions~\cite{baranello2016chip}.
+One possible solution is to develop alternative approaches that avoid the cross-linking step.
+The lack of cross-linking necessarily means that only proteins very tightly associated with the chromatin can be immunoprecipitated.
+Non-specific cross-linking in the human cell line is not an issue if formaldehyde treatment is limited to 10 min or less~\cite{}.
+Shortening the fixation time reduces the background level due to non-specific protein binding to trap preferentially native DNA-proteins interactions~\cite{baranello2016chip}.
 
-Under some conditions cross-linked artefacts might be relevant.
+Under some conditions, cross-linked artifacts might be relevant.
 Good biochemical practice and proper controls can detect and minimize this bias.
 
 To control for nonspecific antibody bias, a mock ChIP can be utilized.
 
-However, mock ChIP yields much less DNA material than DNA input.
+However, the mock ChIP yields much less DNA material than DNA input.
 And mock is more susceptible to technical noise~\cite{kidder2011chip, landt2012chip}.
-
 
 % GC bias
 % ============
