@@ -68,53 +68,50 @@ Even in these cases ChIP data from each condition has to be properly corrected b
 
 % CROSSLINK
 % ===========
-\section{crosslink bias}
+\section{Non-specific TF interactions, crosslinking time}
 
 ChIP-seq technology has been used to identify the localization of post-translationally modified histones, histone variants, TF, and other chromatin-associated proteins.
-Native ChIP is commonly used for the analysis of histones.
-
+Native ChIP is commonly used for the analysis of stable chromatin complexes~\cite{kasinathan2014high} and histones.
+Transcription factor interactions that would not withstand the isolation procedure due to weak affinity to the DNA require a crosslinking step.
 % \todo{"native" bych zde nepoužíval, spíš specific nebo genuine. Nativní se používá jako protiklad k fixovaný (např. native vs formaldehyde-fixed ChIP)}
 
-Transcription factors do not have a high affinity to the DNA, and the crosslinking step is required.
 
-Typical protocol involving crosslinking with formaldehyde, which has been used to trap protein-DNA interactions inside the cells before immunoprecipitation with minimal crosslinking time.
-This small electrophilic molecule can reversibly cross-link with actually all cellular proteins except non-NDA-binding proteins~\cite{solomon1985formaldehyde}. 
+Typical ChIP assay involves crosslinking using formaldehyde reactivity. 
+This smallest aldehyde has been applied for decades in numerous fields~\cite{eckels2003formalin,werner2000effect,gavrilov2015vivo}.
+In the chromatin immunoprecipitation, the ability of formaldehyde to crosslink with proteins and DNA to form protein-DNA or protein-protein complexes provides identification of the location of transcription factor binding along the DNA strand.
+Cell permeability, short spacer length, rapid reactivity, and reversibility are key properties that define formaldehyde as a crosslinking fixative of choice for ChIP~\cite{hoffman2015formaldehyde}.
 
+Unlike other essential regulatory proteins, transcription factors contain at least one DNA-binding domain that contains at least one structural motif that specifically recognizes dsDNA or ssDNA~\cite{mitchell1989transcriptional}.
+Some transcription factors bind non-specifically~\cite{struhl2007interpreting};
+and it is also known, that site-specific TFs can bind non-specifically~\cite{hammar2012lac,mirny2009protein} but with weaker affinity.
 
-Some transcription factors bind non-specifically to a multitude of disparate sites~\cite{struhl2007interpreting}.
-Other factors have specific binding sites.
-It is also known, that site-specific TFs can bind non-specificly~\cite{hammar2012lac}\cite{mirny2009protein}.
-
-
-
-
-
-Source and mechanism of the background expression bias arise from direct or indirect non-specific interactions in open chromatin at highly transcribed regions.
+Several studies show that different DNA-binding proteins spend some time non-specifically bound and sliding along DNA~\cite{slutsky2004kinetics,mirny2010nucleosome,cherstvy2008protein,hu2006proteins,sheinman2009effects}.
+And the approach is that the search process is a combination of three-dimensional and one-dimensional diffusion and also can be statistically predicted~\cite{sela2011dna}.
+Such non-specific accessibility of the genome in different regions leads to the non-specific cross-linking events, which can increase the rate of false-positive signals in further analysis.
 
 
 
+% Even low-level non-specific interactions between the antibody and cross-reacting cellular proteins may contribute to this phenomenon.
+% Or Open chromatin shows preferential recovery through the immunoprecipitation process.
+% Highly expressed genes are characterized by open chromatin conformation, nucleosome perturbation and DNA more exposed to interactions.\cite{}
+% Although the antibody in IP binds specifically to its target TFs.
+% It can also bind non-specifically to other proteins.
+% Under some cross-linkin conditions, this regions might cause the hyper ChIPability\cite{}
 
-Even low-level non-specific interactions between the antibody and cross-reacting cellular proteins may contribute to this phenomenon.
-Or Open chromatin shows preferential recovery through the immunoprecipitation process.
-Highly expressed genes are characterized by open chromatin conformation, nucleosome perturbation and DNA more exposed to interactions.\cite{}
-Although the antibody in IP binds specifically to its target TFs.
-It can also bind non-specifically to other proteins.
-Under some cross-linkin conditions, this regions might cause the hyper ChIPability\cite{}
+% %\todo{jak už jsem psal výše, hlavím zdrojem nespecifických interakcí je adsorpce na povrch kuliček. Protilátka může a nemusí také přispívat}
 
-%\todo{jak už jsem psal výše, hlavím zdrojem nespecifických interakcí je adsorpce na povrch kuliček. Protilátka může a nemusí také přispívat}
+% One possible solution is to develop alternative approaches that avoid the cross-linking step.
+% The lack of cross-linking necessarily means that only proteins very tightly associated with the chromatin can be immunoprecipitated.
+% Non-specific cross-linking in the human cell line is not an issue if formaldehyde treatment is limited to 10 min or less~\cite{}.
+% Shortening the fixation time reduces the background level due to non-specific protein binding to trap preferentially native DNA-proteins interactions~\cite{baranello2016chip}.
 
-One possible solution is to develop alternative approaches that avoid the cross-linking step.
-The lack of cross-linking necessarily means that only proteins very tightly associated with the chromatin can be immunoprecipitated.
-Non-specific cross-linking in the human cell line is not an issue if formaldehyde treatment is limited to 10 min or less~\cite{}.
-Shortening the fixation time reduces the background level due to non-specific protein binding to trap preferentially native DNA-proteins interactions~\cite{baranello2016chip}.
+% Under some conditions, cross-linked artifacts might be relevant.
+% Good biochemical practice and proper controls can detect and minimize this bias.
 
-Under some conditions, cross-linked artifacts might be relevant.
-Good biochemical practice and proper controls can detect and minimize this bias.
+% To control for nonspecific antibody bias, a mock ChIP can be utilized.
 
-To control for nonspecific antibody bias, a mock ChIP can be utilized.
-
-However, the mock ChIP yields much less DNA material than DNA input.
-And mock is more susceptible to technical noise~\cite{kidder2011chip, landt2012chip}.
+% However, the mock ChIP yields much less DNA material than DNA input.
+% And mock is more susceptible to technical noise~\cite{kidder2011chip, landt2012chip}.
 
 % GC bias
 % ============
@@ -129,7 +126,7 @@ In addition, sigle-cell sequencing requires PCR-amplification before the fragmen
 % \todo{důležitá poznámka k celému odstavci: DNA/chromatin se u ChIPu fragmentuje pouze před imunoprecipitací. Poté, co vyizoluješ čistou DNA, se už žádná další fragmentace neprovádí. Rovnou se připraví knihovna a sekvenuje se!}
 
 The coverage for ChIP-seq varies across experiments due to GC-content bias, and that variability may introduce false-positive signals during downstream analysis.
-Loci with high GC base composition are often under-represented, and such bias has been observed in several NGS experiments~\cite{benjamini2012summarizing}\cite{dohm2008substantial}\cite{teng2017accounting}.
+Loci with high GC base composition are often under-represented, and such bias has been observed in several NGS experiments~\cite{benjamini2012summarizing,dohm2008substantial,teng2017accounting}.
 This bias tends to have appeared during the PCR amplification~\cite{ross2013characterizing}.
 It is known that GC-rich DNA targets are less amenable to amplification due to base base-stacking interations~\cite{yakovchuk2006base}.
 % \todo{GC bias vzniká také v průběhu PCR, kdy se GC-rich fragmeny amplifikují hůře než GC-poor. Je to dáno jejich méně efektivní denaturací - mají vyšší vazebnou energii}
@@ -158,7 +155,7 @@ The method for correction of this kind of bias was presented~\cite{teng2017accou
 Incorporation of the approach into current peak callers shows substantial improvements in signal finding.
 However, the method is not suitable for broad peak identification as histone modifications.
 
-% Also new methods of cleavege of the purified DNA cleavage for library construction are developing~\cite{}, which provide better uniform coverage for GC reagions.
+
 
 
 
