@@ -85,3 +85,12 @@
 %%% Various table goodies
 \newcommand{\pulrad}[1]{\raisebox{1.5ex}[0pt]{#1}}
 \newcommand{\mc}[1]{\multicolumn{1}{c}{#1}}
+
+%%% Source in caption
+\newcommand*{\captionsource}[2]{%
+  \caption[{#1}]{%
+    #1%
+    \\\hspace{\linewidth}%
+    \textit{Source:} #2%
+  }%
+}

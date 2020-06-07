@@ -36,51 +36,29 @@ And in these cases, specific antibodies are not available, and epitope-tagged me
 
 \section{Library construction and sequencing}
 
-DNA fragments of 150 to 300 bp long are selected.
-This size range is equivalent to mono- and dinucleosome chromatin fragments~cite{kidder2011chip}.
+After chromatin purification with and without immunoprecipitation to prepare ChIP and corresponding input DNA fragments, the material is ready to be sequenced. 
+The size range of 150 to 300 bp fragment length selection is equivalent to mono- and dinucleosome chromatin fragments~\cite{kidder2011chip}.
+
+The goal of the ChIP-sequencing is to obtain reads long enough to map uniquely to the reference.  
+In many cases, 36-50 bp will be enough even for a complex organism such as a human. 
+The longer reads sequenced, the deeper coverage per base may be achieved.
+Libraries can be sequenced using a single-end or paired-end strategy. 
+Paired-end sequencing can be useful to increase sequencing coverage, improve alignment efficiency into repetitive regions, and detect fragment size~\cite{kidder2011chip}.
+
+
+\begin{figure}[b!]
+\centering
+\includegraphics[width=\textwidth]{../img/chip.jpeg}
+\captionsource{Overview of ChIP-seq experiment.}{www.abcam.com}
+\label{fig:graph_classes}
+\end{figure}
 
 
 
-Sequenced fragments referred to reads are then mapped to the reference. 
-Enriched regions are compared with the control dataset.
 
 
 
 
-
-
-
-
-
-
-
-\section{Sequencing library quality plays the critical role for next-generation sequencing}
-The fragmentation of the target DNA is a key step for NGS library construction.
-Physical metods or enzymatic methods are typically used for DNA fragmentation~\cite{}.
-%comparison of both phys and enzyme?
-After fragmentation the sequencing oligonucleotyde adapters of a constant length with specific sequences are ligated.
-\todo{"constant length" - o velikost v podstate nejde, dulezita je sekvence adapteru}
-Those sequences are specially designed to interact with the NGS platform such as Illumina or Ion Torrent.
-Determination of the library size referring to the insert size which is limited by the high-throughput sequencing instrumentation.
-Process of cluster generation, after the fragments have attached, constrains the optimal insert size in Illumina technology.
-Shorter products amplify more efficiently.
-\todo{"products" -> shorter fragments. Kratsi fragmenty take maji mensi sanci, ze dojde ke kontaktu se sousednim clusterem}
-
-Library preparation from purified DNA for ChIP-seq experiment should be as complex as possible.
-\todo{veta nedava dobry smysl - komplexni ma byt knihovna, nikoli priprava knihovny}
-More starting material induces less amplification.
-\todo{More starting material requires less amplification.}
-Thus library complaxity is better.
-\todo{complexity; v textu je hodne preklepu - muzes nejak vyuzit spellchecking?}
-
-
-\section{Sequencing}
-Purified DNAs fragments from ChIP-seq samples are sequenced as reads of length 36-100bp and can be uniquely aligned to the genome reference.
-Different next-generation platforms can be utilized.
-The technology provides siquencing of both single-end and paired-end reads.
-A single run of the Illumina/Solexa sequencing technology generetas 50-200 million reads\cite{park2009chip}.
-Single-end reads are usrd for common ChIP-seq analysis, while paired-end are evolved to improve the library complexity.
-That helps to focuse at repetitive regions \cite{chen2012systematic}.
 
 \section{Mapping}
 Sequenced short reads are represented as a text file and can be aligned with mapping software based on Burrows-Wheeler transform algorithm \cite{li2009fast} \cite{siren2014indexing}
