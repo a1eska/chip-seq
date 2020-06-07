@@ -1,14 +1,49 @@
 \chapter{Chromatin immunoprecepitation}
+
+\section{Intro}
+Chromatin immunoprecipitation followed by sequencing, also known as ChIP-sequencing or ChIP-seq, is a modern and relatively cheap method to analyze any protein associated with DNA. 
+The most frequently investigated chromatin-associated proteins are transcription factors (TF), modifies histones, components of the transcriptional machinery, and chromatin-modifying enzymes.
+Advances in high-throughput parallel sequencing technology and computational methods enable generate and analyze extremely large data sets. 
+Unlike ChIP-on-chip, ChIP-seq was developed to understand genome-wide profiling and does not rely on knowledge of exact binding loci.~\cite{park2009chip} .
+
+
 \section{Experiment design}
-Chromatin immunoprecepitation followed by sequencing (ChIP-seq) is a method applied on a genome wide scale identification of transcription factor (TF) binding sites and epigenetic marks.
-\todo{TF a histone marks jsou jen nejčastější případy využití této metody, ale ChIP-seq obecně může detekovat jakékoli proteiny asociované s chromatinem (replikační, reparační proteiny atd., remodelery chromatinu....)}
-Genome-wide studies using ChIP-seq provide important insights into biological role of presence of the histone modification and/or transcription factors.
-ChIP assay involves immunoprecepitation of proteins of interest along with assosiated DNA.
-The proteins are crosslinked to DNA using  \emph{in vivo} formaldehyde, and then the chromatin is fragmented either by micrococcal nuclease or sonication.
-A typical experiment requires 10-100 ng od chromatin.
-Before the purification point, the target proeins incubated with specific antibody.
-After washing, the uncrosslinced and purified DNA can be taken to the library construction.
-\todo{v tomto textu vubec nejsou odkazy na literaturu. Je potreba citovat alespon nejake review o ChIP-seq}
+
+A typical protocol has many steps. 
+The consideration od the first step depends on the properties of the protein under investigation. 
+For example, histone-DNA interactions are strong enough. 
+Thus the fixation using formaldehyde as a crosslinking agent may not be necessary~\cite{barski2008identification}. 
+On the other hand, proteins associated with DNA for a short time require a crosslinking step. 
+In the case of histone deacetylases (HDACs) and histone acetyltransferases (HATs), an additional disuccinimidyl glutarate (DSG) treatment step before formaldehyde crosslinking demands~\cite{wang2009genome}. 
+
+Cross-linked chromatin is fragmented before ChIP. 
+Fragmentation way is depending on the purpose of the experiment, cell type, number of cells, fixation conditions. 
+For nucleosome modifications, MNase digestion may be preferred~\cite{kidder2011chip}.  
+The method allows generating high-resolution data of mononucleosome sized particles. 
+However, the nucleosome instability may cause the loss of signal.
+To identify TF binding events, sonication of crosslinked chromatin is a preferable method. 
+In this case, the micrococcal nuclease may cause degradation of the linker DNA~\cite{kidder2011chip}.
+The sonication conditions should be optimized for each experiment type. 
+A Sonication buffer can influence the result~\cite{steger2008dot1l}. 
+It is also important to avoid oversonication during the library preparation for transcription factors. 
+
+
+Then DNA fragments of 150 to 300 bp long are selected and sequenced.
+This size range is equivalent to mono- and dinucleosome chromatin fragments~cite{}.
+
+
+
+Sequenced fragments referred to reads are then mapped to the reference. 
+Enriched regions are compared with the control dataset.
+
+
+
+
+
+
+
+
+
 
 \section{MOCK versus input}
 
