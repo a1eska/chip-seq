@@ -34,7 +34,7 @@ The right choice of antibody is an essential factor for the ChIP-seq experiment.
 Many experiments are orienting on newly discovered proteins. 
 And in these cases, specific antibodies are not available, and epitope-tagged methods can be useful~\cite{brizzard2008epitope, goldberg2010distinct}.
 
-\section{Library construction and sequencing}
+\section{Library construction, sequencing and mapping}
 
 After chromatin purification with and without immunoprecipitation to prepare ChIP and corresponding input DNA fragments, the material is ready to be sequenced. 
 The size range of 150 to 300 bp fragment length selection is equivalent to mono- and dinucleosome chromatin fragments~\cite{kidder2011chip}.
@@ -43,7 +43,7 @@ The goal of the ChIP-sequencing is to obtain reads long enough to map uniquely t
 In many cases, 36-50 bp will be enough even for a complex organism such as a human. 
 The longer reads sequenced, the deeper coverage per base may be achieved.
 Libraries can be sequenced using a single-end or paired-end strategy. 
-Paired-end sequencing can be useful to increase sequencing coverage, improve alignment efficiency into repetitive regions, and detect fragment size~\cite{kidder2011chip}.
+Paired-end sequencing can be useful to increase sequencing coverage, improve alignment efficiency into repetitive regions, and detect fragment size~\cite{kidder2011chip, chen2012systematic}.
 
 
 \begin{figure}[b!]
@@ -53,12 +53,12 @@ Paired-end sequencing can be useful to increase sequencing coverage, improve ali
 \label{fig:graph_classes}
 \end{figure}
 
+Next-generation sequencing technological advancements have facilitated the production of a huge amount of sequencing data. 
+Multiple barcoded ChIP-seq libraries pooled together and sequenced in a single lane~\cite{craig2008identification} to reduce the cost of the experiment and produce high-quality data.
+There are several sequencing technologies available. The big amount of data is generating through the Illumina platform, which produces about 100-400 million reads per run.
 
-
-
-
-
-
-
-\section{Mapping}
-Sequenced short reads are represented as a text file and can be aligned with mapping software based on Burrows-Wheeler transform algorithm \cite{li2009fast} \cite{siren2014indexing}
+Row data of short sequenced tags often appear in fastq format containing sequence information and quality scores. Such files may contain 10 to 60 million reads. Several alignment tools have been developed based on extended Burrows-Wheeler transform (BWT)~\cite{li2009fast, siren2014indexing}.
+Unlike RNA-seq with exon junctions, the ChIP-seq experiment does not require to find spliced alignment. 
+Uniquely mapped reads with minimal allowed mismatches are sufficient to analyze typical TF and also simplify further analysis. 
+However, allowing the random location for multiple mapped reads may increase the sensitivity of peak detection. 
+The ration of the unique mapped reads over the total number of mapped reads is one of the parameters of the library quality assessment and should not be below 50\%~\cite{shin2013computational}.
