@@ -1,13 +1,13 @@
-\chapter{Chromatin immunoprecepitation}
+\chapter{ChIP-seq technology}
 
-\section{Intro}
+\section{Introduction to ChIP-seq}
 Chromatin immunoprecipitation followed by sequencing, also known as ChIP-sequencing or ChIP-seq, is a modern and relatively cheap method to analyze any protein associated with DNA. 
 The most frequently investigated chromatin-associated proteins are transcription factors (TF), modifies histones, components of the transcriptional machinery, and chromatin-modifying enzymes.
 Advances in high-throughput parallel sequencing technology and computational methods enable generate and analyze extremely large data sets. 
 Unlike ChIP-on-chip, ChIP-seq was developed to understand genome-wide profiling and does not rely on knowledge of exact binding loci.~\cite{park2009chip} .
 
 
-\section{Experiment design}
+\section{Considerations of experimental design}
 
 A typical protocol has many steps. 
 The consideration od the first step depends on the properties of the protein under investigation. 
@@ -62,3 +62,25 @@ Unlike RNA-seq with exon junctions, the ChIP-seq experiment does not require to 
 Uniquely mapped reads with minimal allowed mismatches are sufficient to analyze typical TF and also simplify further analysis. 
 However, allowing the random location for multiple mapped reads may increase the sensitivity of peak detection. 
 The ration of the unique mapped reads over the total number of mapped reads is one of the parameters of the library quality assessment and should not be below 50\%~\cite{shin2013computational}.
+
+
+\section{QC and computational analysis workflow}
+
+ChIP-seq data analysis is a powerful tool to get new insight into transcription control machinery and other bilogic processes. 
+The number of raw or precessed datasets is increasing every year. 
+However, computational pipelines have not been straightforward; 
+and new tools and analysis pipelines are needed to be developed.
+
+NCBI's SRA and GEO~\cite{barrett2012ncbi} are the largest central public domains containing a vast amount of published genomic data, including ChIP-seq datasets. 
+Many algorithms and tools have been introduced for addressing specific aspects of computational analysis. 
+As was mentioned above, raw data often appear in fastq format. 
+Processing pipelines are developed to make raw sequence reads annotated.
+Low-quality data can be filtered before alignment to the reference. 
+But such filtering is not necessary due to the inability of such sequences to be aligned~\cite{furey2012chip}.
+Suitable tools~\cite{langmead2009ultrafast, li2009fast, kim2019graph} map sequenced reads producing  SAM, BAM, or CRAM output formats. 
+BAM format is a widely used standard so far.
+The sequencing library is expected to be as complex as possible. 
+The complexity if which is measured by the non-redundant fraction (NRF).
+In a typical TF study reads mapped to the same genomic coordinate are filtered as redundant, because the expected number of mapped reads per base pair is less than 1. 
+On the other hand, when highly repetitive regions such as rDNA in yeast, long repetitive elements such as segmental duplication regions are the regions of interest, the filtering of the redundant reads should be skiped~\cite{nakato2017recent}.
+Data processing routine requires quality control on early step reducing further downstream analysis problems~\cite{ewels2016multiqc}.
