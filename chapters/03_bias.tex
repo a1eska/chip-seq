@@ -1,70 +1,70 @@
 \chapter{bias, artefacts}
 
-% To ensure reliability of the data, at least duplicate biological replicate experiments should be done.
-% Sonication of crosslinked chromatin may be preffered method.
-% Mocrococcal nuclease degrade linker DNA where TF tend to bind.
-% The conditions of sonication should be optimized for each cell type.
-% Because they depend on cell type, type of sonicator and  sonicator settings.
+% % To ensure reliability of the data, at least duplicate biological replicate experiments should be done.
+% % Sonication of crosslinked chromatin may be preffered method.
+% % Mocrococcal nuclease degrade linker DNA where TF tend to bind.
+% % The conditions of sonication should be optimized for each cell type.
+% % Because they depend on cell type, type of sonicator and  sonicator settings.
 
-\section{assay artefacts}
-Strong enrichment signals suggestive of proteins binding to genomic loci where genes were higly transcribed were found.
-Moreover, the enrichment for proteins binding to higly-transcribed genes was was observed even in controls like moch ChIP-seq data.
-Which poins to an overall bias that could contaminate any ChIP-seq data with false positives~\cite{park2013widespread}
-A secondary bias of nucleosomal periodicity was also commonly observed across ChIP-seq dataset.
-And contributed additional false positives in which proteins falsly appeared to interact with nucleosomes.
+% \section{assay artefacts}
+% Strong enrichment signals suggestive of proteins binding to genomic loci where genes were higly transcribed were found.
+% Moreover, the enrichment for proteins binding to higly-transcribed genes was was observed even in controls like moch ChIP-seq data.
+% Which poins to an overall bias that could contaminate any ChIP-seq data with false positives~\cite{park2013widespread}
+% A secondary bias of nucleosomal periodicity was also commonly observed across ChIP-seq dataset.
+% And contributed additional false positives in which proteins falsly appeared to interact with nucleosomes.
 
-Two features among strong false positive signals.
-First, the signals were present within gene bodies.
-Second, Stronges signal derived from genes thet are known to be higly expressed.
+% Two features among strong false positive signals.
+% First, the signals were present within gene bodies.
+% Second, Stronges signal derived from genes thet are known to be higly expressed.
 
-% It is possible that certain TF trully bind to ORFas a means of regulating gene expression.
-A common use of ChIP-seq is to examine binding of a given factor under different growth conditions or backgrounds.
-Since only a single variable is changed (growth condition), it might be assumed that comparing binding under different conditions offers a reliable means of identifying biologically relevant targets, with most background artefacts being ormalized out.
+% % It is possible that certain TF trully bind to ORFas a means of regulating gene expression.
+% A common use of ChIP-seq is to examine binding of a given factor under different growth conditions or backgrounds.
+% Since only a single variable is changed (growth condition), it might be assumed that comparing binding under different conditions offers a reliable means of identifying biologically relevant targets, with most background artefacts being ormalized out.
 
-One bias arised during genome sonication.
-Open chromatin regions are easely shared than other regions.
-Thus these open regions yield more protein-DNA complexes.
-IP step immunoprecepitate more complexes from the open chromatin regions.
-And as a result gives more sequenced reads.
+% One bias arised during genome sonication.
+% Open chromatin regions are easely shared than other regions.
+% Thus these open regions yield more protein-DNA complexes.
+% IP step immunoprecepitate more complexes from the open chromatin regions.
+% And as a result gives more sequenced reads.
 
-To correct this bias, the fragmented genome are divided into two portions.
-One portion goes through the IP step.
-And then sequenced.
-Other portion is sequenced directly.
-This portion serve the input control.
+% To correct this bias, the fragmented genome are divided into two portions.
+% One portion goes through the IP step.
+% And then sequenced.
+% Other portion is sequenced directly.
+% This portion serve the input control.
 
-This input control can be used to normalize the shearing bias of sonication~\cite{kharchenko2008design}.
-% Type of normalization controls might be appropriate for normalizing false positives?
+% This input control can be used to normalize the shearing bias of sonication~\cite{kharchenko2008design}.
+% % Type of normalization controls might be appropriate for normalizing false positives?
 
-In the analysis of ChIP-seq data two types of normalization or correction controls are commonly used.
+% In the analysis of ChIP-seq data two types of normalization or correction controls are commonly used.
 
-The input sample has the advanage that all the regions of the genome are well represented.
-The sample concentration is ample and stable for constructing sequencing libraries.
-The same sample can potentially serve as the control for several related experiments.
+% The input sample has the advanage that all the regions of the genome are well represented.
+% The sample concentration is ample and stable for constructing sequencing libraries.
+% The same sample can potentially serve as the control for several related experiments.
 
-The input a baseline signal for reads across the genome, factoring in sequence mappability and copy number differences relative to the reference genome.
-For these reasons, input has been suggested as a more effective control.
+% The input a baseline signal for reads across the genome, factoring in sequence mappability and copy number differences relative to the reference genome.
+% For these reasons, input has been suggested as a more effective control.
 
-However, genes transcribed at high rates is not adequately represented in the input.
+% However, genes transcribed at high rates is not adequately represented in the input.
 
-A mock ChIP is designed to correct data with large quantity of spurious sites in ChIP-seq, which are coused by uneven genomic sonication and nonspecific interactions between chromatin and antibody.
-\todo{nezapomeň na nespecifické interakce mezi chromatinem a magnetickými/polysacharidovými kuličkami, které se používají pro purifikaci komplexů chromatin-protilátka}
-Whereas DNA input controls corrects only for uneven sonication.
-\todo{řekl bych, že input dokáže korigovat i PCR amplification bias (GC bias?)}
+% A mock ChIP is designed to correct data with large quantity of spurious sites in ChIP-seq, which are coused by uneven genomic sonication and nonspecific interactions between chromatin and antibody.
+% \todo{nezapomeň na nespecifické interakce mezi chromatinem a magnetickými/polysacharidovými kuličkami, které se používají pro purifikaci komplexů chromatin-protilátka}
+% Whereas DNA input controls corrects only for uneven sonication.
+% \todo{řekl bych, že input dokáže korigovat i PCR amplification bias (GC bias?)}
 
-Mock better reflects the background enrichment from highly transcribed genes.
-Mock ChIP-seq data exhibit a stronger expression bias than the corresponding input sample.
-Therefore correction by mock ChIP (normalization) would be more effectively reduce the false-positives than normalization by input~\cite{park2013widespread}.
-Mock ia s better control for minimizing the appearence of occupancy signal over transcribed regions.
-\todo{mock IP má ale tendenci precipitovat jen velmi malé množství chromatinu (DNA), které je do určité míry náhodné a tedy nereproducibilní. Při PCR pak dochází k overamplifikaci.}
+% Mock better reflects the background enrichment from highly transcribed genes.
+% Mock ChIP-seq data exhibit a stronger expression bias than the corresponding input sample.
+% Therefore correction by mock ChIP (normalization) would be more effectively reduce the false-positives than normalization by input~\cite{park2013widespread}.
+% Mock ia s better control for minimizing the appearence of occupancy signal over transcribed regions.
+% \todo{mock IP má ale tendenci precipitovat jen velmi malé množství chromatinu (DNA), které je do určité míry náhodné a tedy nereproducibilní. Při PCR pak dochází k overamplifikaci.}
 
-Measuring the binding of a TF under two different conditions and identifying the differentially bound target offers the most reliable way to identify targets of biological significence.
-\todo{s tímhle nesouhlasím, je to příliš obecně definované. Pokud například opůsobím buňky nějakým inhibitorem, který do 10 min způsobí disociaci TF z chromatinu, tak se to na transkripci moc neprojeví a artefakty mi zůstanou prakticky stejné.}
-The assumption that most sources of background signal are canseled out between two samples is risky.
-Expression biase derives directly from actively transcribed genes.
-Transcription will differ between two conditions.
-\todo{není jisté, zda se bude transkripce mezi podmínkami lišit. Záleží, jaké to jsou podmínky. A určitě bude existovat nějaká skupina vysoce exprimovaných housekeeping genů, které budou silně transkribované za obou podmínek: např. proteiny translačního aparátu, cytoskelet atd.}
-Even in these cases ChIP data from each condition has to be properly corrected by the corresponding mock ChIP data to minimize false positives.
+% Measuring the binding of a TF under two different conditions and identifying the differentially bound target offers the most reliable way to identify targets of biological significence.
+% \todo{s tímhle nesouhlasím, je to příliš obecně definované. Pokud například opůsobím buňky nějakým inhibitorem, který do 10 min způsobí disociaci TF z chromatinu, tak se to na transkripci moc neprojeví a artefakty mi zůstanou prakticky stejné.}
+% The assumption that most sources of background signal are canseled out between two samples is risky.
+% Expression biase derives directly from actively transcribed genes.
+% Transcription will differ between two conditions.
+% \todo{není jisté, zda se bude transkripce mezi podmínkami lišit. Záleží, jaké to jsou podmínky. A určitě bude existovat nějaká skupina vysoce exprimovaných housekeeping genů, které budou silně transkribované za obou podmínek: např. proteiny translačního aparátu, cytoskelet atd.}
+% Even in these cases ChIP data from each condition has to be properly corrected by the corresponding mock ChIP data to minimize false positives.
 
 % CROSSLINK
 % ===========
@@ -147,11 +147,11 @@ However, the method is not suitable for broad peak identification as histone mod
 
 
 
-% Blacklist
-% ============
-\section{Blacklist region/Difficulties in the assambly/overrepresented regions}
+% % Blacklist
+% % ============
+% \section{Blacklist region/Difficulties in the assambly/overrepresented regions}
 
-Signals based on high-throughout sequencing output rely on an accurate genomic annotation and mapping.
-In some regions, such as regions with a large number of structural variants and repetitive regions, the assembly of the genome can be difficult and may may be collapsed or under-represented relative to the actual underlying genomic sequence.
-Problems with the assembly have effects on the mapping and calling and lead to inaccurate interpretation of the downstream analysis.
-Duplication rate for single-end ChIP-seq data is overestimated and leads to ChIP-seq signal being lost within those regions~\cite{chen2012systematic}.
+% Signals based on high-throughout sequencing output rely on an accurate genomic annotation and mapping.
+% In some regions, such as regions with a large number of structural variants and repetitive regions, the assembly of the genome can be difficult and may may be collapsed or under-represented relative to the actual underlying genomic sequence.
+% Problems with the assembly have effects on the mapping and calling and lead to inaccurate interpretation of the downstream analysis.
+% Duplication rate for single-end ChIP-seq data is overestimated and leads to ChIP-seq signal being lost within those regions~\cite{chen2012systematic}.

@@ -86,3 +86,21 @@ The complexity if which is measured by the non-redundant fraction (NRF).
 In a typical TF study reads mapped to the same genomic coordinate are filtered as redundant, because the expected number of mapped reads per base pair is less than 1. 
 On the other hand, highly repetitive regions such as rDNA in yeast, long repetitive elements such as segmental duplication regions are the regions linked to important biological functions~\cite{nakato2017recent}. But the annotation of such regions is challenging and expect special algorithms that take such regions into account~\cite{chung2011discovering}.
 Data processing routine requires quality control on early step reducing further downstream analysis problems~\cite{ewels2016multiqc}.
+
+\section{The best strategy}
+
+Extracting useful lore from huge data repositories combines techniques from computer science and statistics~\cite{friedman2001elements}. 
+In terms of ChIP-seq, the main goal is to distinguish significant enrichment events from background noise and to compare multiple profiles that are linked to the biological functions. 
+The process of discovering patterns in large datasets is critically dependent on high data quality. 
+Cell culture conditions, incubation, ChIP, and library construction may cause variability between datasets. 
+To identify confident ChIP signals the presence of at least two biological replicates is necessary~\cite{kidder2011chip}. 
+The availability of two or more replicates helps to assess whether the signal is a true biological event or just a technical variation. 
+
+The ChIP-seq experiment should be consistent. 
+Expected peak regions should have a similar signal profile, and that consistency is measured by the percentage of the overlapping peaks, correlation coefficient over selected intervals, and Irreproducible Discovery rate (IDR)~\cite{shin2013computational}.
+
+For proper binding site detection, the fragmented genome is divided into two portions. 
+The one portion undergoes al the immunoprecipitation procedure described above, whereas the other is sequenced directly. 
+This direct sequencing is referred to as an input control dataset and used to normalize IP sequencing results~\cite{kidder2011chip}. 
+Another control dataset can be generated using IP protocol, where antibodies cannot recognize a protein tagged with the epitope~\cite{flensburg2014comparison}. 
+Both controls are informative and have advantages as well as disadvantages.
