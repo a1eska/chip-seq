@@ -69,10 +69,12 @@
 % CROSSLINK
 % ===========
 \section{Non-specific TF interactions, crosslinking time}
+\todo{..., effect/impact of crosslinking time?}
 
 ChIP-seq technology has been used to identify the localization of post-translationally modified histones, histone variants, TF, and other chromatin-associated proteins.
 Native ChIP is commonly used for the analysis of stable chromatin complexes~\cite{kasinathan2014high} and histones.
 Transcription factor interactions that would not withstand the isolation procedure due to weak affinity to the DNA require a crosslinking step.
+\todo{tento odstavec se dubluje s obsahem kapitoly 1.2}
 % \todo{"native" bych zde nepoužíval, spíš specific nebo genuine. Nativní se používá jako protiklad k fixovaný (např. native vs formaldehyde-fixed ChIP)}
 
 
@@ -80,6 +82,7 @@ Typical ChIP assay involves crosslinking using formaldehyde reactivity.
 This smallest aldehyde has been applied for decades in numerous fields~\cite{eckels2003formalin,werner2000effect,gavrilov2015vivo}.
 In the chromatin immunoprecipitation, the ability of formaldehyde to crosslink with proteins and DNA to form protein-DNA or protein-protein complexes provides identification of the location of transcription factor binding along the DNA strand.
 Cell permeability, short spacer length, rapid reactivity, and reversibility are key properties that define formaldehyde as a crosslinking fixative of choice for ChIP~\cite{hoffman2015formaldehyde}.
+\todo{tahle věta je HODNĚ podobná původnímu textu v článku. Dávej na podobné věci VELKÝ pozor. Měla bys vše popisovat vlastními slovy. Nejde doslovně přebírat celé věty (a prohození 2 slov to nezachrání), i když cituješ zdroj. Mohlo by to být hodnoceno jako plagiátorství. Obzvlášť, když s angličtinou trochu bojuješ a najednou se v tvém textu objeví věta nebo dokonce celý odstavec s perfektní angličtinou, vypadá to podezřele. Z ničeho tě neobviňuju, jen si to prosím hlídej.}
 
 Unlike other essential regulatory proteins, transcription factors contain at least one DNA-binding domain that contains at least one structural motif that specifically recognizes dsDNA or ssDNA~\cite{mitchell1989transcriptional}.
 Some transcription factors bind non-specifically~\cite{struhl2007interpreting};
@@ -91,8 +94,7 @@ Such non-specific accessibility of the genome in different regions leads to the 
 
 The formaldehyde concentration, incubation time, and other conditions can vary from experiment to experiment. 
 Even though the effective crosslinking time is of the 5-second threshold~\cite{schmiedeberg2009temporal}, many laboratories use rather prolonged formaldehyde incubation time.
-Soluble proteins not expected to associate with DNA would be non-specifically captures at the open chromatin loci.
-
+\todo{buď konkrétní - jaké časy se používají?}
 Soluble proteins not expected to associate with DNA would be non-specifically captures at the open chromatin loci. Shortening the incubation time traps preferentially genuine DNA-protein binding events~\cite{baranello2016chip}.
 
 Antibody-beads also can non-specifically bind cross-linked complexes during the immunoprecipitation step~\cite{zhu2014fast} and cause a raise of false-positive rate.
@@ -105,30 +107,36 @@ It is important to mention, such bias can appear due to formaldehyde excess~\cit
 \section{GC content bias in ChIP-seq is challenging}
 Effective analysis requires sufficient coverage by sequence reads. 
 The sequenced reads must overlap to achieve the required level of resolution for a ChIP experiment.
+\todo{tuhle větu nechápu - proč se ready musí překrývat?}
 Whereby the experiment requires many copies of a whole genome.
 Nowadays ChIP purified DNA is obtained from many cells.
 Multiple genome copies provide a sufficient number of overlapping reads after cleavage and sequencing.
+\todo{"after fragmentation", spíš než "after cleavage"}
 In addition, sigle-cell sequencing requires PCR-amplification before the fragmentation step~\cite{clark2016single}.
+\todo{vysvětli stručně, proč je zde třeba materiál amplifikovat}
 
 % \todo{důležitá poznámka k celému odstavci: DNA/chromatin se u ChIPu fragmentuje pouze před imunoprecipitací. Poté, co vyizoluješ čistou DNA, se už žádná další fragmentace neprovádí. Rovnou se připraví knihovna a sekvenuje se!}
 
 The coverage for ChIP-seq varies across experiments due to GC-content bias, and that variability may introduce false-positive signals during downstream analysis.
+\todo{podle mě je důležitější, že "The coverage for ChIP-seq varies across the genome due to GC-content bias..."}
 Loci with high GC base composition are often under-represented, and such bias has been observed in several NGS experiments~\cite{benjamini2012summarizing,dohm2008substantial,teng2017accounting}.
 This bias tends to have appeared during the PCR amplification~\cite{ross2013characterizing}.
 It is known that GC-rich DNA targets are less amenable to amplification due to base base-stacking interations~\cite{yakovchuk2006base}.
 % \todo{GC bias vzniká také v průběhu PCR, kdy se GC-rich fragmeny amplifikují hůře než GC-poor. Je to dáno jejich méně efektivní denaturací - mají vyšší vazebnou energii}
 
 Both PCR amplification during library construction and PCR for cluster amplification on the Illumina platform play role. 
+\todo{"... PCR for cluster generation..."}
 The first case has many potential solutions to avoid the bias during library construction step.
 It requires preparing a larger amount of the input DNA to avoid PCR itself, or PCR step with extensive optimization such as annealing time and temperatures and primer specifity~\cite{aird2011analyzing}.
 The possible problem of Illumina cell flow bridge amplification may occur due to secondary structures.
+\todo{"cell flow" → flowcell}
 GC-rich sequences form hairpins, which are stable and stack unmelted at usual PCR denaturation temperatures~\cite{stein2010nucleosome}.
 
 Fragmentation is the first step in DNA sequencing process.
 This step ensures the solubility of the crosslinked DNA-protein complexes are soluble and accessible to antibody.
 Using enzymatic digestion, chemical shearing, or different mechanical method, DNA with crosslinked proteins is broken up into short fragments.
 After immunoprecipitation one or both ends of the fragment sequenced.
-
+\todo{připadá mi, že na tomto místě textu už je pozdě detailně vysvětlovat metody fragmentace. To se má čtenář dozvědět dřív. Zde můžeš třeba už jen odkázat na příslušnou předchozí kapitolu.}
 
 The early assumption was that genomic DNA break randomly.
 However, the experiment~\cite{poptsova2014non} with different methods of DNA fragmentation showed that the rates of double-stranded breaks are sequence-dependent.
@@ -136,7 +144,8 @@ This dependency may also cause the GC-bias.
 
 However, true binding sites of the protein of interest may be expected to occur in high GC regions.
 % \todo{"are expected" -> spíš "may be expected"}\todo{. Oblasti vazby vůbec nemusí být GC-bohaté, záleží na cílovém proteinu}
-Those regions have biological relevance such as promotor regions.
+Those regions have biological relevance such as promotor regions
+\todo{jen připomínám, že tohle se liší podle organismu. Třeba S. pombe má promotory GC-poor}.
 Modeling of the GC-content at the fragment level~\cite{benjamini2012summarizing} is the optimal approach, but is not directly applicable to ChIP-seq analysis.
 The method for correction of this kind of bias was presented~\cite{teng2017accounting}.
 Incorporation of the approach into current peak callers shows substantial improvements in signal finding.

@@ -4,6 +4,7 @@ ChIP-seq signal estimation has three major steps: processing, finding candidate 
 Peak calling is a technique used to identify regions in a genome with high read densities.
 
 5' to 3' directionality of short tags results in strand-dependent tag density.
+\todo{musíš nejdřív vysvětlit, že "tag" a "read" jsou synonyma}
 
 Due to large amount of sequence tag it is difficult to analyze ChIP-seq data.
 
@@ -26,8 +27,10 @@ Transcription factors typically specifically interact with chromatin.
 That means that the protein recognize specific sequence called motif.
 Sequenced reads centered around that motif cover small region, which signal appears as sharp peak.
 Broad peaks are typical for histone marks, where several nucleosomes non-specifically positioned on the DNA.
+\todo{to je zavádějící. Nukleosomy sice nevážou konkrétní motiv DNA, ale vykazují jistou míru sekvenčních preferencí, která se liší v závislosti na organismu.}
 Sequenced tags cover broad regions that can reach several kilobases.
 In studies of gene transcription by RNA polymerase II, ChIP signal can appear as mix of sharp and broad signals.
+\todo{v předchozích 2 odstavcích chybí citace zdrojů}
 
 Choosing of a suitable peak caller for a given ChIP-seq experiment is crutial.
 In early approaches, the genome was scanning using window-based counting method~\cite{Zang-2009}~\cite{Xu-2010}.
@@ -54,6 +57,7 @@ In order to identify as many significant comparisons as possible while maintaini
 \todo{já myslel, že q-value = FDR-adjusted p-value? Tvůj  text chápu tak, že q-value je něco podobného jako metoda FDR. Koneckonců to sama píšeš na konci tohoto odstavce}
 
 If performing multiple comparisons, the probability of false positives are increased.
+\todo{mám dojem, že pravděpodobnost falešně pozitivního výsledku je stále stejná, není závislá na počtu opakování. S rostoucím počtem "n" se ale zvyšuje šance, že alespoň jeden falešně pozitivní výsledek už jsme skutečně získali.}
 The more test are present, the higher the chance of a null feature being called significant.
 
 The false positive rate (FPR) is the expected number of false positives out of all hypothesis tests conducted.
@@ -147,8 +151,9 @@ Once the candidate peaks have been identified, the different methods rank candid
 % Broad regions are orten assosiated with histone modifications that mark domains (transcribed or repressed regions)
 
 \section{Normalization}
-Combinung the whole-genome profiles of two different transcription factors in order to study their interactions may be important.
+Combining the whole-genome profiles of two different transcription factors in order to study their interactions may be important.
 \todo{to se vůbec nemusí týkat jen TFs. Často kombinujeme profily z velmi různých ChIPů: TF + RNA Pol + histone marks, atd.}
 Different antibodies have different affinities, and experimental conditions are intrinsically variable.
 Independent ChIP-seq experiment can produce quite different distributions of reads.
+\todo{ano, a taky různé celkové počty readů, podíl signal/noise,,, atd.}
 And chosing the common P-value cutoff for two experiments may unfairly bias the peak-calling algorithm toward one experiment.
