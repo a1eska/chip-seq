@@ -1,24 +1,26 @@
-\chapter{ChIP-seq technology}
-\todo{ChIP-seq je spíš metoda než technologie}
+\chapter{ChIP-seq as a high-throughoutput sequencing technique.}
+%\todo{ChIP-seq je spíš metoda než technologie}
 
-\section{Introduction to ChIP-seq}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\section{Introduction to ChIP-seq.}
+
 Chromatin immunoprecipitation followed by sequencing, also known as ChIP-sequencing or ChIP-seq, is a modern and relatively cheap method to analyze any protein associated with DNA. 
 The most frequently investigated chromatin-associated proteins are transcription factors (TF), modifies histones, components of the transcriptional machinery, and chromatin-modifying enzymes.
 Advances in high-throughput parallel sequencing technology and computational methods enable generate and analyze extremely large data sets. 
 Unlike ChIP-on-chip, ChIP-seq was developed to understand genome-wide profiling and does not rely on knowledge of exact binding loci.~\cite{park2009chip} .
-\todo{tohle je trochu zavádějící, genome-wide jsou obě metody a při použití tiling microarrays s dostatečně "hustými" probami taky dopředu nemusíš znát místa vazby. To tvoje srovnání sedí spíš na ChIP-seq vs ChIP-qPCR}
+%\todo{tohle je trochu zavádějící, genome-wide jsou obě metody a při použití tiling microarrays s dostatečně "hustými" probami taky dopředu nemusíš znát místa vazby. To tvoje srovnání sedí spíš na ChIP-seq vs ChIP-qPCR}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Considerations of experimental design.}
 
-\section{Considerations of experimental design}
-
-A typical protocol has many steps. 
-\todo{A typical ChIP-seq protocol...}
+A typical ChIp-seq protocol has many steps. 
+%\todo{A typical ChIP-seq protocol...}
 The consideration od the first step depends on the properties of the protein under investigation. 
 For example, histone-DNA interactions are strong enough. 
 Thus the fixation using formaldehyde as a crosslinking agent may not be necessary~\cite{barski2008identification}. 
 On the other hand, proteins associated with DNA for a short time require a crosslinking step. 
-In the case of histone deacetylases (HDACs) and histone acetyltransferases (HATs), an additional disuccinimidyl glutarate (DSG) treatment step before formaldehyde crosslinking demands~\cite{wang2009genome}. 
-\todo{Vysvětli, PROČ je potřeba použít DSG.}
+In the case of histone deacetylases (HDACs) and histone acetyltransferases (HATs), an additional disuccinimidyl glutarate (DSG) treatment step before formaldehyde crosslinking demands to prevent protein-protein accosiation~\cite{wang2009genome}. 
+%\todo{Vysvětli, PROČ je potřeba použít DSG.}
 
 Cross-linked chromatin is fragmented before ChIP. 
 Fragmentation way is depending on the purpose of the experiment, cell type, number of cells, fixation conditions. 
@@ -28,21 +30,23 @@ However, the nucleosome instability may cause the loss of signal.
 To identify TF binding events, sonication of crosslinked chromatin is a preferable method. 
 In this case, the micrococcal nuclease may cause degradation of the linker DNA~\cite{kidder2011chip}.
 The sonication conditions should be optimized for each experiment type. 
-A Sonication buffer can influence the result~\cite{steger2008dot1l}. 
+A sonication buffer can influence the result~\cite{steger2008dot1l}. 
 It is also important to avoid oversonication during the library preparation for transcription factors. 
-\todo{Vysvětli, PROČ je to důležité. Navíc bych tu čekal nějakou citaci}
+Oversonication may lead to the deletion of protein epitopes from cross-linked chromatin~\cite{ostrow2015chip}. 
+%\todo{Vysvětli, PROČ je to důležité. Navíc bych tu čekal nějakou citaci}
 
 
 The successful ChIP experiment depends on the isolation of the protein under study from a complex mixture of the chromatin fragments and associated proteins. 
 The specific antibody against a protein of interest is using during the immunoprecipitation step. 
-This procedure allows the removal of non-specific binding sites. 
-\todo{This procedure allows the removal of unbound/non-interacting DNA.}
+This procedure allows the removal of non-interacting DNA. 
+%\todo{This procedure allows the removal of unbound/non-interacting DNA.}
 The right choice of antibody is an essential factor for the ChIP-seq experiment. 
 Many experiments are orienting on newly discovered proteins. 
 And in these cases, specific antibodies are not available, and epitope-tagged methods can be useful~\cite{brizzard2008epitope, goldberg2010distinct}.
-\todo{to je příliš stručné - krátce vysvětli, co to je tagování}
+%\todo{to je příliš stručné - krátce vysvětli, co to je tagování}
 
-\section{Library construction, sequencing and mapping}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+\section{Library construction, sequencing, and mapping.}
 
 After chromatin purification with and without immunoprecipitation to prepare ChIP and corresponding input DNA fragments, the material is ready to be sequenced. 
 The size range of 150 to 300 bp fragment length selection is equivalent to mono- and dinucleosome chromatin fragments~\cite{kidder2011chip}.
@@ -63,24 +67,27 @@ Paired-end sequencing can be useful to increase sequencing coverage, improve ali
 
 Next-generation sequencing technological advancements have facilitated the production of a huge amount of sequencing data. 
 Multiple barcoded ChIP-seq libraries pooled together and sequenced in a single lane~\cite{craig2008identification} to reduce the cost of the experiment and produce high-quality data.
-There are several sequencing technologies available. The big amount of data is generating through the Illumina platform, which produces about 100-400 million reads per run.
-\todo{některé stroje Illuminy dávají i miliardy readů. Možná by bylo lepší to napsat obecněji: which produces hundreds of millions of reads, or even more, depending on the machine type.}
+There are several sequencing technologies available. 
+The big amount of data is generating through the Illumina platform, which produces hundreds of millions of reads, or even more, depending on the machine type.
+%\todo{některé stroje Illuminy dávají i miliardy readů. Možná by bylo lepší to napsat obecněji: which produces hundreds of millions of reads, or even more, depending on the machine type.}
 
-Raw data of short sequenced tags often appear in fastq format containing sequence information and quality scores. Such files may contain 10 to 60 million reads. 
-\todo{To je zavádějící. FASTQ file může obsahovat zcela libovolný počet readů - jsi omezená jen velikostí disku.}
+Raw data of short sequenced tags often appear in fastq format containing sequence information and quality scores, and may contain 10 to 60 million reads. 
+And 60 million reads do not limit such files.
+%\todo{To je zavádějící. FASTQ file může obsahovat zcela libovolný počet readů - jsi omezená jen velikostí disku.}
 Several alignment tools have been developed based on extended Burrows-Wheeler transform (BWT)~\cite{li2009fast, siren2014indexing}.
 Unlike RNA-seq with exon junctions, the ChIP-seq experiment does not require to find spliced alignment. 
-Uniquely mapped reads with minimal allowed mismatches are sufficient to analyze typical TF and also simplify further analysis. 
-\todo{vysvětli proč}
+Sequencing platforms produce sequence-specific errors (SSE)~\cite{nakamura2011sequence}. 
+Also, alignment mismatches can be observed due to the difference between the genotype of the cultivated organism (indels and SNPs) and the reference genome~\cite{park2009chip}.
+Reads with minimal allowed mismatches to maximize the number of the uniquely mapped reads are sufficient to analyze typical TF, and also simplify further analysis~\cite{derrien2012fast}.
+%\todo{vysvětli proč}
 However, allowing the random location for multiple mapped reads may increase the sensitivity of peak detection. 
 The ration of the unique mapped reads over the total number of mapped reads is one of the parameters of the library quality assessment and should not be below 50\%~\cite{shin2013computational}.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Quality control and computational analysis workflow.}
 
-\section{QC and computational analysis workflow}
-
-ChIP-seq data analysis is a powerful tool to get new insight into transcription control machinery and other bilogic processes. 
-The number of raw or precessed datasets is increasing every year. 
-\todo{tohle je nicneříkající. Buď to vyhoď, anebo uveď konkrétní hodnoty: např. počet datasetů se každý rok zdvojnásobí..}
+ChIP-seq data analysis is a powerful tool to get new insight into transcription control machinery and other biologic processes. 
+%\todo{tohle je nicneříkající. Buď to vyhoď, anebo uveď konkrétní hodnoty: např. počet datasetů se každý rok zdvojnásobí..}
 However, computational pipelines have not been straightforward; 
 and new tools and analysis pipelines are needed to be developed.
 
@@ -100,10 +107,12 @@ In a typical TF study reads mapped to the same genomic coordinate are filtered a
 On the other hand, highly repetitive regions such as rDNA in yeast, long repetitive elements such as segmental duplication regions are the regions linked to important biological functions~\cite{nakato2017recent}. But the annotation of such regions is challenging and expect special algorithms that take such regions into account~\cite{chung2011discovering}.
 Data processing routine requires quality control on early step reducing further downstream analysis problems~\cite{ewels2016multiqc}.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The best strategy}
+\label{strategy}
 
-Extracting useful lore from huge data repositories combines techniques from computer science and statistics~\cite{friedman2001elements}. 
-\todo{místo "lore" bych použil "information" nebo "knowledge".}
+Extracting useful information from huge data repositories combines techniques from computer science and statistics~\cite{friedman2001elements}. 
+%\todo{místo "lore" bych použil "information" nebo "knowledge".}
 In terms of ChIP-seq, the main goal is to distinguish significant enrichment events from background noise and to compare multiple profiles that are linked to the biological functions. 
 The process of discovering patterns in large datasets is critically dependent on high data quality. 
 Cell culture conditions, incubation, ChIP, and library construction may cause variability between datasets. 
@@ -118,4 +127,5 @@ The one portion undergoes al the immunoprecipitation procedure described above, 
 This direct sequencing is referred to as an input control dataset and used to normalize IP sequencing results~\cite{kidder2011chip}. 
 Another control dataset can be generated using IP protocol, where antibodies cannot recognize a protein tagged with the epitope~\cite{flensburg2014comparison}. 
 Both controls are informative and have advantages as well as disadvantages.
-\todo{popiš konkrétní vyhody a nevýhody těchto dvou typů kontrol, anebo odkaž čtenáře na kapitolu, kde to popisuješ}
+The choice of the right control dataset will be described more in detail in section~\ref{control}.
+%\todo{popiš konkrétní vyhody a nevýhody těchto dvou typů kontrol, anebo odkaž čtenáře na kapitolu, kde to popisuješ}
