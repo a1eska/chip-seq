@@ -13,44 +13,22 @@ Sharp peaks are typical for TF due to dependency on motif sequence.
 Histones have non-specific positioning on the DNA. 
 Thus the peak profile is broad and can reach several kilobases. 
 The third peak type is a mix of sharp and broad signals, a typical pattern for RNA polymerase II and transcription elongation factor~\cite{lin2011dynamic}.
-
-
-% Given a recent development in the field there are offered a diverse peak calling methods.
-% Several tools that scan along the genome to identify the region with the enrichment have been designed.
-% These programs are based on different statistical algorithms.
-% Regions of the genome of high sequence read density give us a coverage which are reffered to as peaks.
-% Peak calling softwares build a signal profiles along each chromosome.
-% These signals display the locations of sites where the protein may occoure.
-
-% There are three types of signals can typically obtained by ChIP-seq experiment.
-% Transcription factors typically specifically interact with chromatin.
-% That means that the protein recognize specific sequence called motif.
-% Sequenced reads centered around that motif cover small region, which signal appears as sharp peak.
-% Broad peaks are typical for histone marks, where several nucleosomes non-specifically positioned on the DNA.
 % \todo{to je zavádějící. Nukleosomy sice nevážou konkrétní motiv DNA, ale vykazují jistou míru sekvenčních preferencí, která se liší v závislosti na organismu.}
-% Sequenced tags cover broad regions that can reach several kilobases.
-% In studies of gene transcription by RNA polymerase II, ChIP signal can appear as mix of sharp and broad signals.
-% \todo{v předchozích 2 odstavcích chybí citace zdrojů}
 
-% Choosing of a suitable peak caller for a given ChIP-seq experiment is crutial.
-% In early approaches, the genome was scanning using window-based counting method~\cite{Zang-2009}~\cite{Xu-2010}.
-% Each overlapping or non-overlapping window was scored by the quantity of the read density. 
-% Then scores were assessed by a set of criteria such as enrichment over the control and minimum tag density.
-% These software tools adopted Poisson model, which puts on the assumption that the background reads are uniformly distributed along the genome.
-% However, the greater variation in the tag distribution along the genome is experimentally observed.
-% And in contrast of widely used Poisson model the negative binomial model was adopted to allow the backgroung rate of occurence of the reads give more flexible gamma distribution~\cite{ji2008integrated}.
+The very first extended set methodology to calculate peak profile density was presented in 2007~\cite{robertson2007genome}. 
+Fragments are sequenced from 5' to 3' end, and the minimal enough length of a sequenced read is 36 bp long. 
+But the real fragment of DNA is longer, and thus the interaction of the protein of interest is somewhere on that size selected long DNA fragment. 
+Each read is computationally extended in the 3' direction. 
+Regions are scored by the number of overlap reads and assessed as a candidate peak.
 
-% Subsequent algorithms take advantage of the important property of the data such as directionality of reads.
-% Dna fragments are sequenced directly from 5' to 3' end, and the only 5'-most ends are represented.
-% As a result, the strand-dependent tag distribution display bimodal pattern.
-% This pattern can be used for the detection of ChIP signal intensity locations of mapped tags form two distributions.
-% These distributions form a consistent distance between the peaks of these distributins.
-% The distance between sense and antisense profiles may vary from experiment to experiment.
-% % \todo{vysvetli, proc se to mezi experimenty liší}
-% The forward and reverse profiles are shifted toward the center or each mapped position is extended with a fragment of estimeted size to produce the combined density profile.
-% Given a profile, peaks can be scored.
+Sequence directionality sets the stage for a smoothed profile. 
+The strand-specific read distribution form bimodal pattern combined by shifting or extending tags toward the center~\cite{valouev2008genome}.
 
 \section{FDR}
+
+To find enriched regions is not the last role of the peak calling process. How to approve whether any given peak is statistically significant? 
+To estimate the significance of ChIP-seq signals the notion of False Discovery Rate (FDR) has been employed.
+
 
 % When analyzing results from genomewide studies, thousands of hypothesis tests are conucted simulteniously.
 % In order to identify as many significant comparisons as possible while maintaining a low false positive rate, the False Discovery Rate (FDR) and its analog the q-value are utilized.
@@ -70,7 +48,7 @@ The third peak type is a mix of sharp and broad signals, a typical pattern for R
 % An FDR of 5\% means that 5\% of all features called significant are trully null.
 % Just a threshold was set for the P-value to control the FPR, it is possible to set a threshold for the q-value, which is the FDR analog of the P-value.
 
-\section{Identifying if enriched regions}
+
 
 % % After a signal profile was built, the next step is to identify enriched regions.
 % Window-based counting methods set a threshold to call enriched regions.
