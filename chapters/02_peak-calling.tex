@@ -69,31 +69,32 @@ For \textit{k} succes in \textit{n} trails with probability p=${\lambda / n}$ , 
     P_k = \frac{\lambda _i ^{k}}{k!} e^{- \lambda _i}
 \end{align*}
 
-The Poisson parameter $\lambda_i$ is supposed to be constant across the genome and provided to be inadequate for ChIP-seq peak calling. 
-And the negative binomial model was suggested by CisGenome~\cite{ji2008inte}.
+The Poisson parameter $\lambda_i$ is supposed to be constant across the genome and provided to be inadequate for ChIP-seq peak calling to identify TFs binding sites. 
+
+
+
+
+The negative binomial model was suggested by CisGenome~\cite{ji2008inte}, which is, in fact, a generalization of the Poisson distribution, also known as the gamma-Poisson mixture distribution. 
 
 \begin{align*}
-    NB_{y_i, \mu _i, \alpha} = \frac{\Gamma (y_i + \alpha ^{-1})}{\Gamma(\alpha ^{-1})\Gamma(y_i + 1)} \left(\frac{1}{1 + \alpha \mu_i}\right) ^{\alpha ^{-1}} \left(\frac{\alpha \mu _i}{1 + \alpha \mu _i}\right) ^{y _i}
+    NB_{y_i; \mu _i, \alpha} = \frac{\Gamma (y_i + \alpha ^{-1})}{\Gamma(\alpha ^{-1})\Gamma(y_i + 1)} \left(\frac{\alpha ^{-1}}{\alpha ^{-1} + \mu_i}\right) ^{\alpha ^{-1}} \left(\frac{ \mu _i}{ \alpha ^{-1} + \mu _i}\right) ^{y _i}
 \end{align*}
 
-where 
-
-\begin{align*}
-    \mu _i = t _i \mu
-\end{align*}
-
-\begin{align*}
-    \alpha = \frac{1}{\nu}
-\end{align*}
+The derevation from two-parameter gamma distribution is done in on page 118 in~\cite[Cameron and Trivedi (2013)]{cameron2013regression}.
 
 Another suggestion was to estimate $\lambda$ for each genomic position by the local Poisson model. 
 Such an approach was introduced by the most popular peak caller called MACS~\cite{zhang2008model}.
 The tool slides with a constant size window across the genome, merge overlapping peaks by extending the read. 
 The highest tag pileup is defined as a summit of a signal.  
 
-\section{Multiple hypothesis testing.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Multiple hypothesis testing and reliability of the result.}
 
-After scanning through the genome and find a large number of candidate regions, the quality of the detected peaks should be detect.
+After scanning through the genome and find a large number of candidate regions estimating null distribution, the quality of the detected peaks should be identified. 
+From generated data, the candidate signal may be either a false or true binding event. 
+And the probabilistic statement cannot be made by using a well known Bayes' Theorem. 
+In the genomic studies, especially in ChIP-seq, individual hypothesis testing is not useful, and a global hypothesis test is required~\cite{futschik2019omnibus}. 
+
 Suppose we have \textit{n} genomic loci obtained.
 The $i^{th}$ null hypothesis $H_{0,i}$ with corresponding P-values $p_i$.
 The global null hypothesis of simultenious test of all null hypitheses  is defined:
@@ -102,18 +103,18 @@ The global null hypothesis of simultenious test of all null hypitheses  is defin
     H_0 = \displaystyle\bigcap_{i=1}^{n} H_{0, i}
 \end{align*}
 
-Fisher's combined probability test combines known P-values using:
+Fisher's combined probability test~\cite{fisher1992statistical} combines known P-values:
 
 \begin{align*}
     T = - \displaystyle \sum_{i=1}^{n} 2 \log p_i \sim  \chi_{2n}^{2}
 \end{align*}
 
-Bonferroni's test looks at the smallest P-value and at given desired level $\alpha$ tests the global null hypothesis by testing each $H_{0,i}$ at level $\alpha /n$. 
+Bonferroni's test~\cite{hommel1988stagewise} looks at the smallest P-value and at given desired level $\alpha$ tests the global null hypothesis by testing each $H_{0,i}$ at level $\alpha /n$. 
 And whenever $p_i \leq \alpha / n$ rejects the global null hypothesis.
 Assuming the global hypothesis is true, the overal level control is: 
 
 \begin{align*}
-    P_{H_0}(Error Type I) = P_{H_0} \left[\bigcup_{i=1}^{n} \left\{ p_i \leq \alpha / n\right\}\right] \leq \sum_{i=1}^{n} P_{H_0}(p_i \le \alpha / n)  = n \frac{\alpha}{n} = \alpha
+    P_{H_0}[Error Type I] = P_{H_0} \left[\bigcup_{i=1}^{n} \left\{ p_i \leq \alpha / n\right\}\right] \leq \sum_{i=1}^{n} P_{H_0}(p_i \le \alpha / n)  = n \frac{\alpha}{n} = \alpha
 \end{align*}
 
 Even though both tests are easy and straightforward, non of them is effective. 
@@ -122,11 +123,56 @@ In the case of  Bonferroni's test, the only one P-value is used.
 Hence it can be applied only if very few binding events are expected to be significant. 
 The rejection of extreme value of binding event at the $\alpha$ significance level leads to increase number of false positives. 
 The idea of the global null hypothesis rejection is not suitable for genomic analysis. 
-Another approach is the familywise error (FWE) rate method, which controls the probability of performing one or more Type I errors. 
+Another approach is the familywise error (FWER) rate method:
+
+\begin{align*}
+    FWER \leq 1 - (1 - \alpha)^c, 
+\end{align*}
+
+where $\alpha$ is a level for an individual test, $c$ is a number of comparisons.
+The test controls the probability of performing one or more Type I errors. 
 However, the method is very conservative and does only a few rejections. 
 
 The application of the False Discovery Rate (FDR) approach in the genomic field is associated with microarray technology~\cite{lai2017statistical}.
 The method allows a few small rejections if the majority of the rejections are correct. Such testing adjusts the statistical confidence based on the number of tests. 
 
+Let $R$ be the total number of rejections and $V$ be the number of trully null hypotheses.
+The the proportion $Q$ of false positive rejection among all rejection is 
+
+\begin{align*}
+    Q = \frac{V}{R}.
+\end{align*}
+
+The Benjamini-Hochberg procedure~\cite{benjamini2000adaptive} ensures the expectetion and define False Dicovery Rate as follow: 
+
+\begin{align*}
+    FDR = E(Q) = E \left(\frac{V}{R}\right)
+\end{align*}
+
+If all null hypotheses are true, then FDR and FWER are indeed the same.
+The most common significance level accepted is 95, which means that 95\% of the obtained result has a chance to be true. 
+The p = 0,05 cutoff means that the chance of making a wrong decision is equal to 5\%. 
+It is too strict and leads to the loss of a real finding. 
+That is why the q-value was introduced to calibrate the false discovery rate measurements~\cite{storey2003statistical}. 
+P-value test the significance of the false-positive rates and the q-value test the significance in term of false discovery rate. 
+In other words, the threshold choice either by P- or q-value should be based on how many false positives are expected in the experiment.
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Statistical sin}
+
+Most programs for identification of the enriched regions (peaks) work as follow: candidate signal are identified by analyzing along the genome, and then by comparing with the input or mock dataset(or with another IP data in case of the differential analysis) regions are evaluated. 
+However, most of the software tools use data twice to identify and assess the enrichment, which leads to a statistical sin~\cite{lun2014novo}. 
+Moreover, the estimated P-values depend on the same data and result in statistical bias.
+A similar problem can influence the result during ChIP-seq analysis and in areas such as DNA variant calling~\cite{chitpin2019recap}.
+
+Without a correctly calculated P-value, it is difficult to choose the right cutoff threshold, which influences the final results. 
+Improper P-values lead to difficulties in evaluating of reliability of a given set of peaks.
+It may also lead to loss of the true binding event due to the biased statistical significance of such a peak, and further downstream analysis will exhibit the error-prone result~\cite{chitpin2019recap}. 
+
+A possible solution to that problem is to develop a new peak identification approach to avoid double usage of the same data. 
+However, many software tools are good enough to be used, and recalibration of the obtained P-values is the possible alternative resolve~\cite{chitpin2019recap}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{}
