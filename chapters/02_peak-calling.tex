@@ -42,13 +42,14 @@ In the contest of ChIP-seq analysis, this type of error occurs when there is no 
 The inversion of Type I error is Type II error, which is referred to as a "false negative". Considering the ChIP-seq experiment, the "false negative" error type is seen less serious than "false positives". 
 
 To test peaks for significance, different peak calling algorithms adopt different statistical techniques. 
-The widely used Poisson model was utilized in early software tools such as SICER~\cite{zang2009clustering}. 
-The Poisson is directly connected to Binomial distribution:
+In a MUSIC's approach~\cite{harmanci2014music}, a window of fixed size for TF or varying width for histone marks while scanning a genome ranks the candidate peaks using a Binomial test, where the distribution of the total number of mapped tags in the respective regions across IP and control is assumed to be equal:
 
 \begin{align*}
     p_{k,n} = \binom{n}{k}p^k(1-p)^{n-k}
 \end{align*}
 
+The widely used Poisson model was utilized in early software tools such as SICER~\cite{zang2009clustering}. 
+The Poisson is directly connected to Binomial distribution,
 where probability \textit{p} of succes in each trail and p$_{k,n}$  for \textit{k} succes in \textit{n} trails; but assosiated with rare events:
 
 \begin{align*}
@@ -70,10 +71,6 @@ For \textit{k} succes in \textit{n} trails with probability p=${\lambda / n}$ , 
 \end{align*}
 
 The Poisson parameter $\lambda_i$ is supposed to be constant across the genome and provided to be inadequate for ChIP-seq peak calling to identify TFs binding sites. 
-
-
-
-
 The negative binomial model was suggested by CisGenome~\cite{ji2008inte}, which is, in fact, a generalization of the Poisson distribution, also known as the gamma-Poisson mixture distribution. 
 
 \begin{align*}
@@ -82,9 +79,10 @@ The negative binomial model was suggested by CisGenome~\cite{ji2008inte}, which 
 
 The derevation from two-parameter gamma distribution is done in on page 118 in~\cite[Cameron and Trivedi (2013)]{cameron2013regression}.
 
-Another suggestion was to estimate $\lambda$ for each genomic position by the local Poisson model. 
+Another suggestion was to estimate $\lambda$ for each genomic position by the local Poisson test. 
 Such an approach was introduced by the most popular peak caller called MACS~\cite{zhang2008model}.
-The tool slides with a constant size window across the genome, merge overlapping peaks by extending the read. 
+The tool slides with a constant size window centered on each nucleotide across the genome, merge overlapping peaks by extending the read.
+If the number of reads in the IP sample is higher than expected, given a background rate estimated from the control dataset, then using the Poison test, the enriched regions are ranked~\cite{thomas2017features}. 
 The highest tag pileup is defined as a summit of a signal.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -175,4 +173,4 @@ A possible solution to that problem is to develop a new peak identification appr
 However, many software tools are good enough to be used, and recalibration of the obtained P-values is the possible alternative resolve~\cite{chitpin2019recap}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{}
+\section{Reliability of the result}
