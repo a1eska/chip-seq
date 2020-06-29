@@ -85,6 +85,8 @@ The tool slides with a constant size window centered on each nucleotide across t
 If the number of reads in the IP sample is higher than expected, given a background rate estimated from the control dataset, then using the Poison test, the enriched regions are ranked~\cite{thomas2017features}. 
 The highest tag pileup is defined as a summit of a signal.  
 
+Comparing the statistical models implemented by different peak calling algorithms shows that the Poisson test is a better approach to score the candidate signals than the Binomial test~\cite{thomas2017features}.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Multiple hypothesis testing and reliability of the result.}
 
@@ -174,3 +176,11 @@ However, many software tools are good enough to be used, and recalibration of th
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Reliability of the result}
+
+Peak identification process outputs typically tens of thousands of possible binding loci, which are needed to be assessed. 
+An obtained list of peak coordinates may be annotated with the nearest gene. 
+However, the lack of annotated actual binding sites may limit the process of the validation of the experiment result~\cite{nakato2017recent}.
+
+The motif-discover of a peak collection is another available approach. 
+Typically the top-ranked by P-value identified peaks are undergoing the motif finding procedure.
+Motifs are represented as a position weight matrix and sequence logo and suitable for the TF experiment due to the specificity of the binding protein. 
