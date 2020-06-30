@@ -54,7 +54,8 @@ That specificity can be disrupted (for example, by sonication) and exhibit unstr
 Several studies have described that phenomenon in different organisms~\cite{boyle2014comparative, fan2009does, krebs2014optimization, teytelman2013highly,   waldminghaus2010chip, xie2013dynamic}.
 
 The HOT region location is typically at promoter locus of highly expressed genes close to the transcription start site (TSS), and that genes stand behind essential cellular functions~\cite{wreczycka2019hot}. 
-One possible solution is to use the so-called Knockout Implemented Normalization (KOIN) method, where the protein is not present~\cite{krebs2014optimization}. 
+One possible solution is to use the so-called Knockout Implemented Normalization (KOIN) method, where the protein is not present~\cite{krebs2014optimization}.
+\todo{"where the PROTEIN is not present" - který protein máš na mysli - target protein? target TF? the analyzed/studied protein?} 
 This method significantly improves false-positive identification, which can help more accurate downstream interpretation during analysis~\cite{wreczycka2019hot}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -69,6 +70,7 @@ Multiple genome copies provide a sufficient number of overlapping reads after cl
 %\todo{"after fragmentation", spíš než "after cleavage"}
 In addition, sigle-cell sequencing requires PCR-amplification before the fragmentation step~\cite{clark2016single}.
 %\todo{vysvětli stručně, proč je zde třeba materiál amplifikovat}
+\todo{teď mi došlo, že to nedává smysl. Kroslinkovaný chromatin se amplifikovat nedá! Jediná šance na amplifikaci je až po purifikaci DNA, před konstrukcí knihovny}
 
 % \todo{důležitá poznámka k celému odstavci: DNA/chromatin se u ChIPu fragmentuje pouze před imunoprecipitací. Poté, co vyizoluješ čistou DNA, se už žádná další fragmentace neprovádí. Rovnou se připraví knihovna a sekvenuje se!}
 
@@ -131,6 +133,7 @@ However, the method is not suitable for broad peak identification as histone mod
  Direct sequencing of crosslinked chromatin without IP contains the bias of sonication and is able to normalize that bias~\cite{kharchenko2008design}. 
  Therefore, input control is recommended to distinguish real signals from artifacts. 
  Also, input datasets produced from the same cell line under the same circumstances may be combined~\cite{meyer2014identifying}.
+ \todo{tuhle poslední větu nechápu - co přesně se kombinuje a proč?}
 
  Even if the input is preferred to mock due to library complexity, there is still the presence of biases, which are not able to get fid of using only input control. 
  Expression and open chromatin biases appear in the ChIP-seq experiment, and the mock IP as control can correct such a factor~cite{park2013widespread}.
