@@ -140,13 +140,13 @@ Let $R$ be the total number of rejections and $V$ be the number of trully null h
 The the proportion $Q$ of false positive rejection among all rejection is 
 
 \begin{align*}
-    Q = \frac{V}{R}.
+    Q = \frac{V}{R} .
 \end{align*}
 
 The Benjamini-Hochberg procedure~\cite{benjamini2000adaptive} ensures the expectetion and define False Dicovery Rate as follow: 
 
 \begin{align*}
-    FDR = E(Q) = E \left(\frac{V}{R}\right)
+    FDR = E(Q) = E \left(\frac{V}{R}\right) .
 \end{align*}
 
 If all null hypotheses are true, then FDR and FWER are indeed the same.
@@ -175,12 +175,20 @@ A possible solution to that problem is to develop a new peak identification appr
 However, many software tools are good enough to be used, and recalibration of the obtained P-values is the possible alternative resolve~\cite{chitpin2019recap}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Reliability of the result}
+\section{Reliability of the obtained list of ChIP-seq signals after peak calling procedure.}
 
 Peak identification process outputs typically tens of thousands of possible binding loci, which are needed to be assessed. 
 An obtained list of peak coordinates may be annotated with the nearest gene. 
 However, the lack of annotated actual binding sites may limit the process of the validation of the experiment result~\cite{nakato2017recent}.
 
 The motif-discover of a peak collection is another available approach. 
-Typically the top-ranked by P-value identified peaks are undergoing the motif finding procedure.
-Motifs are represented as a position weight matrix and sequence logo and suitable for the TF experiment due to the specificity of the binding protein. 
+Typically the top-ranked by P-value identified peaks are undergoing the motif finding procedure~\cite{bailey2011dreme}.
+Motifs are represented as a position weight matrix and sequence logo and suitable for the TF experiment due to the specificity of the binding protein.
+However, for the proteins which bind without a preferable sequence such as histones, the motif-based evaluation of the peak reliability is not suitable~\cite{nakato2017recent}. 
+
+If more than one biological replicates are available, then another way to validate signals is to assess the global similarity between replicates with a calculation of the cross-correlation coefficient. 
+IDR, which validates the rank consistency of common peaks in replicates, is another way for the peak validation, which may help to filter out false-positive peaks. 
+
+As  was mentioned, the bimodal peak pattern is utilized in peak calling design. 
+Many false positives may be filtered out by analyzing the size and appearance of the signal~\cite{rye2011manually}. 
+However, only a few methods utilize the analysis of the peak shapes~\cite{hower2011shape, wu2014polyapeak}.
