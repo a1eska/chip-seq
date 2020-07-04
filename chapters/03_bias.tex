@@ -124,7 +124,9 @@ However, the method is not suitable for broad peak identification as histone mod
  \label{control}
 
  Earlier in section \ref{strategy} was mentioned about two basic types of control data. 
- Cross-linked and fragmented DNA under the same conditions as IP is referred to as an input control dataset. 
+ Cross-linked and fragmented DNA under the same conditions as IP is the most common control sample of the whole-cell extract (WCE)~\cite{kidder2011chip,landt2012chip}. 
+ WCE is referred to as an input control dataset. 
+
  The second one is IgG/GFP control (also known as mock), where IP lacks specific interactions due to untagged with epitope TF or using antibodies, which cannot recognize the TF~\cite{landt2012chip, shin2013computational}.
  The theoretical distribution of noise is expected to be uniform~\cite{robertson2007genome}. 
  However, existing technical and biological biases require either input or mock control dataset.
@@ -135,7 +137,7 @@ However, the method is not suitable for broad peak identification as histone mod
  Also, input datasets produced from the same cell line under the same circumstances may be combined~\cite{meyer2014identifying}.
  \todo{tuhle poslední větu nechápu - co přesně se kombinuje a proč?}
 
- Even if the input is preferred to mock due to library complexity, there is still the presence of biases, which are not able to get fid of using only input control. 
- Expression and open chromatin biases appear in the ChIP-seq experiment, and the mock IP as control can correct such a factor~cite{park2013widespread}.
+ Even if the input is preferred to mock due to library complexity, there is still the presence of biases, which are not able to get rid of using only input control. 
+ Expression and open chromatin biases appear in the ChIP-seq experiment, and the mock IP as control can correct such a factor~\cite{park2013widespread}.
 
 

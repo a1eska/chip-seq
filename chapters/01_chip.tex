@@ -3,11 +3,13 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 \section{Introduction to ChIP-seq.}
+Gene regulatory networks tend to be critical in various genomic studies. Several methods have been developed to identify biological regulatory elements and their behavior in the context of the interaction with chromatin and other transcription regulation components. Various ChIP technologies have been used to map a large number of protein binding sites along the genome. Microarray techniques measure the expression of many genes simultaneously but also produce a large number of false positives. 
 
-Chromatin immunoprecipitation followed by sequencing, also known as ChIP-sequencing or ChIP-seq, is a modern and relatively cheap method to analyze any protein associated with DNA. 
+Chromatin immunoprecipitation followed by sequencing, known as ChIP-sequencing or ChIP-seq, is a modern and relatively cheap method to analyze any protein associated with DNA. 
 The most frequently investigated chromatin-associated proteins are transcription factors (TF), modifies histones, components of the transcriptional machinery, and chromatin-modifying enzymes.
 Advances in high-throughput parallel sequencing technology and computational methods enable generate and analyze extremely large data sets. 
-Unlike ChIP-on-chip, ChIP-seq was developed to understand genome-wide profiling and does not rely on prior knowledge of exact binding loci.~\cite{park2009chip}.
+Both ChIP followed by microarray hybridization (ChIP-on-chip) and ChIP-seq was developed to understand genome-wide profiling and does not rely on prior knowledge of exact binding loci.
+However, ChIP-seq generally builds a profile with better resolution and signal-to-noise ratio, and detect more signals~\cite{park2009chip}.
 %\todo{tohle je trochu zavádějící, genome-wide jsou obě metody a při použití tiling microarrays s dostatečně "hustými" probami taky dopředu nemusíš znát místa vazby. To tvoje srovnání sedí spíš na ChIP-seq vs ChIP-qPCR}
 
 
@@ -26,7 +28,7 @@ Unlike ChIP-on-chip, ChIP-seq was developed to understand genome-wide profiling 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Considerations of experimental design.}
 
-A typical ChIP-seq protocol has many steps. 
+A typical ChIP-seq protocol has many steps and requires a sufficient quantity if immuno-enriched DNA. 
 The consideration od the first step depends on the properties of the protein under investigation. 
 For example, histone-DNA interactions are strong enough. 
 Thus the fixation using formaldehyde as a crosslinking agent may not be necessary~\cite{barski2008identification}. 
@@ -155,7 +157,7 @@ Low-quality data can be filtered before alignment to the reference.
 But such filtering is not necessary due to the inability of such sequences to be aligned~\cite{furey2012chip}.
 
 
-
+Data quality problem is one of the most critical ChIP-seq experiment issues due to artifacts and noise reproducibility.
 In a typical TF study reads mapped to the same genomic coordinate are filtered as redundant, because the expected number of mapped reads per genomic position is less than or equal to one. 
 %% \todo{až teď mi došlo, že tenhle kousek vlastně nechápu "the expected number of mapped reads per base pair is less than 1."}
 On the other hand, highly repetitive regions such as rDNA in yeast, long repetitive elements such as segmental duplication regions are the regions linked to important biological functions~\cite{nakato2017recent}. But the annotation of such regions is challenging and expect special algorithms that take such regions into account~\cite{chung2011discovering}.
@@ -164,7 +166,11 @@ To obtain reliable results essential to have a complex ChIP-seq library.
 The complexity is measured by the non-redundant fraction (NRF), which is one of the QC-metrics.
 The fraction is defined as the ratio between uniquely mapped reads over the total number of reads~\cite{landt2012chip}.
 
-
+Another quality metrics to assess a ChIP sample is normalized cross-correlation (NSC) and relative cross-correlation (RSC) metrics of the fragment length and read length~\cite{landt2012chip, marinov2014large}. 
+The directionality of the sequencing reads produces bimodal enrichment on both strands centered around the binding site of the protein of interest. 
+The cross-correlation metric can evaluate each obtained peak. 
+The calculation is based on Pearson's linear correlation between forward and reverse strand for each complementarity base by shifting minus strand. 
+The procedure generates two peaks, a bigger on corresponding to the fragment length, and a smaller one is associated with a read length. 
 
 
 
@@ -190,4 +196,7 @@ Another control dataset can be generated using IP protocol, where antibodies can
 Both controls are informative and have advantages as well as disadvantages.
 The choice of the right control dataset will be described more in detail in section~\ref{control}.
 %\todo{popiš konkrétní vyhody a nevýhody těchto dvou typů kontrol, anebo odkaž čtenáře na kapitolu, kde to popisuješ}
+
 In addition to both input and mock normalization methods, there is also spike-in normalization, in which foreign chromatin is used as internal control and helps avoid several biases~\cite{bonhoure2014quantifying}.
+Spike adjustment allows comparing the occupancy level. 
+By adding a constant low amount of foreign chromatin before immunoprecipitation, the method adjusts global changes. 
