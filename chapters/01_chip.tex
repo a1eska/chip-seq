@@ -7,14 +7,26 @@
 Chromatin immunoprecipitation followed by sequencing, also known as ChIP-sequencing or ChIP-seq, is a modern and relatively cheap method to analyze any protein associated with DNA. 
 The most frequently investigated chromatin-associated proteins are transcription factors (TF), modifies histones, components of the transcriptional machinery, and chromatin-modifying enzymes.
 Advances in high-throughput parallel sequencing technology and computational methods enable generate and analyze extremely large data sets. 
-Unlike ChIP-on-chip, ChIP-seq was developed to understand genome-wide profiling and does not rely on knowledge of exact binding loci.~\cite{park2009chip}.
+Unlike ChIP-on-chip, ChIP-seq was developed to understand genome-wide profiling and does not rely on prior knowledge of exact binding loci.~\cite{park2009chip}.
 %\todo{tohle je trochu zavádějící, genome-wide jsou obě metody a při použití tiling microarrays s dostatečně "hustými" probami taky dopředu nemusíš znát místa vazby. To tvoje srovnání sedí spíš na ChIP-seq vs ChIP-qPCR}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Considerations of experimental design.}
 
-A typical ChIp-seq protocol has many steps. 
-%\todo{A typical ChIP-seq protocol...}
+A typical ChIP-seq protocol has many steps. 
 The consideration od the first step depends on the properties of the protein under investigation. 
 For example, histone-DNA interactions are strong enough. 
 Thus the fixation using formaldehyde as a crosslinking agent may not be necessary~\cite{barski2008identification}. 
@@ -37,16 +49,39 @@ Oversonication may lead to the deletion of protein epitopes from cross-linked ch
 
 
 The successful ChIP experiment depends on the isolation of the protein under study from a complex mixture of the chromatin fragments and associated proteins. 
-The specific antibody against a protein of interest is using during the immunoprecipitation step. 
-This procedure allows the removal of non-interacting DNA. 
-%\todo{This procedure allows the removal of unbound/non-interacting DNA.}
+The target protein bound to the chromatin can be isolated from a sample using an antibody pre-immobilized onto insoluble magnetic beads that specifically recognizes that protein and that purification technique is known as immunoprecipitation (IP). 
+After incubation, the immune complexes are separated from the lysate of non-interacting DNA by applying a magnetic field~\cite{slovakova2005use}.
+
 The right choice of antibody is an essential factor for the ChIP-seq experiment. 
-Many experiments are orienting on newly discovered proteins. 
-And in these cases, specific antibodies are not available, and epitope-tagged methods can be useful~\cite{brizzard2008epitope, goldberg2010distinct}.
-%\todo{to je příliš stručné - krátce vysvětli, co to je tagování}
+Many experiments are orienting on newly discovered proteins, which means that such a protein probably does not have any available antibody. 
+However, the development and validation of the antibodies to each protein is pretty time-consuming and expensive~\cite{jarvik1998epitope}. 
+For example, the number of proteins interacting with chromatin in a human cell is very high~\cite{ramani2005consolidating}, and the traditional approach may not be suitable.
+Genetic engineering makes it possible to solve that problem by fusion of the short epitope sequence into a gene of interest for which an antibody is available~\cite{jarvik1998epitope,brizzard2008epitope,goldberg2010distinct}. 
+This recombinant DNA method called epitope tagging and was first described in 1984~\cite{munro1984use}. 
+
+%% \todo{to je příliš stručné - krátce vysvětli, co to je tagování}
+
+
+
+
+
+
+
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
 \section{Library construction, sequencing, and mapping.}
+
+\begin{figure}[b!]
+    \centering
+    \includegraphics[width=\textwidth]{../img/chip.jpeg}
+    \captionsource{Overview of ChIP-seq experiment.}{www.abcam.com}
+    \label{fig:graph_classes}
+\end{figure}
+
 
 After chromatin purification with and without immunoprecipitation to prepare ChIP and corresponding input DNA fragments, the material is ready to be sequenced. 
 The size range of 150 to 300 bp fragment length selection is equivalent to mono- and dinucleosome chromatin fragments~\cite{kidder2011chip}.
@@ -58,30 +93,49 @@ Libraries can be sequenced using a single-end or paired-end strategy.
 Paired-end sequencing can be useful to increase sequencing coverage, improve alignment efficiency into repetitive regions, and detect fragment size~\cite{kidder2011chip, chen2012systematic}.
 
 
-\begin{figure}[b!]
-\centering
-\includegraphics[width=\textwidth]{../img/chip.jpeg}
-\captionsource{Overview of ChIP-seq experiment.}{www.abcam.com}
-\label{fig:graph_classes}
-\end{figure}
+
 
 Next-generation sequencing technological advancements have facilitated the production of a huge amount of sequencing data. 
 Multiple barcoded ChIP-seq libraries pooled together and sequenced in a single lane~\cite{craig2008identification} to reduce the cost of the experiment and produce high-quality data.
 There are several sequencing technologies available. 
-The big amount of data is generating through the Illumina platform, which produces hundreds of millions of reads, or even more, depending on the machine type.
+The big amount of data is generating through the Illumina and SOLiD sequencing platform~\cite{park2009chip}, which produces hundreds of millions of reads, or even more, depending on the machine type.
 %\todo{některé stroje Illuminy dávají i miliardy readů. Možná by bylo lepší to napsat obecněji: which produces hundreds of millions of reads, or even more, depending on the machine type.}
 
 Raw data of short sequenced tags often appear in fastq format containing sequence information and quality scores, and may contain 10 to 60 million reads. 
 And 60 million reads do not limit such files.
 %\todo{To je zavádějící. FASTQ file může obsahovat zcela libovolný počet readů - jsi omezená jen velikostí disku.}
-Several alignment tools have been developed based on extended Burrows-Wheeler transform (BWT)~\cite{li2009fast, siren2014indexing}.
-Unlike RNA-seq with exon junctions, the ChIP-seq experiment does not require to find spliced alignment. 
-Sequencing platforms produce sequence-specific errors (SSE)~\cite{nakamura2011sequence}. 
-Also, alignment mismatches can be observed due to the difference between the genotype of the cultivated organism (indels and SNPs) and the reference genome~\cite{park2009chip}.
-Reads with minimal allowed mismatches to maximize the number of the uniquely mapped reads are sufficient to analyze typical TF, and also simplify further analysis~\cite{derrien2012fast}.
-%\todo{vysvětli proč}
-However, allowing the random location for multiple mapped reads may increase the sensitivity of peak detection. 
+Fastq files then need to be analyzed. 
+First, the sequence information should be reconstructed by the alignment to the reference genome and find overlaps.
+Several alignment tools have been developed based on extended Burrows-Wheeler transform (BWT). 
+The algorithm was developed in 1994 as a data compression technique based.~\cite{li2009fast, siren2014indexing}.
+And at the end of the 2000s was applied in the NGS field~\cite{simpson2010efficient}.
+Suitable tools~\cite{langmead2009ultrafast, li2009fast, kim2019graph} map sequenced reads producing  SAM, BAM, or CRAM output formats. 
+BAM format is a widely used standard so far.
+
+
+Many mapping software tools can search for exon junctions. 
+However, unlike RNA-seq, the ChIP-seq experiment does not require to find spliced alignment.
+Thus the optimal set of the parameters is to disable the spliced alignment and minimize the number of the allowed mismatches, increasing the number of the unique mapped reads and simplify further analysis~\cite{derrien2012fast}.
+
+Alignment mismatches can be observed due to the biological differences between the genotype of the cultivated organism (indels and SNPs) and the reference genome~\cite{park2009chip}.
+It is also possible to observe differences between reference and mapped tags due to contamination by the adapters or primers, which can be computationally filtered when a sequence is known~\cite{nakamura2011sequence}. 
+Sequencing platforms may also produce sequence-specific errors (SSE). Some of them may be avoided or minimized by the improvement of the experimental procedure. The latest experiments tend to prolongate the number of cycles up to 150 bp. During the sequencing of the longer reads on the Illumina platform may produce an error~\cite{nakamura2011sequence}.
+
+Some sequences are able to fit more than the one location on the reference. Thus, allowing the random site for multiple mapped reads may increase the sensitivity of peak detection. 
 The ration of the unique mapped reads over the total number of mapped reads is one of the parameters of the library quality assessment and should not be below 50\%~\cite{shin2013computational}.
+%% \todo{vysvětli proč}
+
+
+
+
+
+
+
+
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Quality control and computational analysis workflow.}
@@ -100,15 +154,19 @@ Processing pipelines are developed to make raw sequence reads annotated.
 Low-quality data can be filtered before alignment to the reference. 
 But such filtering is not necessary due to the inability of such sequences to be aligned~\cite{furey2012chip}.
 
-Suitable tools~\cite{langmead2009ultrafast, li2009fast, kim2019graph} map sequenced reads producing  SAM, BAM, or CRAM output formats. 
-BAM format is a widely used standard so far.
-The sequencing library is expected to be as complex as possible. 
-The complexity if which is measured by the non-redundant fraction (NRF).
 
-In a typical TF study reads mapped to the same genomic coordinate are filtered as redundant, because the expected number of mapped reads per base pair is less than 1. 
-\todo{až teď mi došlo, že tenhle kousek vlastně nechápu "the expected number of mapped reads per base pair is less than 1."}
+
+In a typical TF study reads mapped to the same genomic coordinate are filtered as redundant, because the expected number of mapped reads per genomic position is less than or equal to one. 
+%% \todo{až teď mi došlo, že tenhle kousek vlastně nechápu "the expected number of mapped reads per base pair is less than 1."}
 On the other hand, highly repetitive regions such as rDNA in yeast, long repetitive elements such as segmental duplication regions are the regions linked to important biological functions~\cite{nakato2017recent}. But the annotation of such regions is challenging and expect special algorithms that take such regions into account~\cite{chung2011discovering}.
 Data processing routine requires quality control on early step reducing further downstream analysis problems~\cite{ewels2016multiqc}.
+To obtain reliable results essential to have a complex ChIP-seq library.
+The complexity is measured by the non-redundant fraction (NRF), which is one of the QC-metrics.
+The fraction is defined as the ratio between uniquely mapped reads over the total number of reads~\cite{landt2012chip}.
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The best strategy}

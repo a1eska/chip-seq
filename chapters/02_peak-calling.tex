@@ -2,24 +2,37 @@
 
 \section{Building a signal profile.}
 
+\begin{figure}[b!]
+    \centering
+    \includegraphics[width=\textwidth]{../img/peaks.jpg}
+    \captionsource{Illustration of individual reads mapping to the forward (up) and reverse (down) strand, building the good binding site prfile (a, b, c) and false positive (d). }{doi: 10.1371/journal.pone.0089694}
+    \label{fig:graph_classes}
+\end{figure}
+
 The computational method of the protein-chromatin binding event identification plays a central role in ChIP-seq analysis. 
 After read mapping to the reference, the next step is to identify loci with high read density comparatively to the background, referred to ChIP-seq signals, or simply peaks.
 More than 30 algorithms and tools have been implemented to solve that computational problem~\cite{chen2012systematic}.
 The choice of the right peak caller is crucial and depends on the type of experiment~\cite{nakato2017recent}, e.g. TF binding event identification vs. long-range histone marks interactions.
 
+
+
 Suitable software builds a peak profile along each chromosome. 
 All the peak profiles can be divided into three categories~\cite{park2009chip}. 
-Sharp peaks are typical for TF due to dependency on motif sequence. 
-Histones have non-specific positioning on the DNA. 
+Sharp peaks are typical for TF due to dependency on motif sequence~\cite{landt2012chip}. 
+Histones have non-specific positioning on the DNA~\cite{krig2007identification}. 
 Thus the peak profile is broad and can reach several kilobases. 
-The third peak type is a mix of sharp and broad signals, a typical pattern for RNA polymerase II and transcription elongation factor~\cite{lin2011dynamic}.
+The third peak type is a mix of sharp and broad signals, a typical pattern for RNA polymerase II and transcription elongation factor~\cite{squazzo2006suz12, lin2011dynamic}.
 % \todo{to je zavádějící. Nukleosomy sice nevážou konkrétní motiv DNA, ale vykazují jistou míru sekvenčních preferencí, která se liší v závislosti na organismu.}
+
+
 
 The very first extended set methodology to calculate peak profile density was presented in 2007~\cite{robertson2007genome}. 
 Fragments are sequenced from 5' to 3' end, and the minimal enough length of a sequenced read is 36 bp long. 
 But the real fragment of DNA is longer, and thus the interaction of the protein of interest is somewhere on that size selected long DNA fragment. 
 Each read is computationally extended in the 3' direction. 
 Regions are scored by the number of overlap reads and assessed as a candidate peak.
+
+
 
 Sequence directionality sets the stage for a smoothed profile. 
 The strand-specific read distribution form bimodal pattern combined by shifting or extending tags toward the center~\cite{valouev2008genome}.
@@ -198,3 +211,7 @@ IDR, which validates the rank consistency of common peaks in replicates, is anot
 As  was mentioned, the bimodal peak pattern is utilized in peak calling design. 
 Many false positives may be filtered out by analyzing the size and appearance of the signal~\cite{rye2011manually}. 
 However, only a few methods utilize the analysis of the peak shapes~\cite{hower2011shape, wu2014polyapeak}.
+
+
+
+ %The directionality of the sequencing reads produces bimodal enrichment on both strands centered around the binding site of the protein of interest. The cross-correlation metric can evaluate each obtained peak. The calculation is based on Pearson's linear correlation between forward and reverse strand for each complementarity base by shifting minus strand. The procedure generates two peaks, a bigger on corresponding to the fragment length, and a smaller one is associated with a read length. 
