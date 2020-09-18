@@ -2,11 +2,55 @@
 %\todo{ChIP-seq je spíš metoda než technologie}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
-\section{Introduction to ChIP-seq.}
-Gene regulatory networks tend to be critical in various genomic studies. Several methods have been developed to identify biological regulatory elements and their behavior in the context of the interaction with chromatin and other transcription regulation components. Various ChIP technologies have been used to map a large number of protein binding sites along the genome. Microarray techniques measure the expression of many genes simultaneously but also produce a large number of false positives. 
+\section{Genome-Wide Methods for Protein Binding Sites on DNA.}
+Gene regulatory networks tend to be crucial in various genomic studies such as gene expression, cell segregation and differentiation, and disease~\cite{collas2010current}. 
+Transcription factors (TFs) and chromatin modifiers are the main elements that control cellular functions by the dynamic association with target DNA within regulatory regions such as promoters and enhancers and their coding sequences.
+Epigenetic modifications change the composition of the chromatin and modulate the association of the regulatory elements with DNA~\cite{antequera2003structure, kouzarides2007chromatin, mito2007histone}.
+Several methods have been developed to identify biological regulatory elements and their behavior in the context of the interaction with chromatin and other transcription regulation components. 
+
+Chromatin immunoprecipitation, known as ChIP, is a technique to investigate and analyze any protein associated with DNA inside the cell~\cite{o1995histone, o1996immunoprecipitation, nelson2006protocol}.
+The most frequently investigated chromatin-associated proteins are transcription factors, post-translationally modified histones and histone variants in the genome, components of the transcriptional machinery, and chromatin-modifying enzymes.
+Classical ChIP assays require a large number of cells because of the loss of material and extensive sample handling which leads to errors and inconsistency between replicates~\cite{o1996immunoprecipitation}. 
+However, the introduction of the newer ChIP protocols promotes simplification of the procedure. 
+Those simplifications enable the technique to be applied for a small amount of the cells and discover the genome-wide profiling of the target elements without prior knowledge of exact binding loci~\cite{collas2010current}. 
+
+DNA microarrays in combination with ChIP assay enable us to analyze the protein of interest in large areas in the genome. 
+Such an approach is known as ChIP-on-chip~\cite{ren2000genome, loden2005whole}. 
+%Nonetheless, the method has its limitations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+%Various ChIP technologies have been used to map a large number of protein binding sites along the genome. 
+%Microarray techniques measure the expression of many genes simultaneously but also produce a large number of false positives. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Chromatin immunoprecipitation followed by sequencing, known as ChIP-sequencing or ChIP-seq, is a modern and relatively cheap method to analyze any protein associated with DNA. 
-The most frequently investigated chromatin-associated proteins are transcription factors (TF), modifies histones, components of the transcriptional machinery, and chromatin-modifying enzymes.
+
 Advances in high-throughput parallel sequencing technology and computational methods enable generate and analyze extremely large data sets. 
 Both ChIP followed by microarray hybridization (ChIP-on-chip) and ChIP-seq was developed to understand genome-wide profiling and does not rely on prior knowledge of exact binding loci.
 However, ChIP-seq generally builds a profile with better resolution and signal-to-noise ratio, and detect more signals~\cite{park2009chip}.
@@ -28,7 +72,7 @@ However, ChIP-seq generally builds a profile with better resolution and signal-t
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Considerations of experimental design.}
 
-A typical ChIP-seq protocol has many steps and requires a sufficient quantity if immuno-enriched DNA. 
+A typical ChIP-seq protocol has many steps and requires a sufficient quantity if immunoenriched DNA. 
 The consideration od the first step depends on the properties of the protein under investigation. 
 For example, histone-DNA interactions are strong enough. 
 Thus the fixation using formaldehyde as a crosslinking agent may not be necessary~\cite{barski2008identification}. 

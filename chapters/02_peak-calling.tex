@@ -2,12 +2,8 @@
 
 \section{Building a signal profile.}
 
-\begin{figure}[b!]
-    \centering
-    \includegraphics[width=\textwidth]{../img/peaks.jpg}
-    \captionsource{Illustration of individual reads mapping to the forward (up) and reverse (down) strand, building the good bimodal binding site prfile (a, b, c) and false positive (d). }{doi: 10.1371/journal.pone.0089694}
-    \label{fig:graph_classes}
-\end{figure}
+
+
 
 The computational method of the protein-chromatin binding event identification plays a central role in ChIP-seq analysis. 
 After read mapping to the reference, the next step is to identify loci with high read density comparatively to the background, referred to ChIP-seq signals, or simply peaks.
@@ -36,6 +32,14 @@ Regions are scored by the number of overlap reads and assessed as a candidate pe
 
 Sequence directionality sets the stage for a smoothed profile. 
 The strand-specific read distribution form bimodal pattern combined by shifting or extending tags toward the center~\cite{valouev2008genome}.
+
+\begin{figure}[b!]
+    \centering
+    \includegraphics[width=\textwidth]{../img/peaks_final.pdf}
+    \caption{Illustration of individual reads mapping to the forward (blue) and reverse (red) strand, building the good bimodal binding site prfile (A, B, C) and false positive (D). }
+    \label{fig:graph_classes}
+\end{figure}
+
 %% \todo{obrázek by možná čtenářům pomohl snáze pochopit popisované kroky}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -13,17 +13,17 @@ Native ChIP is commonly used for the analysis of stable chromatin complexes~\cit
 Transcription factor interactions that would not withstand the isolation procedure due to weak affinity to the DNA require a crosslinking step.
 %\todo{tento odstavec se dubluje s obsahem kapitoly 1.2}
 % \todo{"native" bych zde nepoužíval, spíš specific nebo genuine. Nativní se používá jako protiklad k fixovaný (např. native vs formaldehyde-fixed ChIP)}
-
 Typical ChIP assay involves crosslinking using formaldehyde reactivity. 
 This smallest aldehyde has been applied for decades in numerous fields~\cite{eckels2003formalin,werner2000effect,gavrilov2015vivo}.
 In the chromatin immunoprecipitation, the ability of formaldehyde to crosslink with proteins and DNA to form protein-DNA or protein-protein complexes provides identification of the location of transcription factor binding along the DNA strand.
-Cell permeability, short spacer length, rapid reactivity, and reversibility are key properties that define formaldehyde as a crosslinking fixative of choice for ChIP~\cite{hoffman2015formaldehyde}.
+This chemical reagent has several essential features that define this reagent as a crosslinking fixative of choice for the ChIP-seq experiment. 
+Those properties are cell permeability, short spacer length, rapid reactivity, and reversibility.
+% Cell permeability, short spacer length, rapid reactivity, and reversibility are key properties that define formaldehyde as a crosslinking fixative of choice for ChIP~\cite{hoffman2015formaldehyde}.
 %\todo{tahle věta je HODNĚ podobná původnímu textu v článku. Dávej na podobné věci VELKÝ pozor. Měla bys vše popisovat vlastními slovy. Nejde doslovně přebírat celé věty (a prohození 2 slov to nezachrání), i když cituješ zdroj. Mohlo by to být hodnoceno jako plagiátorství. Obzvlášť, když s angličtinou trochu bojuješ a najednou se v tvém textu objeví věta nebo dokonce celý odstavec s perfektní angličtinou, vypadá to podezřele. Z ničeho tě neobviňuju, jen si to prosím hlídej.}
 
 Unlike other essential regulatory proteins, transcription factors contain at least one DNA-binding domain that contains at least one structural motif that specifically recognizes dsDNA or ssDNA~\cite{mitchell1989transcriptional}.
 Some transcription factors bind non-specifically~\cite{struhl2007interpreting};
 and it is also known, that site-specific TFs can bind non-specifically~\cite{hammar2012lac,mirny2009protein} but with weaker affinity.
-
 Several studies show that different DNA-binding proteins spend some time non-specifically bound and sliding along DNA~\cite{slutsky2004kinetics,mirny2010nucleosome,cherstvy2008protein,hu2006proteins,sheinman2009effects}.
 And the approach is that the search process is a combination of three-dimensional and one-dimensional diffusion and also can be statistically predicted~\cite{sela2011dna}.
 Such non-specific accessibility of the genome in different regions leads to the non-specific cross-linking events, which can increase the rate of false-positive signals in further analysis.
@@ -36,7 +36,7 @@ Soluble proteins not expected to associate with DNA would be non-specifically ca
 Antibody-beads also can non-specifically bind cross-linked complexes during the immunoprecipitation step~\cite{zhu2014fast} and cause a raise of false-positive rate.
 It is important to mention, such bias can appear due to formaldehyde excess~\cite{hanson2018using}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Hyper ChIPable regions are another source of false-positive signals.}
 
 Another challenge the researcher can face during the ChIP-seq analysis is that some regions are more susceptible to immunoprecipitation. 
