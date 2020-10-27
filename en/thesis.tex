@@ -54,7 +54,7 @@
 
 %% My packages
 \usepackage{todonotes}
-\usepackage{svg}
+%\usepackage{svg}
 % \linenumbers
 
 %%% Basic information on the thesis
@@ -123,11 +123,48 @@ Abstract.
 
 \tableofcontents
 
+%%% Abbreviations used in the thesis, if any, including their explanation
+%%% In mathematical theses, it could be better to move the list of abbreviations to the beginning of the thesis.
+\chapwithtoc{List of Abbreviations}
+
+\begin{tabular}{c l}
+	ChIP & chromatin immunoprecipitation \\
+	ChIP-seq & chromatin immunoprecipitation followed by sequencing \\
+	ChIP-on-chip &  chromatin immunoprecipitation followed bygenomic tiling microarray hybridization \\
+	DNA & deoxyribonucleic acid \\
+	TF & transcription factor \\
+	IP & immunoprecipitation \\
+	HDAC & histone deacetylase \\
+	HAT & histone acetyltransferase \\
+	DSG & disuccinimidyl glutarate \\
+	BWT & Burrows-Wheeler transform \\
+	NGS & next-generation sequencing \\
+	RNA & ribonucleic acid \\
+	SNP & single nucleotide polymorphysm \\
+	SSE & sequencing-specific error \\
+	NRF & non-redundant fraction \\
+	NSC & normalized cross-corelation \\
+	RSC & relative cross-corelation \\
+	QC & quality control \\
+	IDR & irreproducible discovery rate \\
+	FDR & false discovery rate \\
+	dsDNA & double-stranded DNA \\
+	ssDNA & single stranded DNA \\
+	HOT & high-occupancy target \\
+	TSS & transcription start site \\
+	KOIN & knockout implemented normalization \\
+	PCR & polymerase chain reaction \\
+	IgG & immunoglobulin G \\
+	
+\end{tabular}
+
+
 %%% Each chapter is kept in a separate file
 \include{preface}
 \input{../chapters/01_chip}
 \input{../chapters/02_peak-calling}
 \input{../chapters/03_bias}
+\input{../chapters/04_practical}
 
 \include{epilog}
 
@@ -141,9 +178,7 @@ Abstract.
 %%% In mathematical theses, it could be better to move the list of tables to the beginning of the thesis.
 % \listoftables
 
-%%% Abbreviations used in the thesis, if any, including their explanation
-%%% In mathematical theses, it could be better to move the list of abbreviations to the beginning of the thesis.
-\chapwithtoc{List of Abbreviations}
+
 
 %%% Attachments to the bachelor thesis, if any. Each attachment must be
 %%% referred to at least once from the text of the thesis. Attachments
