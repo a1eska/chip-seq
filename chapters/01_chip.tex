@@ -32,6 +32,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Considerations of Experimental Design.}
 
+
 A typical ChIP-seq protocol has many steps and requires a sufficient quantity if immunoenriched DNA. 
 The consideration od the first step depends on the properties of the protein under investigation. 
 For example, histone-DNA interactions are strong enough. 
@@ -53,6 +54,12 @@ It is also important to avoid oversonication during the library preparation for 
 Oversonication may lead to the deletion of protein epitopes from cross-linked chromatin~\cite{ostrow2015chip}. 
 %\todo{Vysvětli, PROČ je to důležité. Navíc bych tu čekal nějakou citaci}
 
+\begin{figure}[b!]
+    \centering
+    \includegraphics[width=\textwidth]{../img/chip.jpeg}
+    \captionsource{Overview of ChIP-seq experiment.}{www.abcam.com}
+    \label{fig:graph_classes}
+\end{figure}
 
 The successful ChIP experiment depends on the isolation of the protein under study from a complex mixture of the chromatin fragments and associated proteins. 
 The target protein bound to the chromatin can be isolated from a sample using an antibody pre-immobilized onto insoluble magnetic beads that specifically recognizes that protein and that purification technique is known as immunoprecipitation (IP). 
@@ -80,29 +87,42 @@ This recombinant DNA method called epitope tagging and was first described in 19
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
 \section{Library Construction and Sequencing.}
-
-\begin{figure}[b!]
-    \centering
-    \includegraphics[width=\textwidth]{../img/chip.jpeg}
-    \captionsource{Overview of ChIP-seq experiment.}{www.abcam.com}
-    \label{fig:graph_classes}
-\end{figure}
-
-
 After chromatin purification with and without immunoprecipitation to prepare ChIP and corresponding input DNA fragments, the material is ready to be sequenced. 
-The size range of 150 to 300 bp fragment length selection is equivalent to mono- and dinucleosome chromatin fragments~\cite{kidder2011chip}.
+The size range of $150$ to $300$ bp fragment length selection is equivalent to mono- and dinucleosome chromatin fragments~\cite{kidder2011chip}.
 
-The goal of the ChIP-sequencing is to obtain reads long enough to map uniquely to the reference.  
-The first DNA sequencing methods were developed in the '70s. 
-With the invention of the thermal cycler, the new Sanger's sequencing method, which is referred to as first-generation sequencing (FGS), enables automatization of the sequencing process~\cite{quail2012tale}. 
-Next-generation sequencing (NGS) has brought technological advancements have facilitated the production of a huge amount of sequencing data. 
-There are two types of sequencing technologies available, which includes sequencing by synthesis (SBS) and sequencing by hybridization and ligation (SBL) approaches.   
+With the invention of the thermal cycler,  Sanger chain-termination sequencing method, which is referred to as first-generation sequencing (FGS), enables automatization of the sequencing process~\cite{quail2012tale}. 
+The appearance of the pyrosequencing technique was the start of the next-generation sequencers. 
+Unlike Sanger's sequencing, this method enabled real-time observation; and usage of nucleotides, which are not heavily modified~\cite{ronaghi1996real, ronaghi1998sequencing}.
+Instead, the method uses luminescent labeling for pyrophosphate synthesis measuring. 
+First, ATP sulfurylase converts pyrophosphate into ATP. 
+The ATP is used as a substrate for the luciferase enzyme, which the light-emitting reaction. 
+The light produced by the enzyme can be measured and is proportional to the amount of pyrophosphate. 
+The measuring of the pyrophosphate produced during the reaction is used to identify the sequence~\cite{hyman1988new}. 
+Like Sanger's, such a method is called sequencing by synthesis (SBS).
 
+The most common SBS method is Solexa/Illumina platform~\cite{voelkerding2009next}. 
+The bridge amplification produces clusters of clonal DNA. 
+Fluorescent reversible-terminator (RT) nucleotides cannot bind further nucleotides due to protection at $3^\prime$ hydroxyl position~\cite{heather2016sequence}. 
+During sequencing, free RT nucleotides ina competitive manner are able to complementary incorporate to the DNA template with the removal of the fluorescent tag, which is different for four bases and can be imaged by an analyzer~\cite{berglund2011next}. 
+Illumina HiSeq and MiSeq machine enable us to reach greater read length and depth. 
+However, the recent NextSeq 500 technology reduces capturing time and cost by replacing the four-channel sequencing system with a two-channel system~\cite{reuter2015high}. 
+
+
+
+The goal of the ChIP-sequencing is to obtain reads long enough to map uniquely to the reference. 
 Multiple barcoded ChIP-seq libraries pooled together and sequenced in a single lane~\cite{craig2008identification} to reduce the cost of the experiment and produce high-quality data.
 In many cases, 36-50 bp will be enough even for a complex organism such as a human. 
 The longer reads sequenced, the deeper coverage per base may be achieved.
-Libraries can be sequenced using a single-end or paired-end strategy. 
-Paired-end sequencing can be useful to increase sequencing coverage, improve alignment efficiency into repetitive regions, and detect fragment size~\cite{kidder2011chip, chen2012systematic}.
+The main advantage of the Illumina platform is the ability to obtain paired-end sequenced data due to clonal amplification. 
+%Libraries can be sequenced using a single-end or paired-end strategy. 
+Paired-end sequencing generates high sequencing coverage, improves alignment efficiency into repetitive regions, detects fragment size, and increases the probability of the alignment to a reference~\cite{kidder2011chip, chen2012systematic}.
+
+
+
+Another remarkable sequencing platform called IonTorrent is also available on the market. 
+Instead of using laser scanners, IonTorrent technology measures pH during the sequencing without using labeled nucleotides. 
+However, the homopolymeric regions may cause errors due to electronic signals corresponding to the number of released hydrogen ions~\cite{ambardar2016high}.
+To improve the sequencing indel error rates and reduce GC-bias the technology comes up with a sequencing enzyme called Hi-Q~\cite{veras2014efficiency}. 
 
 
 
@@ -112,9 +132,6 @@ Paired-end sequencing can be useful to increase sequencing coverage, improve ali
 
 
 
-
-The big amount of data is generating through the Illumina and SOLiD sequencing platform~\cite{park2009chip}, which produces hundreds of millions of reads, or even more, depending on the machine type.
-%\todo{některé stroje Illuminy dávají i miliardy readů. Možná by bylo lepší to napsat obecněji: which produces hundreds of millions of reads, or even more, depending on the machine type.}
 
 \section{ChIP-seq Read Mapping to the Reference}
 
