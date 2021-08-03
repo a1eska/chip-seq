@@ -10,9 +10,14 @@
 %ChIP-seq technology has been used to identify the localization of post-translationally modified histones, histone variants, TF, and other chromatin-associated proteins.
 
 Native ChIP is commonly used for the analysis of stable chromatin complexes~\cite{kasinathan2014high} and histones.
-Transcription factor interactions that would not withstand the isolation procedure due to weak affinity to the DNA require a crosslinking step.
+However, this specific ChIP is not able to fit in all kind of experiments.
+
+Transcription factor interactions would not withstand the isolation procedure due to weak affinity to the DNA.
+Thus, it requires a crosslinking step.
+%Transcription factor interactions that would not withstand the isolation procedure due to weak affinity to the DNA require a crosslinking step.
 %\todo{tento odstavec se dubluje s obsahem kapitoly 1.2}
 % \todo{"native" bych zde nepoužíval, spíš specific nebo genuine. Nativní se používá jako protiklad k fixovaný (např. native vs formaldehyde-fixed ChIP)}
+\paragraph{Formaldehyde.}
 Typical ChIP assay involves crosslinking using formaldehyde reactivity. 
 This smallest aldehyde has been applied for decades in numerous fields~\cite{eckels2003formalin,werner2000effect,gavrilov2015vivo}.
 In the chromatin immunoprecipitation, the ability of formaldehyde to crosslink with proteins and DNA to form protein-DNA or protein-protein complexes provides identification of the location of transcription factor binding along the DNA strand.
@@ -21,6 +26,7 @@ Those properties are cell permeability, short spacer length, rapid reactivity, a
 % Cell permeability, short spacer length, rapid reactivity, and reversibility are key properties that define formaldehyde as a crosslinking fixative of choice for ChIP~\cite{hoffman2015formaldehyde}.
 %\todo{tahle věta je HODNĚ podobná původnímu textu v článku. Dávej na podobné věci VELKÝ pozor. Měla bys vše popisovat vlastními slovy. Nejde doslovně přebírat celé věty (a prohození 2 slov to nezachrání), i když cituješ zdroj. Mohlo by to být hodnoceno jako plagiátorství. Obzvlášť, když s angličtinou trochu bojuješ a najednou se v tvém textu objeví věta nebo dokonce celý odstavec s perfektní angličtinou, vypadá to podezřele. Z ničeho tě neobviňuju, jen si to prosím hlídej.}
 
+\paragraph{Motif recognition.}
 Unlike other essential regulatory proteins, transcription factors contain at least one DNA-binding domain that contains at least one structural motif that specifically recognizes dsDNA or ssDNA~\cite{mitchell1989transcriptional}.
 Some transcription factors bind non-specifically~\cite{struhl2007interpreting};
 and it is also known, that site-specific TFs can bind non-specifically~\cite{hammar2012lac,mirny2009protein} but with weaker affinity.
@@ -28,9 +34,10 @@ Several studies show that different DNA-binding proteins spend some time non-spe
 And the approach is that the search process is a combination of three-dimensional and one-dimensional diffusion and also can be statistically predicted~\cite{sela2011dna}.
 Such non-specific accessibility of the genome in different regions leads to the non-specific cross-linking events, which can increase the rate of false-positive signals in further analysis.
 
+\paragraph{Incubation time.}
 The formaldehyde concentration, incubation time, and other conditions can vary from experiment to experiment. 
-Even though the effective crosslinking time is of the 5-second threshold~\cite{schmiedeberg2009temporal}, many laboratories use rather prolonged formaldehyde incubation time.
-\todo{buď konkrétní - jaké časy se používají?}
+Even though the effective crosslinking time is of the 5-second threshold, many laboratories use rather prolonged formaldehyde incubation time up to 30 min~\cite{schmiedeberg2009temporal}.
+%\todo{buď konkrétní - jaké časy se používají?}
 Soluble proteins not expected to associate with DNA would be non-specifically captures at the open chromatin loci. Shortening the incubation time traps preferentially genuine DNA-protein binding events~\cite{baranello2016chip}.
 
 Antibody-beads also can non-specifically bind cross-linked complexes during the immunoprecipitation step~\cite{zhu2014fast} and cause a raise of false-positive rate.
@@ -41,6 +48,8 @@ It is important to mention, such bias can appear due to formaldehyde excess~\cit
 
 Another challenge the researcher can face during the ChIP-seq analysis is that some regions are more susceptible to immunoprecipitation. 
 Those areas may show a strong signal for the loci where a protein of interest has no binding event~\cite{teytelman2013highly}.
+
+\paragraph{Open chromatin.}
 As was described in the previous section~\ref{formaldehyde}, crosslinking using formaldehyde may trap mobile proteins in areas with promoters of actively transcribed genes. 
 Such promoters are localized in regions of open chromatin where high transcription factor occupancy.  
 That can explain the presence of a ChIP signal. 
@@ -54,12 +63,16 @@ That specificity can be disrupted (for example, by sonication) and exhibit unstr
 Several studies have described that phenomenon in different organisms~\cite{boyle2014comparative, fan2009does, krebs2014optimization, teytelman2013highly,   waldminghaus2010chip, xie2013dynamic}.
 
 The HOT region location is typically at promoter locus of highly expressed genes close to the transcription start site (TSS), and that genes stand behind essential cellular functions~\cite{wreczycka2019hot}. 
-One possible solution is to use the so-called Knockout Implemented Normalization (KOIN) method, where the protein is not present~\cite{krebs2014optimization}.
-\todo{"where the PROTEIN is not present" - který protein máš na mysli - target protein? target TF? the analyzed/studied protein?} 
+
+\paragraph{Knockout implemented normalization.}
+One possible solution is to use the so-called Knockout Implemented Normalization (KOIN) method, where the target TF is not present~\cite{krebs2014optimization}.
+Knokout dataset utilize mutations directly to the gene encoding the target TF.
+This leads to unexpression of the target TF and may be used as an alternative to input control dataset.
 This method significantly improves false-positive identification, which can help more accurate downstream interpretation during analysis~\cite{wreczycka2019hot}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{GC content bias in ChIP-seq is challenging.}
+\label{gc}
 
 Effective analysis requires sufficient coverage by sequence reads. 
 The sequenced reads must overlap to achieve the required level of resolution for a ChIP experiment.
@@ -68,14 +81,15 @@ Whereby the experiment requires many copies of a whole genome.
 Nowadays ChIP purified DNA is obtained from many cells.
 Multiple genome copies provide a sufficient number of overlapping reads after cleavage and sequencing.
 %\todo{"after fragmentation", spíš než "after cleavage"}
-In addition, sigle-cell sequencing requires PCR-amplification before the fragmentation step~\cite{clark2016single}.
+%In addition, sigle-cell sequencing requires PCR-amplification before the fragmentation step~\cite{clark2016single}.
 %\todo{vysvětli stručně, proč je zde třeba materiál amplifikovat}
-\todo{teď mi došlo, že to nedává smysl. Kroslinkovaný chromatin se amplifikovat nedá! Jediná šance na amplifikaci je až po purifikaci DNA, před konstrukcí knihovny}
+%\todo{teď mi došlo, že to nedává smysl. Kroslinkovaný chromatin se amplifikovat nedá! Jediná šance na amplifikaci je až po purifikaci DNA, před konstrukcí knihovny}
 
 % \todo{důležitá poznámka k celému odstavci: DNA/chromatin se u ChIPu fragmentuje pouze před imunoprecipitací. Poté, co vyizoluješ čistou DNA, se už žádná další fragmentace neprovádí. Rovnou se připraví knihovna a sekvenuje se!}
 
 The coverage for ChIP-seq varies across experiments due to GC-content bias, and that variability may introduce false-positive signals during downstream analysis.
 %\todo{podle mě je důležitější, že "The coverage for ChIP-seq varies across the genome due to GC-content bias..."}
+\paragraph{PCR amplification.}
 Loci with high GC base composition are often under-represented, and such bias has been observed in several NGS experiments~\cite{benjamini2012summarizing,dohm2008substantial,teng2017accounting}.
 This bias tends to have appeared during the PCR amplification~\cite{ross2013characterizing}.
 It is known that GC-rich DNA targets are less amenable to amplification due to base base-stacking interations~\cite{yakovchuk2006base}.
@@ -89,6 +103,7 @@ The possible problem of Illumina cell flow bridge amplification may occur due to
 %\todo{"cell flow" → flowcell}
 GC-rich sequences form hairpins, which are stable and stack unmelted at usual PCR denaturation temperatures~\cite{stein2010nucleosome}.
 
+\paragraph{Fragmentation.}
 Fragmentation is the first step in the DNA sequencing process.
 This step ensures the solubility of the crosslinked DNA-protein complexes are soluble and accessible to antibody.
 Using enzymatic digestion, chemical shearing, or different mechanical method, DNA with crosslinked proteins is broken up into short fragments.
@@ -101,7 +116,7 @@ This dependency may also cause the GC-bias.
 
 However, true binding sites of the protein of interest may be expected to occur in high GC regions.
 % \todo{"are expected" -> spíš "may be expected"}\todo{. Oblasti vazby vůbec nemusí být GC-bohaté, záleží na cílovém proteinu}
-Those regions have biological relevance such as promotor regions
+For some organisms those regions have biological relevance such as promotor regions.
 %\todo{jen připomínám, že tohle se liší podle organismu. Třeba S. pombe má promotory GC-poor}.
 Modeling of the GC-content at the fragment level~\cite{benjamini2012summarizing} is the optimal approach, but is not directly applicable to ChIP-seq analysis.
 The method for correction of this kind of bias was presented~\cite{teng2017accounting}.
@@ -113,7 +128,9 @@ However, the method is not suitable for broad peak identification as histone mod
  \section{Problematic regions of the genome.}
 
  Accurate annotation of the genome assembly is required to get proper information after mapping of the sequenced reads. 
- Unfortunately, some genomes may contain misassembled and gap regions due to repetitive sequences~\cite{amemiya2019encode}.
+ Unfortunately, some genomes may contain misassembled and gap.
+ As we mansioned in \ref{gc}, a high GC-content may cause sequencing problem.
+ Thus, centromeric, telomeric and repetitive regions may cause assembly difficulties~\cite{amemiya2019encode, liao2019current}.
  Recent long-read sequencing technologies~\cite{feng2015nanopore} and newly developed software improve more accurate \textit{de novo} assembles~\cite{rice2019new}. 
  Even though new assemblies are generated using accurate modern methods, such under-represented regions in the reference can bias the ChIP-seq results and produce an ambiguous outcome~\cite{carroll2014impact}. 
  One possible solution is to detect and remove such regions when analyzing data to improve the assessment of biologically relevant signals during normalization and peak calling~\cite{amemiya2019encode}. 
@@ -134,8 +151,8 @@ However, the method is not suitable for broad peak identification as histone mod
  A small number of reads and PCR duplicates, which appears due to limited genomic regions, results in problematic normalization, making mock control less favorable than an input~\cite{kidder2011chip}. 
  Direct sequencing of crosslinked chromatin without IP contains the bias of sonication and is able to normalize that bias~\cite{kharchenko2008design}. 
  Therefore, input control is recommended to distinguish real signals from artifacts. 
- Also, input datasets produced from the same cell line under the same circumstances may be combined~\cite{meyer2014identifying}.
- \todo{tuhle poslední větu nechápu - co přesně se kombinuje a proč?}
+ Also, input datasets produced from the same cell line under the same circumstances may be combined into one file~\cite{meyer2014identifying}.
+ %\todo{tuhle poslední větu nechápu - co přesně se kombinuje a proč?}
 
  Even if the input is preferred to mock due to library complexity, there is still the presence of biases, which are not able to get rid of using only input control. 
  Expression and open chromatin biases appear in the ChIP-seq experiment, and the mock IP as control can correct such a factor~\cite{park2013widespread}.
