@@ -1,4 +1,4 @@
-\chapter{Peak Calling.}
+\chapter{Peak Calling}
 
 The computational method of the protein-chromatin binding event identification plays a central role in ChIP-seq analysis. 
 Peak calling is a statistical procedure.
@@ -33,9 +33,9 @@ The third peak type is a mix of sharp and broad signals, a typical pattern for R
 
 
 The very first extended set methodology to calculate peak profile density was presented in 2007~\cite{robertson2007genome}. 
-Fragments are sequenced from 5' to 3' end, and the minimal enough length of a sequenced read is 36 bp long. 
+Fragments are sequenced from $5'$ to $3'$ end, and the minimal enough length of a sequenced read is 36 bp long. 
 But the real fragment of DNA is longer, and thus the interaction of the protein of interest is somewhere on that size selected long DNA fragment. 
-Each read is computationally extended in the 3' direction. 
+Each read is computationally extended in the $3'$ direction. 
 Regions are scored by the number of overlap reads and assessed as a candidate peak.
 
 
@@ -132,27 +132,27 @@ From generated data, the candidate signal may be either a false or true binding 
 Standard biological research has some rate of false positives. 
 Due to there is no absolute proof or absolute rejection of the results in ChIP-seq studies, the analysis works with probabilities.
 The end goal of the ChIP-seq experiment is to define the genomic loci of possible protein binding events. 
-The null hypothesis $H_{0}$ is the default assumption for the model generating the data; the alternative hypothesis $H_{1}$ is accepted as the best explanation for the data if the $H_{0}$ is rejected.
-The candidate signal of a binding event is represented as an alternative hypothesis $H_{1}$, and $H_{0}$ is that there is no actual binding. 
-To describe the statistical significance of the individual hypothesis, a $P$-value is calculated.
+The null hypothesis $H_{0}$ is the default assumption for the model generating the data; the alternative hypothesis $H_{A}$ is accepted as the best explanation for the data if the $H_{0}$ is rejected.
+The candidate signal of a binding event is represented as an alternative hypothesis $H_{A}$, and $H_{0}$ is that there is no actual binding. 
+To describe the statistical significance of the individual hypothesis, a $p$-value is calculated.
 % The name of the P-value is referred to as a Probability Value, and corresponds to the $H_{0}$ tail area~\cite{efron2007size}. 
 
-Different scientific studies based on statistical approaches utilize either $P$-value or confidence intervals concepts. 
-Even though those two concepts are complementary, many biological and medical studies prefer confidence intervals to $P$-value because of showing the potential range of results~\cite{feinstein1998p}.
-However, there are several reasons why the utilization of the $P$-value in the ChIP-seq studies is more suitable than confidence intervals.
+Different scientific studies based on statistical approaches utilize either $p$-value or confidence intervals concepts. 
+Even though those two concepts are complementary, many biological and medical studies prefer confidence intervals to $p$-value because of showing the potential range of results~\cite{feinstein1998p}.
+However, there are several reasons why the utilization of the $p$-value in the ChIP-seq studies is more suitable than confidence intervals.
 
 
 The early approach was that the background noise is uniform; 
 However, the usage of the control dataset shows that the different biases make uniform model is too ideal to be true~\cite{robertson2007genome}. 
-That is why all peak calling algorithms make all the output signals associated with $P$-value~\cite{chitpin2019recap} to determine statistical significance in a hypothesis test. 
-The null hypothesis's incorrect rejection produces the Type I error known as a ``false positive''. 
+That is why all peak calling algorithms make all the output signals associated with $p$-value~\cite{chitpin2019recap} to determine statistical significance in a hypothesis test. 
+The null hypothesis's incorrect rejection produces the Type-I error known as a ``false positive''. 
 In the contest of ChIP-seq analysis, this type of error occurs when there is no actual binding event, but the peak caller shows that there is. 
-The inversion of Type I error is Type II error, which is referred to as a ``false negative''. 
+The inversion of Type-I error is Type-II error, which is referred to as a ``false negative''. 
 Considering the common clinical experiments, the ``false negative'' error type is seen less serious than the ``false positive'' error.
 However, in ChIP-seq experiment, the false positives can be checked by qPCR experiment, whereas the ``false negatives'' are going to be lost. 
 % \todo{proč to tak je? a můžeš své tvrzení podpořit nějakou citací?}
 
-In~\ref{pvalue} and~\ref{qvalue} we give an explanation of basic statistics used for peak evaluation more in detail.
+In~\ref{pvalue} and~\ref{qvalue} we give an explanation of basic statistics used for peak evaluation in more detail.
 
 % To test peaks for significance, different peak calling algorithms adopt different statistical techniques. 
 % In a MUSIC's approach~\cite{harmanci2014music}, a window of fixed size for TF or varying width for histone marks while scanning a genome ranks the candidate peaks using a Binomial test.
@@ -203,7 +203,7 @@ In~\ref{pvalue} and~\ref{qvalue} we give an explanation of basic statistics used
 
 
 
-\section{Introduction into Hypothesis Testing.}
+\section{Introduction into Hypothesis Testing}
 \label{pvalue}
 In this section, we give a light introduction into hypothesis testing, from the point of view of classical statistics.
 It is a very important part of statistcs, often used in biological research.
@@ -460,7 +460,7 @@ For a set of test statistics and their $q$-values, rejecting the null hypothesis
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Statistical Sin and Reliability of the Obtained List of ChIP-seq Signals After Peak Calling Procedure.}
+\section{Statistical Sin and Reliability of the Obtained List of ChIP-seq Signals After Peak Calling Procedure}
 
 Most programs for identification of the enriched regions (peaks) work as follow: candidate signal are identified by analyzing along the genome, and then by comparing with the input or mock dataset(or with another IP data in case of the differential analysis) regions are evaluated. 
 However, most of the software tools use data twice to identify and assess the enrichment, which leads to a statistical sin~\cite{lun2014novo}. 

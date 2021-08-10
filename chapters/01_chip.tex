@@ -1,4 +1,4 @@
-\chapter{ChIP-seq as a High-Throughoutput Sequencing Technique.}
+\chapter{ChIP-seq as a High-Throughoutput Sequencing Technique}
 %\todo{ChIP-seq je spíš metoda než technologie}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
@@ -30,7 +30,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Considerations of Experimental Design.}
+\section{Considerations of Experimental Design}
 
 \begin{figure}[b!]
     \centering
@@ -48,7 +48,7 @@ In the case of histone deacetylases (HDACs) and histone acetyltransferases (HATs
 
 
 Cross-linked chromatin is fragmented before ChIP. 
-Fragmentation way is depending on the purpose of the experiment, cell type, number of cells, fixation conditions. 
+The way of the fragmentation depends on the purpose of the experiment, cell type, number of cells, fixation conditions. 
 For nucleosome modifications, MNase digestion may be preferred~\cite{kidder2011chip}.  
 The method allows generating high-resolution data of mononucleosome sized particles. 
 However, the nucleosome instability may cause the loss of signal.
@@ -71,7 +71,7 @@ Many experiments are orienting on newly discovered proteins, which means that su
 However, the development and validation of the antibodies to each protein is pretty time-consuming and expensive~\cite{jarvik1998epitope}. 
 For example, the number of proteins interacting with chromatin in a human cell is very high~\cite{ramani2005consolidating}, and the traditional approach may not be suitable.
 Genetic engineering makes it possible to solve that problem by fusion of the short epitope sequence into a gene of interest for which an antibody is available~\cite{jarvik1998epitope,brizzard2008epitope,goldberg2010distinct}. 
-This recombinant DNA method called epitope tagging and was first described in 1984~\cite{munro1984use}. 
+This recombinant DNA method is called epitope tagging and was first described in 1984~\cite{munro1984use}. 
 
 %% \todo{to je příliš stručné - krátce vysvětli, co to je tagování}
 
@@ -87,7 +87,7 @@ This recombinant DNA method called epitope tagging and was first described in 19
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
-\section{Library Construction and Sequencing.}
+\section{Library Construction and Sequencing}
 
 After chromatin purification with and without immunoprecipitation to prepare ChIP and corresponding input DNA fragments, the material is ready to be sequenced. 
 The size range of $150$ to $300$ bp fragment length selection is equivalent to mono- and dinucleosome chromatin fragments~\cite{kidder2011chip}.
@@ -103,10 +103,10 @@ The measuring of the pyrophosphate produced during the reaction is used to ident
 Like Sanger's, such a method is called sequencing by synthesis (SBS).
 
 \paragraph{Sequencing by synthesis.}
-The most common SBS method is Solexa/Illumina\textsuperscript{\texttrademark} platform~\cite{voelkerding2009next}. 
+Solexa/Illumina\textsuperscript{\texttrademark} platform is the most common SBS method~\cite{voelkerding2009next}. 
 The bridge amplification produces clusters of clonal DNA. 
 Fluorescent reversible-terminator (RT) nucleotides cannot bind further nucleotides due to protection at $3^\prime$ hydroxyl position~\cite{heather2016sequence}. 
-During sequencing, free RT nucleotides ina competitive manner are able to complementary incorporate to the DNA template with the removal of the fluorescent tag, which is different for four bases and can be imaged by an analyzer~\cite{berglund2011next}. 
+During sequencing, free RT nucleotides are able, in a competitive manner, to complementary incorporate to the DNA template with the removal of the fluorescent tag, which is different for four bases and can be imaged by an analyzer~\cite{berglund2011next}. 
 Illumina\textsuperscript{\texttrademark} HiSeq and MiSeq machine enable us to reach greater read length and depth. 
 However, the recent NextSeq 500 technology reduces capturing time and cost by replacing the four-channel sequencing system with a two-channel system~\cite{reuter2015high}. 
 
@@ -195,7 +195,7 @@ The ration of the unique mapped reads over the total number of mapped reads is o
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Quality control and computational analysis workflow.}
+\section{Quality control and computational analysis workflow}
 
 % The directionality of the sequencing reads produces bimodal enrichment on both strands centered around the binding site of the protein of interest. The cross-correlation metric can evaluate each obtained peak. The calculation is based on Pearson's linear correlation between forward and reverse strand for each complementarity base by shifting minus strand. The procedure generates two peaks, a bigger on corresponding to the fragment length, and a smaller one is associated with a read length. 
 
@@ -224,7 +224,7 @@ To obtain reliable results essential to have a complex ChIP-seq library.
 The complexity is measured by the non-redundant fraction (NRF), which is one of the QC-metrics.
 The fraction is defined as the ratio between uniquely mapped reads over the total number of reads~\cite{landt2012chip}.
 
-Another quality metrics to assess a ChIP sample is normalized cross-correlation (NSC) and relative cross-correlation (RSC) metrics of the fragment length and read length~\cite{landt2012chip, marinov2014large}. 
+Another quality metrics that can be used to assess a ChIP sample are normalized cross-correlation (NSC) and relative cross-correlation (RSC) metrics of the fragment length and read length~\cite{landt2012chip, marinov2014large}. 
 The directionality of the sequencing reads produces bimodal enrichment on both strands centered around the binding site of the protein of interest. 
 The cross-correlation metric can evaluate each obtained peak. 
 The calculation is based on Pearson's linear correlation between forward and reverse strand for each complementarity base by shifting minus strand. 
