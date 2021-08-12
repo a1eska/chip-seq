@@ -2,7 +2,7 @@
 
 The computational method of the protein-chromatin binding event identification plays a central role in ChIP-seq analysis. 
 Peak calling is a statistical procedure.
-With usage of files with sufficiant quality of the mapped IP and control sample, this method produce a BED file.
+With usage of files having sufficient quality of the mapped IP and control sample, this method produces a BED file.
 This format represents a set of genomic locations associated with a significance score.
 
 \section{Identification of enriched regions using peak calling}
@@ -12,7 +12,7 @@ This format represents a set of genomic locations associated with a significance
  
 After read mapping to the reference, the next step is to identify loci with high read density comparatively to the background, referred to ChIP-seq signals, or simply peaks.
 More than 30 algorithms and tools have been implemented to solve that computational problem~\cite{chen2012systematic}.
-The choice of the right peak caller is crucial and depends on the type of experiment~\cite{nakato2017recent}, e.g. TF binding event identification vs. long-range histone marks interactions.
+The choice of the right peak caller is crucial and depends on the type of experiment~\cite{nakato2017recent}, e.g. TF binding event identification vs. detection of broadly distributed histone marks.
 
 \begin{figure}[b!]
     \centering
@@ -25,7 +25,7 @@ The choice of the right peak caller is crucial and depends on the type of experi
 Suitable software builds a peak profile along each chromosome. 
 All the peak profiles can be divided into three categories~\cite{park2009chip}. 
 Sharp peaks are typical for TF due to dependency on motif sequence~\cite{landt2012chip}. 
-Histones have non-specific positioning on the DNA~\cite{krig2007identification}. 
+Histones have relatively non-specific positioning on the DNA~\cite{krig2007identification}. 
 Thus the peak profile is broad and can reach several kilobases. 
 The third peak type is a mix of sharp and broad signals, a typical pattern for RNA polymerase II and transcription elongation factor~\cite{squazzo2006suz12, lin2011dynamic}.
 % \todo{to je zavádějící. Nukleosomy sice nevážou konkrétní motiv DNA, ale vykazují jistou míru sekvenčních preferencí, která se liší v závislosti na organismu.}
@@ -33,29 +33,20 @@ The third peak type is a mix of sharp and broad signals, a typical pattern for R
 
 
 The very first extended set methodology to calculate peak profile density was presented in 2007~\cite{robertson2007genome}. 
-Fragments are sequenced from $5'$ to $3'$ end, and the minimal enough length of a sequenced read is 36 bp long. 
-But the real fragment of DNA is longer, and thus the interaction of the protein of interest is somewhere on that size selected long DNA fragment. 
-Each read is computationally extended in the $3'$ direction. 
-Regions are scored by the number of overlap reads and assessed as a candidate peak.
+Fragments are sequenced from $5'$ to $3'$ end, and the minimal required length of a sequenced read is 36 bp. 
+But the real fragment of DNA is longer, and thus the interaction of the protein of interest is somewhere on that size-selected longer DNA fragment. 
+Each read is computationally extended in the $3'-$ direction. 
+Regions are scored by the number of overlapping reads and assessed as a candidate peak.
 
 
 
 Sequence directionality sets the stage for a smoothed profile. 
-The strand-specific read distribution form bimodal pattern combined by shifting or extending tags toward the center~\cite{valouev2008genome}.
+The strand-specific read distributions form a bimodal pattern combined by shifting or extending tags toward the center~\cite{valouev2008genome}.
 
 
-
-
-
-%% \todo{obrázek by možná čtenářům pomohl sn áze pochopit popisované kroky}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \paragraph{Assesment of the candidate regions.}
-After scanning through the genome and find a large number of candidate regions estimating null distribution, the quality of the detected peaks should be identified. 
+After scanning through the genome and finding a large number of candidate regions estimating null distribution, the quality of the detected peaks should be determined. 
 From generated data, the candidate signal may be either a false or true binding event. 
 %And the probabilistic statement cannot be made by using a well known Bayes' Theorem. 
 %In the genomic studies, especially in ChIP-seq, individual hypothesis testing is not useful, and a global hypothesis test is required~\cite{futschik2019omnibus}. 
@@ -130,27 +121,25 @@ From generated data, the candidate signal may be either a false or true binding 
 %\section{Statistical Model Utilization for the Assesment of the Significance of Estimated Signals.}
 
 Standard biological research has some rate of false positives. 
-Due to there is no absolute proof or absolute rejection of the results in ChIP-seq studies, the analysis works with probabilities.
+Due to that there is no absolute proof or absolute rejection of the results in ChIP-seq studies, the analysis works with probabilities.
 The end goal of the ChIP-seq experiment is to define the genomic loci of possible protein binding events. 
 The null hypothesis $H_{0}$ is the default assumption for the model generating the data; the alternative hypothesis $H_{A}$ is accepted as the best explanation for the data if the $H_{0}$ is rejected.
 The candidate signal of a binding event is represented as an alternative hypothesis $H_{A}$, and $H_{0}$ is that there is no actual binding. 
 To describe the statistical significance of the individual hypothesis, a $p$-value is calculated.
-% The name of the P-value is referred to as a Probability Value, and corresponds to the $H_{0}$ tail area~\cite{efron2007size}. 
 
 Different scientific studies based on statistical approaches utilize either $p$-value or confidence intervals concepts. 
 Even though those two concepts are complementary, many biological and medical studies prefer confidence intervals to $p$-value because of showing the potential range of results~\cite{feinstein1998p}.
 However, there are several reasons why the utilization of the $p$-value in the ChIP-seq studies is more suitable than confidence intervals.
 
 
-The early approach was that the background noise is uniform; 
-However, the usage of the control dataset shows that the different biases make uniform model is too ideal to be true~\cite{robertson2007genome}. 
+The early approach was to assume that the background noise is uniform; 
+However, the usage of the control dataset shows that the different biases make the uniform model too ideal to be true~\cite{robertson2007genome}. 
 That is why all peak calling algorithms make all the output signals associated with $p$-value~\cite{chitpin2019recap} to determine statistical significance in a hypothesis test. 
-The null hypothesis's incorrect rejection produces the Type-I error known as a ``false positive''. 
-In the contest of ChIP-seq analysis, this type of error occurs when there is no actual binding event, but the peak caller shows that there is. 
+The incorrect rejection on the null hypothesis produces the Type-I error known as a ``false positive''. 
+In the context of ChIP-seq analysis, this type of error occurs when there is no actual binding event, but the peak caller shows that there is. 
 The inversion of Type-I error is Type-II error, which is referred to as a ``false negative''. 
-Considering the common clinical experiments, the ``false negative'' error type is seen less serious than the ``false positive'' error.
+Considering the common clinical experiments, the ``false negative'' error type is seen as less serious than the ``false positive'' error.
 However, in ChIP-seq experiment, the false positives can be checked by qPCR experiment, whereas the ``false negatives'' are going to be lost. 
-% \todo{proč to tak je? a můžeš své tvrzení podpořit nějakou citací?}
 
 In~\ref{pvalue} and~\ref{qvalue} we give an explanation of basic statistics used for peak evaluation in more detail.
 
@@ -210,28 +199,28 @@ It is a very important part of statistcs, often used in biological research.
 In this whole part, we loosely follow~\cite{citacia}.
 
 In general, hypotheses are assumptions or statements about parameters of probability distributions.
-Examples include the fowllowing:
-\begin{itemize}
-\item
-A coin is biased.
-\item
-The avarage grade of a student is $2.5$.
-\item
-The avarage delivery time of the post is at least $2$ days.
-\item
-People spend more time on social media during the weekends.
-\end{itemize}
+% Examples include the fowllowing:
+% \begin{itemize}
+% \item
+% A coin is biased.
+% \item
+% The avarage grade of a student is $2.5$.
+% \item
+% The avarage delivery time of the post is at least $2$ days.
+% \item
+% People spend more time on social media during the weekends.
+% \end{itemize}
 These statements can be either true or false.
 Further, we can distighuish several types of hypotheses:
 \begin{itemize}
 \item
-Simple: the parameter takes one specific value, e.g., \emph{``The probability of falling heads is $2/3$''}.
+Simple: the parameter takes one specific value. %, e.g., \emph{``The probability of falling heads is $2/3$''}.
 \item
-Composite: the parameter takes one specific value, e.g., \emph{``The probability of falling heads is $1/3$ or $2/3$''}.
+Composite: the parameter takes one specific value. %, e.g., \emph{``The probability of falling heads is $1/3$ or $2/3$''}.
 \item
-One-sided: the parameter is on one side of some specific value, e.g., \emph{``The expected time of package delivery is $\leq 10$ days''}.
+One-sided: the parameter is on one side of some specific value. %, e.g., \emph{``The expected time of package delivery is $\leq 10$ days''}.
 \item
-Two-sided: the parameter is on two sides of some specific value, e.g., \emph{``The probability of falling heads is not $2/3$''}
+Two-sided: the parameter is on two sides of some specific value. %, e.g., \emph{``The probability of falling heads is not $2/3$''}
 \end{itemize}
 
 \paragraph{Null and alternative hypotheses.}
@@ -239,15 +228,15 @@ The status quo, or our belief, is typically represented by the \emph{null hypoth
 The complementary view is represented by the \emph{alternative hypothesis}, usually denoted by $H_A$, or also by $H_1$.
 The alternative hypothesis can be for example the complement, or the ``one-sided'' complement of $H_0$.
 
-\begin{example}
-For a two-sided coin a possible null hypothesis is the following:
-$$H_0: \quad\text{the coin is unbiased, i.e., $P(\text{heads}) = 1/2$.}$$
-The complementary hypothesis is:
-$$H_A: \quad\text{$P(\text{heads}) \neq 1/2$.}$$
-A possible one-sided alternative is:
-$$H_A: \quad\text{$P(\text{heads}) > 1/2$.}$$
-\qed
-\end{example}
+% \begin{example}
+% For a two-sided coin a possible null hypothesis is the following:
+% $$H_0: \quad\text{the coin is unbiased, i.e., $P(\text{heads}) = 1/2$.}$$
+% The complementary hypothesis is:
+% $$H_A: \quad\text{$P(\text{heads}) \neq 1/2$.}$$
+% A possible one-sided alternative is:
+% $$H_A: \quad\text{$P(\text{heads}) > 1/2$.}$$
+% \qed
+% \end{example}
 
 \paragraph{Testing.}
 In classical statistics, testing hypothesis is performed in several steps.
@@ -277,13 +266,13 @@ If it is small, then we reject $H_0$ in favor of $H_A$.
 \end{itemize}
 Note that we give the words ``large'' and ``small'' a more precise meaning later, when we discuss error types.
 
-\begin{example}
-Consider the hypotheses $H_0: \text{the coin is unbiased}$, and a one sided alternative $H_A: \text{the coin is biased with $P(\text{heads}) > 1/2$}$.
-In a possible experiment, we could toss the coin, say, $20$ times.
-The test statistic could be a function of the data that counts the number of heads $X$ in those $20$ tosses.
-We could could say that if $X \geq 16$, then $H_0$ is unlikely and we might reject $H_0$ towards $H_A$.
-\qed
-\end{example}
+% \begin{example}
+% Consider the hypotheses $H_0: \text{the coin is unbiased}$, and a one sided alternative $H_A: \text{the coin is biased with $P(\text{heads}) > 1/2$}$.
+% In a possible experiment, we could toss the coin, say, $20$ times.
+% The test statistic could be a function of the data that counts the number of heads $X$ in those $20$ tosses.
+% We could could say that if $X \geq 16$, then $H_0$ is unlikely and we might reject $H_0$ towards $H_A$.
+% \qed
+% \end{example}
 
 \begin{remark}
 It is important to note the asymmetry between the null hypothesis and alternative hypothesis.
@@ -452,36 +441,29 @@ For a set of test statistics and their $q$-values, rejecting the null hypothesis
 
 
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Statistical Sin and Reliability of the Obtained List of ChIP-seq Signals After Peak Calling Procedure}
 
 Most programs for identification of the enriched regions (peaks) work as follow: candidate signal are identified by analyzing along the genome, and then by comparing with the input or mock dataset(or with another IP data in case of the differential analysis) regions are evaluated. 
 However, most of the software tools use data twice to identify and assess the enrichment, which leads to a statistical sin~\cite{lun2014novo}. 
-Moreover, the estimated P-values depend on the same data and result in statistical bias.
+Moreover, the estimated $p$-values depend on the same data and result in statistical bias.
 A similar problem can influence the result during ChIP-seq analysis and in areas such as DNA variant calling~\cite{chitpin2019recap}.
 
-Without a correctly calculated P-value, it is difficult to choose the right cutoff threshold, which influences the final results. 
-Improper P-values lead to difficulties in evaluating of reliability of a given set of peaks.
-It may also lead to loss of the true binding event due to the biased statistical significance of such a peak, and further downstream analysis will exhibit the error-prone result~\cite{chitpin2019recap}. 
+Without a correctly calculated $p$-value, it is difficult to choose the right cutoff, which influences the final results. 
+Improper $p$-values lead to difficulties in evaluating of reliability of a given set of peaks.
+It may also lead to loss of a true binding event due to the biased statistical significance of such a peak, and further downstream analysis will exhibit an error-prone result~\cite{chitpin2019recap}. 
 
 \paragraph{Solutions.}
 A possible solution to that problem is to develop a new peak identification approach to avoid double usage of the same data. 
-However, many software tools are good enough to be used, and recalibration of the obtained P-values is the possible alternative resolve~\cite{chitpin2019recap}.
+However, many software tools are good enough to be used, and recalibration of the obtained $p$-values is a possible alternative resolve~\cite{chitpin2019recap}.
 
 
 Peak identification process outputs typically tens of thousands of possible binding loci, which are needed to be assessed. 
 An obtained list of peak coordinates may be annotated with the nearest gene. 
 However, the lack of annotated actual binding sites may limit the process of the validation of the experiment result~\cite{nakato2017recent}.
 
-The motif-discover of a peak collection is another available approach. 
-Typically the top-ranked by P-value identified peaks are undergoing the motif finding procedure~\cite{bailey2011dreme}.
+The motif-discovery of a peak collection is another available approach. 
+Typically the top-$p$-value-ranked peaks are undergoing the motif finding procedure~\cite{bailey2011dreme}.
 Motifs are represented as a position weight matrix and sequence logo and suitable for the TF experiment due to the specificity of the binding protein.
 However, for the proteins which bind without a preferable sequence such as histones, the motif-based evaluation of the peak reliability is not suitable~\cite{nakato2017recent}. 
 
@@ -491,7 +473,3 @@ IDR, which validates the rank consistency of common peaks in replicates, is anot
 As  was mentioned, the bimodal peak pattern is utilized in peak calling design. 
 Many false positives may be filtered out by analyzing the size and appearance of the signal~\cite{rye2011manually}. 
 However, only a few methods utilize the analysis of the peak shapes~\cite{hower2011shape, wu2014polyapeak}.
-
-
-
- %The directionality of the sequencing reads produces bimodal enrichment on both strands centered around the binding site of the protein of interest. The cross-correlation metric can evaluate each obtained peak. The calculation is based on Pearson's linear correlation between forward and reverse strand for each complementarity base by shifting minus strand. The procedure generates two peaks, a bigger on corresponding to the fragment length, and a smaller one is associated with a read length. 

@@ -22,7 +22,7 @@ Typical ChIP assay involves crosslinking using formaldehyde reactivity.
 This smallest aldehyde has been applied for decades in numerous fields~\cite{eckels2003formalin,werner2000effect,gavrilov2015vivo}.
 In the chromatin immunoprecipitation, the ability of formaldehyde to crosslink with proteins and DNA to form protein-DNA or protein-protein complexes provides identification of the location of transcription factor binding along the DNA strand.
 This chemical reagent has several essential features that define this reagent as a crosslinking fixative of choice for the ChIP-seq experiment. 
-Those properties are cell permeability, short spacer length, rapid reactivity, and reversibility.
+Those properties are cell permeability, short chain length, rapid reactivity, and crosslink reversibility.
 % Cell permeability, short spacer length, rapid reactivity, and reversibility are key properties that define formaldehyde as a crosslinking fixative of choice for ChIP~\cite{hoffman2015formaldehyde}.
 %\todo{tahle věta je HODNĚ podobná původnímu textu v článku. Dávej na podobné věci VELKÝ pozor. Měla bys vše popisovat vlastními slovy. Nejde doslovně přebírat celé věty (a prohození 2 slov to nezachrání), i když cituješ zdroj. Mohlo by to být hodnoceno jako plagiátorství. Obzvlášť, když s angličtinou trochu bojuješ a najednou se v tvém textu objeví věta nebo dokonce celý odstavec s perfektní angličtinou, vypadá to podezřele. Z ničeho tě neobviňuju, jen si to prosím hlídej.}
 
@@ -38,7 +38,8 @@ Such non-specific accessibility of the genome in different regions leads to the 
 The formaldehyde concentration, incubation time, and other conditions can vary from experiment to experiment. 
 Even though the effective crosslinking time is of the 5-second threshold, many laboratories use rather prolonged formaldehyde incubation time up to 30 min~\cite{schmiedeberg2009temporal}.
 %\todo{buď konkrétní - jaké časy se používají?}
-Soluble proteins not expected to associate with DNA would be non-specifically captures at the open chromatin loci. Shortening the incubation time traps preferentially genuine DNA-protein binding events~\cite{baranello2016chip}.
+Soluble proteins not expected to associate with DNA would be non-specifically captured at the open chromatin loci. 
+Shortening the incubation time traps preferentially genuine DNA-protein binding events~\cite{baranello2016chip}.
 
 Antibody-beads also can non-specifically bind cross-linked complexes during the immunoprecipitation step~\cite{zhu2014fast} and cause a raise of false-positive rate.
 It is important to mention, such bias can appear due to formaldehyde excess~\cite{hanson2018using}.
@@ -51,23 +52,23 @@ Those areas may show a strong signal for the loci where a protein of interest ha
 
 \paragraph{Open chromatin.}
 As was described in the previous section~\ref{formaldehyde}, crosslinking using formaldehyde may trap mobile proteins in areas with promoters of actively transcribed genes. 
-Such promoters are localized in regions of open chromatin where high transcription factor occupancy.  
+Such promoters are localized in regions of open chromatin where there is high transcription factor occupancy.  
 That can explain the presence of a ChIP signal. 
 However, if there is no antigen in the sample, but the signals are still present in the ChIP profile, the formaldehyde crosslinking bias cannot explain such a fact~\cite{jain2015active}.
 
 The term high-occupancy target (HOT) region is used to describe sites of highly expressed genes~\cite{teytelman2013highly}.  
-Such loci are characterized by the occupancy of multiple unrelated TFs and transcription machinery proteins~\cite{boyle2014comparative}. 
+Such loci are characterized by the  apparent occupancy of multiple unrelated TFs and transcription machinery proteins~\cite{boyle2014comparative}. 
 Unstructured globule surface of proteins sometimes caused by low sequence complexity may interact non-specifically with beads or antibodies during immunoprecipitation~\cite{teytelman2013highly}.
 TFs in protein complexes reach specific conformation only during the interaction between components. 
 That specificity can be disrupted (for example, by sonication) and exhibit unstructured surface, which after IP leads to a hyper-ChIPability~\cite{jain2015active}.
 Several studies have described that phenomenon in different organisms~\cite{boyle2014comparative, fan2009does, krebs2014optimization, teytelman2013highly,   waldminghaus2010chip, xie2013dynamic}.
 
-The HOT region location is typically at promoter locus of highly expressed genes close to the transcription start site (TSS), and that genes stand behind essential cellular functions~\cite{wreczycka2019hot}. 
+The HOT region location is typically at promoters of highly expressed genes close to the transcription start site (TSS), and these genes are required for essential cellular functions~\cite{wreczycka2019hot}. 
 
 \paragraph{Knockout implemented normalization.}
 One possible solution is to use the so-called Knockout Implemented Normalization (KOIN) method, where the target TF is not present~\cite{krebs2014optimization}.
 Knokout dataset utilize mutations directly to the gene encoding the target TF.
-This leads to unexpression of the target TF and may be used as an alternative to input control dataset.
+This leads to absence of the target TF and may be used as an alternative to input control dataset.
 This method significantly improves false-positive identification, which can help more accurate downstream interpretation during analysis~\cite{wreczycka2019hot}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -92,26 +93,25 @@ The coverage for ChIP-seq varies across experiments due to GC-content bias, and 
 \paragraph{PCR amplification.}
 Loci with high GC base composition are often under-represented, and such bias has been observed in several NGS experiments~\cite{benjamini2012summarizing,dohm2008substantial,teng2017accounting}.
 This bias tends to have appeared during the PCR amplification~\cite{ross2013characterizing}.
-It is known that GC-rich DNA targets are less amenable to amplification due to base base-stacking interations~\cite{yakovchuk2006base}.
+It is known that GC-rich DNA targets are less amenable to amplification due to base-stacking interations~\cite{yakovchuk2006base}.
 % \todo{GC bias vzniká také v průběhu PCR, kdy se GC-rich fragmeny amplifikují hůře než GC-poor. Je to dáno jejich méně efektivní denaturací - mají vyšší vazebnou energii}
 
 Both PCR amplification during library construction and PCR for cluster amplification on the Illumina platform play role. 
 %\todo{"... PCR for cluster generation..."}
 The first case has many potential solutions to avoid the bias during library construction step.
-It requires preparing a larger amount of the input DNA to avoid PCR itself, or PCR step with extensive optimization such as annealing time and temperatures and primer specifity~\cite{aird2011analyzing}.
-The possible problem of Illumina cell flow bridge amplification may occur due to secondary structures.
+It requires preparing a larger amount of the input DNA to avoid PCR itself, or PCR step with extensive optimization such as annealing time and temperatures and primer specificity~\cite{aird2011analyzing}.
+The possible problem of Illumina flowcell bridge amplification may occur due to secondary structures.
 %\todo{"cell flow" → flowcell}
-GC-rich sequences form hairpins, which are stable and stack unmelted at usual PCR denaturation temperatures~\cite{stein2010nucleosome}.
+GC-rich sequences form hairpins, which are stable and stay unmelted at usual PCR denaturation temperatures~\cite{stein2010nucleosome}.
 
 \paragraph{Fragmentation.}
 Fragmentation is the first step in the DNA sequencing process.
-This step ensures the solubility of the crosslinked DNA-protein complexes are soluble and accessible to antibody.
-Using enzymatic digestion, chemical shearing, or different mechanical method, DNA with crosslinked proteins is broken up into short fragments.
-After immunoprecipitation one or both ends of the fragment sequenced.
-%\todo{připadá mi, že na tomto místě textu už je pozdě detailně vysvětlovat metody fragmentace. To se má čtenář dozvědět dřív. Zde můžeš třeba už jen odkázat na příslušnou předchozí kapitolu.}
+This step ensures the crosslinked DNA-protein complexes are soluble and accessible to antibody.
+Using enzymatic digestion or mechanical shearing DNA with crosslinked proteins is broken up into short fragments.
+After immunoprecipitation one or both ends of the fragment are sequenced.
 
-The early assumption was that genomic DNA break randomly.
-However, the experiment~\cite{poptsova2014non} with different methods of DNA fragmentation showed that the rates of double-stranded breaks are sequence-dependent.
+The early assumption was that genomic DNA breaks randomly.
+However, the experiment~\cite{poptsova2014non} with different methods of DNA fragmentation showed that the rates of double-strand breaks are sequence-dependent.
 This dependency may also cause the GC-bias. 
 
 However, true binding sites of the protein of interest may be expected to occur in high GC regions.
@@ -121,17 +121,17 @@ For some organisms those regions have biological relevance such as promotor regi
 Modeling of the GC-content at the fragment level~\cite{benjamini2012summarizing} is the optimal approach, but is not directly applicable to ChIP-seq analysis.
 The method for correction of this kind of bias was presented~\cite{teng2017accounting}.
 Incorporation of the approach into current peak callers shows substantial improvements in signal finding.
-However, the method is not suitable for broad peak identification as histone modifications.
+However, the method is not suitable for identification of broad peaks such as histone modifications.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  \section{Problematic regions of the genome}
 
  Accurate annotation of the genome assembly is required to get proper information after mapping of the sequenced reads. 
- Unfortunately, some genomes may contain misassembled and gap.
- As we mansioned in \ref{gc}, a high GC-content may cause sequencing problem.
- Thus, centromeric, telomeric and repetitive regions may cause assembly difficulties~\cite{amemiya2019encode, liao2019current}.
- Recent long-read sequencing technologies~\cite{feng2015nanopore} and newly developed software improve more accurate \textit{de novo} assembles~\cite{rice2019new}. 
+ Unfortunately, some genomes may contain misassembled regions and gaps.
+ As we mentioned in \ref{gc}, a high GC-content may cause sequencing problems.
+ Also centromeric, telomeric and repetitive regions may cause assembly difficulties~\cite{amemiya2019encode, liao2019current}.
+ Recent long-read sequencing technologies~\cite{feng2015nanopore} and newly developed software help generate more accurate \textit{de novo} assemblies~\cite{rice2019new}. 
  Even though new assemblies are generated using accurate modern methods, such under-represented regions in the reference can bias the ChIP-seq results and produce an ambiguous outcome~\cite{carroll2014impact}. 
  One possible solution is to detect and remove such regions when analyzing data to improve the assessment of biologically relevant signals during normalization and peak calling~\cite{amemiya2019encode}. 
 
@@ -141,20 +141,20 @@ However, the method is not suitable for broad peak identification as histone mod
  \label{control}
 
  Earlier in section \ref{strategy} we mentioned two basic types of control data. 
- Cross-linked and fragmented DNA under the same conditions as IP is the most common control sample of the whole-cell extract (WCE)~\cite{kidder2011chip,landt2012chip}. 
+ DNA cross-linked and fragmented under the same conditions as IP is the most common control sample (whole-cell extract WCE)~\cite{kidder2011chip,landt2012chip}. 
  WCE is referred to as an input control dataset. 
 
- The second one is IgG/GFP control (also known as mock), where IP lacks specific interactions due to untagged with epitope TF or using antibodies, which cannot recognize the TF~\cite{landt2012chip, shin2013computational}.
+ The second one is IgG/GFP control (also known as mock), where IP lacks specific interactions due to absence of required epitope on target protein or due to using antibodies which cannot recognize the target protein~\cite{landt2012chip, shin2013computational}.
  The theoretical distribution of noise is expected to be uniform~\cite{robertson2007genome}. 
  However, existing technical and biological biases require either input or mock control dataset.
 
- A small number of reads and PCR duplicates, which appears due to limited genomic regions, results in problematic normalization, making mock control less favorable than an input~\cite{kidder2011chip}. 
+ The high content of PCR duplicates, which appear due to the limited complexity of the mock sample, results in problematic normalization, making mock control less favorable than an input~\cite{kidder2011chip}. 
  Direct sequencing of crosslinked chromatin without IP contains the bias of sonication and is able to normalize that bias~\cite{kharchenko2008design}. 
  Therefore, input control is recommended to distinguish real signals from artifacts. 
  Also, input datasets produced from the same cell line under the same circumstances may be combined into one file~\cite{meyer2014identifying}.
  %\todo{tuhle poslední větu nechápu - co přesně se kombinuje a proč?}
 
- Even if the input is preferred to mock due to library complexity, there is still the presence of biases, which are not able to get rid of using only input control. 
+ Even if the input is preferred to mock due to library complexity, there is still the presence of biases, which cannot be removed using only input control. 
  Expression and open chromatin biases appear in the ChIP-seq experiment, and the mock IP as control can correct such a factor~\cite{park2013widespread}.
 
 

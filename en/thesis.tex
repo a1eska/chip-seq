@@ -97,25 +97,42 @@ It is my sincere belief that without his approach, the thesis would take a compl
 }
 
 % Abstract (recommended length around 80-200 words; this is not a copy of your thesis assignment!)
-\def\Abstract{%
+\def\Abstract{
+
+
+
+
+Chromatinová immunoprecipitace se používá k obohacení sekvencí DNA, které jsou spojeny s požadovaným proteinem, a používá se k mapování těchto sekvencí na oblasti v genomu. Studium těchto vazebných míst proteinů na molekule DNA poskytuje pochopení genové regulace a remodelace chromatinu. Některé signály  nepředstavují žádné vazebné místo a jsou známé jako falešné pozitivy. Tato práce se zaobírá hlavními zdroji falešně pozitivních signálů, které běžně vznikají při analýze ChIP-seq dat, a nabízí možná řešení pro jejich omezení nebo odfiltrování.
+
+
+Klíčová slova:   ChIP-seq,  chromatinová imunoprecipitace, kontrola kvality, odfiltrování dat
 
 
 Chromatin immunoprecipitation is used to enrich DNA sequences that are associated with a protein of interest, and is used to map those sequences to the genomic regions.
-Studying these DNA-protein binding regions provide an understanding of gene regulation and chromatin remodeling. 
+Studying these DNA-protein binding regions provides an understanding of gene regulation and chromatin remodeling. 
 However, some signals in fact represent no binding event and are known as false positives.
 This thesis discusses the main sources of false-positive signals that commonly arise during ChIP-seq analysis, and offers possible solutions on how to minimize or filter them. 
 
-Abstrakt:
-
-Chromatinová immunoprecipitace se používá k obohacení sekvencí DNA, které jsou spojeny s požadovaným proteinem, a používá se k mapování těchto sekvencí na oblasti v genomu. Studium těchto vazebných míst proteinů na molekule DNA poskytuje pochopení genové regulace a remodelace chromatinu. Některé signály  nepředstavují žádné vazební místo a jsou známé jako falešně pozitiva. Tato práce se zabírá hlavními zdroji falešně pozitivních signálů, které běžně vznikají při analýze ChIP-seq dat, a nabízí možná řešení pro jejich snížení nebo filtrací.
-
 }
 
+
+
+
+% \def\Abstract {
+
+% 	Abstrakt:
+
+% 	Chromatinová immunoprecipitace se používá k obohacení sekvencí DNA, které jsou spojeny s požadovaným proteinem, a používá se k mapování těchto sekvencí na oblasti v genomu. Studium těchto vazebných míst proteinů na molekule DNA poskytuje pochopení genové regulace a remodelace chromatinu. Některé signály  nepředstavují žádné vazebné místo a jsou známé jako falešné pozitivy. Tato práce se zaobírá hlavními zdroji falešně pozitivních signálů, které běžně vznikají při analýze ChIP-seq dat, a nabízí možná řešení pro jejich omezení nebo odfiltrování.
+% }
+
 % 3 to 5 keywords (recommended), each enclosed in curly braces
-\def\Keywords{%
+\def\Keywords{
 {ChIP-seq}, {chromatin imunoprecipitation}, {quality control}, {data filtration}
 }
 
+% \def\Keywords{
+% {ChIP-seq}, {chromatinová imunoprecipitace}, {kontrola kvality}, {odfiltrování dat}
+% }
 %% The hyperref package for clickable links in PDF and also for storing
 %% metadata to PDF (including the table of contents).
 %% Most settings are pre-set by the pdfx package.
@@ -153,11 +170,11 @@ Chromatinová immunoprecipitace se používá k obohacení sekvencí DNA, které
 	BWT & Burrows-Wheeler transform \\
 	NGS & next-generation sequencing \\
 	RNA & ribonucleic acid \\
-	SNP & single nucleotide polymorphysm \\
+	SNP & single nucleotide polymorphism \\
 	SSE & sequencing-specific error \\
 	NRF & non-redundant fraction \\
-	NSC & normalized cross-corelation \\
-	RSC & relative cross-corelation \\
+	NSC & normalized cross-correlation \\
+	RSC & relative cross-correlation \\
 	QC & quality control \\
 	IDR & irreproducible discovery rate \\
 	FDR & false discovery rate \\
@@ -185,7 +202,7 @@ Chromatinová immunoprecipitace se používá k obohacení sekvencí DNA, které
 \include{bibliography}
 
 %%% Figures used in the thesis (consider if this is needed)
-\listoffigures
+%\listoffigures
 
 %%% Tables used in the thesis (consider if this is needed)
 %%% In mathematical theses, it could be better to move the list of tables to the beginning of the thesis.
