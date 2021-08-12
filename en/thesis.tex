@@ -61,6 +61,7 @@
 
 % Thesis title in English (exactly as in the formal assignment)
 \def\ThesisTitle{Sources, Identification and Removal of ChIP-seq Artifacts}
+\def\ThesisTitleCZ{Cesky nazov}
 
 % Author of the thesis
 \def\ThesisAuthor{Aleksandra Shumilova}
@@ -72,19 +73,23 @@
 % (according to the Organizational Structure of MFF UK in English,
 % or a full name of a department outside MFF)
 \def\Department{Department of Cell Biology}
+\def\DepartmentCZ{Cesky nazova dep}
 
 % Is it a department (katedra), or an institute (ústav)?
 \def\DeptType{Department}
+\def\DeptTypeCZ{Katedra}
 
 % Thesis supervisor: name, surname and titles
 \def\Supervisor{RNDr. Martin Převorovský, Ph.D.}
 
 % Supervisor's department (again according to Organizational structure of MFF)
 \def\SupervisorsDepartment{Department of Cell Biology}
+\def\SupervisorsDepartmentCZ{Nazova super depts}
 
 % Study programme and specialization
 \def\StudyProgramme{Bioinformatics}
 \def\StudyBranch{Bioinformatics}
+
 
 % An optional dedication: you can thank whomever you wish (your supervisor,
 % consultant, a person who lent the software, etc.)
@@ -102,10 +107,10 @@ It is my sincere belief that without his approach, the thesis would take a compl
 
 
 
-Chromatinová immunoprecipitace se používá k obohacení sekvencí DNA, které jsou spojeny s požadovaným proteinem, a používá se k mapování těchto sekvencí na oblasti v genomu. Studium těchto vazebných míst proteinů na molekule DNA poskytuje pochopení genové regulace a remodelace chromatinu. Některé signály  nepředstavují žádné vazebné místo a jsou známé jako falešné pozitivy. Tato práce se zaobírá hlavními zdroji falešně pozitivních signálů, které běžně vznikají při analýze ChIP-seq dat, a nabízí možná řešení pro jejich omezení nebo odfiltrování.
 
 
-Klíčová slova:   ChIP-seq,  chromatinová imunoprecipitace, kontrola kvality, odfiltrování dat
+
+
 
 
 Chromatin immunoprecipitation is used to enrich DNA sequences that are associated with a protein of interest, and is used to map those sequences to the genomic regions.
@@ -113,6 +118,10 @@ Studying these DNA-protein binding regions provides an understanding of gene reg
 However, some signals in fact represent no binding event and are known as false positives.
 This thesis discusses the main sources of false-positive signals that commonly arise during ChIP-seq analysis, and offers possible solutions on how to minimize or filter them. 
 
+}
+
+\def\AbstractCZ{
+	Chromatinová immunoprecipitace se používá k obohacení sekvencí DNA, které jsou spojeny s požadovaným proteinem, a používá se k mapování těchto sekvencí na oblasti v genomu. Studium těchto vazebných míst proteinů na molekule DNA poskytuje pochopení genové regulace a remodelace chromatinu. Některé signály  nepředstavují žádné vazebné místo a jsou známé jako falešné pozitivy. Tato práce se zaobírá hlavními zdroji falešně pozitivních signálů, které běžně vznikají při analýze ChIP-seq dat, a nabízí možná řešení pro jejich omezení nebo odfiltrování.
 }
 
 
@@ -128,6 +137,10 @@ This thesis discusses the main sources of false-positive signals that commonly a
 % 3 to 5 keywords (recommended), each enclosed in curly braces
 \def\Keywords{
 {ChIP-seq}, {chromatin imunoprecipitation}, {quality control}, {data filtration}
+}
+
+\def\KeywordsCZ{
+	ChIP-seq,  chromatinová imunoprecipitace, kontrola kvality, odfiltrování dat
 }
 
 % \def\Keywords{
@@ -158,33 +171,45 @@ This thesis discusses the main sources of false-positive signals that commonly a
 \chapwithtoc{List of Abbreviations}
 
 \begin{tabular}{c l}
-	ChIP & chromatin immunoprecipitation \\
-	ChIP-seq & ChIP followed by sequencing \\
-	ChIP-on-chip & ChIP followed bygenomic tiling microarray hybridization \\
-	DNA & deoxyribonucleic acid \\
-	TF & transcription factor \\
-	IP & immunoprecipitation \\
-	HDAC & histone deacetylase \\
-	HAT & histone acetyltransferase \\
-	DSG & disuccinimidyl glutarate \\
 	BWT & Burrows-Wheeler transform \\
+	
+	ChIP & chromatin immunoprecipitation \\
+	ChIP-on-chip & ChIP followed bygenomic tiling microarray hybridization \\
+	ChIP-seq & ChIP followed by sequencing \\
+	DNA & deoxyribonucleic acid \\
+	dsDNA & double-stranded DNA \\
+	DSG & disuccinimidyl glutarate \\
+	IgG & immunoglobulin G \\
+	IP & immunoprecipitation \\
+	FDR & false discovery rate \\
+	
+	
+	HAT & histone acetyltransferase \\
+	HDAC & histone deacetylase \\
+	HOT & high-occupancy target \\
+
+	IDR & irreproducible discovery rate \\
+
+	KOIN & knockout implemented normalization \\
+
 	NGS & next-generation sequencing \\
-	RNA & ribonucleic acid \\
-	SNP & single nucleotide polymorphism \\
-	SSE & sequencing-specific error \\
 	NRF & non-redundant fraction \\
 	NSC & normalized cross-correlation \\
-	RSC & relative cross-correlation \\
-	QC & quality control \\
-	IDR & irreproducible discovery rate \\
-	FDR & false discovery rate \\
-	dsDNA & double-stranded DNA \\
-	ssDNA & single-stranded DNA \\
-	HOT & high-occupancy target \\
-	TSS & transcription start site \\
-	KOIN & knockout implemented normalization \\
 	PCR & polymerase chain reaction \\
-	IgG & immunoglobulin G \\
+	QC & quality control \\
+
+	RNA & ribonucleic acid \\
+	RSC & relative cross-correlation \\
+	RT & reversible terminator \\
+	
+	
+	ssDNA & single-stranded DNA \\
+	SNP & single nucleotide polymorphism \\
+	SSE & sequencing-specific error \\
+	TF & transcription factor \\
+	TSS & transcription start site \\
+	
+	
 	
 \end{tabular}
 

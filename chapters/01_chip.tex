@@ -6,11 +6,11 @@
 \begin{figure}[b!]
     \centering
     \includegraphics[width=\textwidth]{../img/chip.jpeg}
-    \captionsource{Overview of ChIP-seq experiment.}{www.abcam.com}
-    \label{fig:graph_classes}
+    \captionsource{The schematic illustrates key steps of the ChIP-seq protocol.}{www.abcam.com}
+    \label{chip}
 \end{figure}
 
-A typical ChIP-seq protocol has many steps and requires a sufficient quantity of immunoenriched DNA. 
+A typical ChIP-seq protocol, as shown on Figure~\ref{chip}, has many steps and requires a sufficient quantity of immunoenriched DNA. 
 The consideration of the first step depends on the properties of the protein under investigation. 
 For example, histone-DNA interactions are strong enough. 
 Thus the fixation using formaldehyde as a crosslinking agent may not be necessary~\cite{barski2008identification}. 
@@ -102,7 +102,7 @@ To improve the sequencing indel error rates and reduce GC-bias the technology co
 \section{ChIP-seq Read Mapping to the Reference}
 
 \paragraph{Raw data.}
-Raw data of short sequenced tags often appear in FASTQ format containing sequence information and quality scores, and may often contain 10s to 100s million reads.
+Raw data of short sequenced tags often appear in FASTQ~\cite{fastq} format containing sequence information and quality scores, and may often contain 10s to 100s million reads.
 In FASTQ files each entry is associated with 4 lines:
 
 
@@ -124,7 +124,7 @@ The sequence information from FASTQ files should be reconstructed by the alignme
 Several alignment tools have been developed based on extended Burrows-Wheeler transform (BWT). 
 The algorithm was developed in 1994 as a data compression technique~\cite{li2009fast, siren2014indexing}.
 And at the end of the 2000s was applied in the NGS field~\cite{simpson2010efficient}.
-Suitable tools~\cite{langmead2009ultrafast, li2009fast, kim2019graph} map sequenced reads producing  SAM (Sequence Alignment Map), BAM (Binary Alignment Map), or relatively new CRAM output. 
+Suitable tools~\cite{langmead2009ultrafast, li2009fast, kim2019graph} map sequenced reads producing  SAM (Sequence Alignment Map)~\cite{sam}, BAM (Binary Alignment Map)~\cite{sam}, or relatively new CRAM~\cite{cram} output. 
 BAM format is a widely used standard so far.
 
 Many mapping software tools can search for exon junctions. 

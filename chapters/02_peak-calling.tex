@@ -2,7 +2,7 @@
 
 The computational method of the protein-chromatin binding event identification plays a central role in ChIP-seq analysis. 
 Peak calling is a statistical procedure.
-With usage of files having sufficient quality of the mapped IP and control sample, this method produces a BED file.
+With usage of files having sufficient quality of the mapped IP and control sample, this method produces a BED~\cite{bed} file.
 This format represents a set of genomic locations associated with a significance score.
 
 \section{Identification of enriched regions using peak calling}
@@ -14,11 +14,13 @@ After read mapping to the reference, the next step is to identify loci with high
 More than 30 algorithms and tools have been implemented to solve that computational problem~\cite{chen2012systematic}.
 The choice of the right peak caller is crucial and depends on the type of experiment~\cite{nakato2017recent}, e.g. TF binding event identification vs. detection of broadly distributed histone marks.
 
+% \todo{to je zavádějící. Nukleosomy sice nevážou konkrétní motiv DNA, ale vykazují jistou míru sekvenčních preferencí, která se liší v závislosti na organismu.}
+
 \begin{figure}[b!]
     \centering
     \includegraphics[width=\textwidth]{../img/peaks_final.pdf}
     \caption{Illustration of individual reads mapping to the forward (blue) and reverse (red) strand, building the good bimodal binding site prfile (A, B, C) and false positive (D). }
-    \label{fig:graph_classes}
+    \label{peak}
 \end{figure}
 
 \paragraph{Peak profile.}
@@ -28,8 +30,6 @@ Sharp peaks are typical for TF due to dependency on motif sequence~\cite{landt20
 Histones have relatively non-specific positioning on the DNA~\cite{krig2007identification}. 
 Thus the peak profile is broad and can reach several kilobases. 
 The third peak type is a mix of sharp and broad signals, a typical pattern for RNA polymerase II and transcription elongation factor~\cite{squazzo2006suz12, lin2011dynamic}.
-% \todo{to je zavádějící. Nukleosomy sice nevážou konkrétní motiv DNA, ale vykazují jistou míru sekvenčních preferencí, která se liší v závislosti na organismu.}
-
 
 
 The very first extended set methodology to calculate peak profile density was presented in 2007~\cite{robertson2007genome}. 
@@ -42,12 +42,16 @@ Regions are scored by the number of overlapping reads and assessed as a candidat
 
 Sequence directionality sets the stage for a smoothed profile. 
 The strand-specific read distributions form a bimodal pattern combined by shifting or extending tags toward the center~\cite{valouev2008genome}.
+The example of strand-specific distribution is shown on Figure~\ref{peak}.
 
 
 
 \paragraph{Assesment of the candidate regions.}
 After scanning through the genome and finding a large number of candidate regions estimating null distribution, the quality of the detected peaks should be determined. 
 From generated data, the candidate signal may be either a false or true binding event. 
+
+
+
 %And the probabilistic statement cannot be made by using a well known Bayes' Theorem. 
 %In the genomic studies, especially in ChIP-seq, individual hypothesis testing is not useful, and a global hypothesis test is required~\cite{futschik2019omnibus}. 
 
